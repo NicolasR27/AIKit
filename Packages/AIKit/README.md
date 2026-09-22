@@ -1,4 +1,4 @@
-# AIProviderKit
+# AIKit
 
 Drop-in "bring your own key" settings for iOS apps. Users connect their own
 OpenAI, Anthropic, Google Gemini, Mistral, OpenRouter or Ollama account, so they
@@ -12,8 +12,8 @@ pay the provider for usage instead of you.
 
 ## Install
 
-**Local package:** drag the `AIProviderKit` folder into your Xcode project, then add
-`AIProviderKit` under your target's *Frameworks, Libraries, and Embedded Content*.
+**Local package:** drag the `AIKit` folder into your Xcode project, then add
+`AIKit` under your target's *Frameworks, Libraries, and Embedded Content*.
 
 **From git:** File ▸ Add Package Dependencies… and point at the repo containing this package.
 
@@ -22,7 +22,7 @@ pay the provider for usage instead of you.
 **1. Create the store once**
 
 ```swift
-import AIProviderKit
+import AIKit
 import SwiftUI
 
 @main struct MyApp: App {

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0000000000000000000A0001 /* AIProviderKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0000000000000000000A0002 /* AIProviderKit */; };
+		0000000000000000000A0001 /* AIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0000000000000000000A0002 /* AIKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +26,7 @@
 		000000000000000130000000 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
-				0000000000000000000A0001 /* AIProviderKit in Frameworks */,
+				0000000000000000000A0001 /* AIKit in Frameworks */,
 			);
 		};
 /* End PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 			);
 			name = "AI Providers";
 			packageProductDependencies = (
-				0000000000000000000A0002 /* AIProviderKit */,
+				0000000000000000000A0002 /* AIKit */,
 			);
 			productName = MyApp;
 			productReference = 000000000000000000000120 /* AI Providers.app */;
@@ -97,7 +97,7 @@
 			mainGroup = 000000000000000000000001;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				0000000000000000000A0003 /* XCLocalSwiftPackageReference "Packages/AIProviderKit" */,
+				0000000000000000000A0003 /* XCLocalSwiftPackageReference "Packages/AIKit" */,
 			);
 			preferredProjectObjectVersion = 90;
 			productRefGroup = 000000000000000000000020 /* Products */;
@@ -360,16 +360,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		0000000000000000000A0003 /* XCLocalSwiftPackageReference "Packages/AIProviderKit" */ = {
+		0000000000000000000A0003 /* XCLocalSwiftPackageReference "Packages/AIKit" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = Packages/AIProviderKit;
+			relativePath = Packages/AIKit;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0000000000000000000A0002 /* AIProviderKit */ = {
+		0000000000000000000A0002 /* AIKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = AIProviderKit;
+			productName = AIKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

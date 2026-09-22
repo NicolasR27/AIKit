@@ -7,8 +7,11 @@ import Observation
 /// Read `activeCredentials` whenever you need to call the user's AI provider.
 @Observable
 public final class AIProviderStore {
-    private static let settingsKey = "AIProviderKit.settings"
-    private static let activeKey = "AIProviderKit.activeProvider"
+    /// Used by every AIKit view unless you pass your own store.
+    public static let shared = AIProviderStore()
+
+    private static let settingsKey = "AIKit.settings"
+    private static let activeKey = "AIKit.activeProvider"
 
     /// Providers shown in settings, in display order.
     public let providers: [AIProvider]
@@ -35,7 +38,7 @@ public final class AIProviderStore {
     ///   - defaults: Where non-secret settings are saved. API keys always go to the Keychain.
     public init(
         providers: [AIProvider] = AIProvider.allCases,
-        openRouterCallbackScheme: String = "aiproviderkit",
+        openRouterCallbackScheme: String = "aikit",
         openRouterKeyLabel: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "iOS App",
         defaults: UserDefaults = .standard
     ) {

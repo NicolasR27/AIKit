@@ -3,11 +3,11 @@ import SwiftUI
 /// Drop-in settings screen with its own `NavigationStack`.
 /// Use it as a root view, a tab, or inside `.sheet`.
 ///
-///     AIProviderSettingsView(store: providers)
+///     AIProviderSettingsView()
 public struct AIProviderSettingsView: View {
     private let store: AIProviderStore
 
-    public init(store: AIProviderStore) {
+    public init(store: AIProviderStore = .shared) {
         self.store = store
     }
 
@@ -20,11 +20,11 @@ public struct AIProviderSettingsView: View {
 
 /// The same settings without a `NavigationStack`, for pushing from your app's own settings:
 ///
-///     NavigationLink("AI Providers") { AIProviderSettingsForm(store: providers) }
+///     NavigationLink("AI Providers") { AIProviderSettingsForm() }
 public struct AIProviderSettingsForm: View {
     private let store: AIProviderStore
 
-    public init(store: AIProviderStore) {
+    public init(store: AIProviderStore = .shared) {
         self.store = store
     }
 

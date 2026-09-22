@@ -6,13 +6,13 @@ import SwiftUI
 ///
 ///     Form {
 ///         AccountSection()
-///         AIProviderSettingsSection(store: providers)
+///         AIProviderSettingsSection()
 ///     }
 public struct AIProviderSettingsSection: View {
     private let store: AIProviderStore
     private let footer: Text?
 
-    public init(store: AIProviderStore, footer: Text? = nil) {
+    public init(store: AIProviderStore = .shared, footer: Text? = nil) {
         self.store = store
         self.footer = footer
     }

@@ -1,15 +1,17 @@
 // swift-tools-version: 6.2
+// Lets other apps add AIKit straight from this repo's URL.
 import PackageDescription
 
 let package = Package(
-    name: "AIProviderKit",
+    name: "AIKit",
     platforms: [.iOS(.v26)],
     products: [
-        .library(name: "AIProviderKit", targets: ["AIProviderKit"]),
+        .library(name: "AIKit", targets: ["AIKit"]),
     ],
     targets: [
         .target(
-            name: "AIProviderKit",
+            name: "AIKit",
+            path: "Packages/AIKit/Sources/AIKit",
             swiftSettings: [
                 .defaultIsolation(MainActor.self),
             ]
