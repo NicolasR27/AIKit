@@ -1,9 +1,12 @@
 import SwiftUI
 
 @main struct MyApp: App {
+    @State private var providers = ProviderStore()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SettingsView()
+                .environment(providers)
         }
     }
 }
