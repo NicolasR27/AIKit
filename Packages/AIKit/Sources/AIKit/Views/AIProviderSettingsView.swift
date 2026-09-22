@@ -5,6 +5,8 @@ import SwiftUI
 ///
 ///     AIProviderSettingsView()
 public struct AIProviderSettingsView: View {
+    @Environment(\.isPresented) private var isPresented
+    @Environment(\.dismiss) private var dismiss
     private let store: AIProviderStore
 
     public init(store: AIProviderStore = .shared) {
@@ -14,7 +16,19 @@ public struct AIProviderSettingsView: View {
     public var body: some View {
         NavigationStack {
             AIProviderSettingsForm(store: store)
+                .toolbar {
+                    // Only when shown as a sheet/cover; as a root view or tab there's nothing to go back to.
+                    if isPresented {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Close", systemImage: "xmark", role: .close, action: close)
+                        }
+                    }
+                }
         }
+    }
+
+    private func close() {
+        dismiss()
     }
 }
 
