@@ -37,6 +37,31 @@ CurrentAIProviderRow()                                   // "Current AI   Anthro
 Text(AIProviderStore.shared.activeProvider?.displayName ?? "None")   // just the name
 ```
 
+## Read the user's pick in code
+
+```swift
+let provider = AIProviderStore.shared.activeProvider     // AIProvider?, nil until one is connected
+provider?.displayName                                    // "Anthropic"
+provider?.rawValue                                       // "anthropic" (stable, good for saving or analytics)
+
+if let creds = AIProviderStore.shared.activeCredentials { // model, API key, base URL
+    print(creds.provider, creds.model ?? "")
+}
+```
+
+React when the user switches:
+
+```swift
+@State private var selectedAIProvider: AIProvider?
+
+AIProviderSettingsSection(selection: $selectedAIProvider)
+    .onChange(of: selectedAIProvider) { _, provider in /* save, log, tell your backend */ }
+```
+
+Change it from code with `AIProviderStore.shared.selectProvider(.openAI)`. It returns
+`false` if that provider isn't connected. Off the main actor, `await` these calls.
+Working example: [SelectedProviderExample.swift](AI%20Providers/Examples/SelectedProviderExample.swift).
+
 ## Customize
 
 ```swift
