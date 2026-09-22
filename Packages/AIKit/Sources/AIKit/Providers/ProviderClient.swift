@@ -60,7 +60,11 @@ struct ProviderClient {
         }
         var request = URLRequest(url: url, timeoutInterval: 15)
         headers.forEach { request.setValue($1, forHTTPHeaderField: $0) }
+        return try await perform(request)
+    }
 
+    /// Sends a request and maps HTTP failures to `ProviderError`.
+    func perform(_ request: URLRequest) async throws -> Data {
         let data: Data
         let response: URLResponse
         do {
@@ -72,8 +76,11 @@ struct ProviderClient {
 
         let status = (response as? HTTPURLResponse)?.statusCode ?? 0
         guard (200..<300).contains(status) else {
-            let message = try? JSONDecoder().decode(ErrorEnvelope.self, from: data).error.message
-            if status == 401 || status == 403 {
+            let message = Self.errorMessage(in: data)
+            // Gemini reports a bad key as 400 "API key not valid".
+            let isKeyError = status == 401 || status == 403
+                || (status == 400 && message?.localizedStandardContains("API key") == true)
+            if isKeyError {
                 throw ProviderError.invalidKey(message)
             }
             throw ProviderError.server(status: status, message: message)
@@ -81,7 +88,18 @@ struct ProviderClient {
         return data
     }
 
-    private func decode<T: Decodable>(_ type: T.Type, _ data: Data) throws -> T {
+    /// Pulls a human-readable message out of the error shapes providers use:
+    /// `{"error":{"message":…}}` (OpenAI, Anthropic, Gemini, OpenRouter), `{"detail":…}` (Mistral),
+    /// `{"error":"…"}` (Ollama) and `{"message":…}`.
+    static func errorMessage(in data: Data) -> String? {
+        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return nil }
+        if let error = json["error"] as? [String: Any], let message = error["message"] as? String { return message }
+        if let error = json["error"] as? String { return error }
+        if let detail = json["detail"] as? String { return detail }
+        return json["message"] as? String
+    }
+
+    func decode<T: Decodable>(_ type: T.Type, _ data: Data) throws -> T {
         do {
             return try JSONDecoder().decode(type, from: data)
         } catch {
@@ -89,7 +107,6 @@ struct ProviderClient {
         }
     }
 }
-
 // MARK: - Response shapes
 
 private struct DataList: Decodable {
@@ -108,10 +125,4 @@ private struct GeminiModels: Decodable {
 private struct OllamaTags: Decodable {
     struct Model: Decodable { let name: String }
     let models: [Model]
-}
-
-/// OpenAI, Anthropic, Gemini, Mistral and OpenRouter all nest errors as `{"error": {"message": ...}}`.
-private struct ErrorEnvelope: Decodable {
-    struct Body: Decodable { let message: String? }
-    let error: Body
 }

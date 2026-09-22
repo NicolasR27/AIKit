@@ -60,28 +60,37 @@ NavigationLink("AI Providers") {
 `AIProviderSettingsSection` and `AIProviderSettingsForm` must sit inside a
 `NavigationStack`; `AIProviderSettingsView` brings its own.
 
-**3. Read credentials when you make a request**
-
-`AIProviderStore` lives on the main actor. From SwiftUI or other `@MainActor`
-code read it directly; from anywhere else, `await` it.
+**3. Send prompts**
 
 ```swift
-guard let credentials = await AIProviderStore.shared.activeCredentials,
-      let model = credentials.model,
-      let baseURL = credentials.baseURL else {
-    // Nothing connected yet: show the settings.
-    return
-}
+// Uses the user's default provider, model and key.
+let reply = try await AIProviderStore.shared.send("Write a haiku about Lisbon")
 
-// credentials.provider → .openAI, .anthropic, .gemini, .mistral, .openRouter, .ollama
-// credentials.apiKey   → the user's key (nil for Ollama)
-// credentials.baseURL  → API root, e.g. https://openrouter.ai/api/v1
+// Conversations, a system prompt, or a specific connected provider:
+let answer = try await AIProviderStore.shared.send(
+    [.user("Hi"), .assistant("Hello!"), .user("What's 2+2?")],
+    system: "Answer briefly.",
+    provider: .anthropic
+)
 ```
 
-OpenAI, Mistral, OpenRouter and Ollama (`/v1`) all accept the same OpenAI-style
-`POST {baseURL}/chat/completions` with `Authorization: Bearer <key>`. Anthropic
-uses `POST {baseURL}/messages` with `x-api-key` and `anthropic-version: 2023-06-01`.
-Gemini uses `POST {baseURL}/models/{model}:generateContent` with `x-goog-api-key`.
+Errors have a user-readable `localizedDescription`. `AIKitError.notConnected` and
+`.noModelSelected` mean the user needs to finish setup, so show the settings.
+
+`AIProviderStore` lives on the main actor: from non-main code, `await` it
+(`try await AIProviderStore.shared.send(…)` already does).
+
+Replies arrive in one piece (no streaming yet). Each provider is called with its own API:
+
+| Provider | Endpoint |
+| --- | --- |
+| OpenAI, Mistral, OpenRouter | `POST /chat/completions` |
+| Anthropic | `POST /v1/messages` |
+| Google Gemini | `POST /models/{model}:generateContent` |
+| Ollama | `POST /api/chat` |
+
+Need raw access instead? `AIProviderStore.shared.activeCredentials` gives you the
+provider, model, key and API base URL to build your own requests.
 
 ## Customize
 
@@ -150,3 +159,24 @@ xcodebuild test -scheme AIKit -destination 'platform=iOS Simulator,name=iPhone 1
 ```
 
 Network calls are stubbed, and store tests use Ollama so they never touch the Keychain.
+
+To also run a real round-trip against Ollama on your Mac (`ollama pull smollm:135m` first):
+
+```sh
+TEST_RUNNER_AIKIT_LIVE_OLLAMA=1 xcodebuild test -scheme AIKit -destination 'platform=iOS Simulator,name=iPhone 18 Pro'
+```
+
+And against the cloud providers with your own keys (each runs only if its key is set;
+it lists models, then sends one tiny prompt to a small model):
+
+```sh
+TEST_RUNNER_OPENAI_API_KEY=sk-… \
+TEST_RUNNER_ANTHROPIC_API_KEY=sk-ant-… \
+TEST_RUNNER_GEMINI_API_KEY=AIza… \
+TEST_RUNNER_MISTRAL_API_KEY=… \
+TEST_RUNNER_OPENROUTER_API_KEY=sk-or-… \
+xcodebuild test -scheme AIKit -destination 'platform=iOS Simulator,name=iPhone 18 Pro' \
+  | grep -E "replied|✘|TEST"
+```
+
+Pin a model with e.g. `TEST_RUNNER_OPENAI_MODEL=…`.

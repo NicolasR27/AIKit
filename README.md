@@ -34,13 +34,19 @@ see [Packages/AIKit/README.md](Packages/AIKit/README.md#customize).
 ## Call the AI
 
 ```swift
-// From async code (e.g. your networking service), use await:
-if let ai = await AIProviderStore.shared.activeCredentials {
-    ai.provider   // .openAI, .anthropic, …
-    ai.model      // model the user picked
-    ai.apiKey     // user's key (from Keychain)
-    ai.baseURL    // API root to send requests to
-}
+let reply = try await AIProviderStore.shared.send("Summarize this article: …")
 ```
+
+AIKit sends it to whichever provider and model the user picked, with their key.
+For a conversation, pass messages:
+
+```swift
+let reply = try await AIProviderStore.shared.send(
+    [.user("Hi"), .assistant("Hello! How can I help?"), .user("Plan a trip to Lisbon")],
+    system: "You are a concise travel assistant."
+)
+```
+
+If nothing is connected it throws `AIKitError.notConnected`; show the settings.
 
 More options: [Packages/AIKit/README.md](Packages/AIKit/README.md)

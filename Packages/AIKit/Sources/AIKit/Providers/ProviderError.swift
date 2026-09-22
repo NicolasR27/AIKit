@@ -15,7 +15,9 @@ enum ProviderError: LocalizedError {
         case .invalidBaseURL:
             "That server address isn't a valid URL."
         case .invalidKey(let message):
-            message ?? "The provider rejected this API key."
+            // Providers' own wording varies ("User not found.", "Invalid API Key"), so lead with a clear sentence.
+            message.map { String(localized: "This API key was rejected (\($0)).") }
+                ?? String(localized: "This API key was rejected.")
         case .server(let status, let message):
             message ?? "The provider returned HTTP \(status)."
         case .unreachable(let detail):
