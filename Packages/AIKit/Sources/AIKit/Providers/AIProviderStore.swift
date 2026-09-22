@@ -29,7 +29,8 @@ public final class AIProviderStore {
     @ObservationIgnored let openRouterCallbackScheme: String
     @ObservationIgnored let openRouterKeyLabel: String
     @ObservationIgnored private let defaults: UserDefaults
-    @ObservationIgnored private let client = ProviderClient()
+    /// Internal and mutable so tests can stub the network.
+    @ObservationIgnored var client = ProviderClient()
 
     /// - Parameters:
     ///   - providers: Which providers to offer, in display order.
@@ -153,6 +154,18 @@ public final class AIProviderStore {
         let key = try await auth.exchange(callbackURL: callbackURL)
         try await connect(.openRouter, apiKey: key, baseURL: nil)
         activeProvider = .openRouter
+    }
+
+    func isDefault(_ provider: AIProvider) -> Bool {
+        activeProvider == provider
+    }
+
+    func setDefault(_ provider: AIProvider, _ isOn: Bool) {
+        if isOn {
+            activeProvider = provider
+        } else if activeProvider == provider {
+            activeProvider = nil
+        }
     }
 
     func selectModel(_ model: String, for provider: AIProvider) {

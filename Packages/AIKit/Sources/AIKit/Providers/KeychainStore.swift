@@ -44,12 +44,3 @@ enum KeychainStore {
         SecItemDelete(baseQuery(for: account) as CFDictionary)
     }
 }
-
-struct KeychainError: LocalizedError {
-    let status: OSStatus
-
-    var errorDescription: String? {
-        let message = SecCopyErrorMessageString(status, nil) as String? ?? "status \(status)"
-        return "Couldn't save to the Keychain (\(message))."
-    }
-}

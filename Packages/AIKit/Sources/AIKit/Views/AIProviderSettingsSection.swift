@@ -10,52 +10,37 @@ import SwiftUI
 ///     }
 public struct AIProviderSettingsSection: View {
     private let store: AIProviderStore
+    private let configuration: AIKitConfiguration
     private let footer: Text?
 
-    public init(store: AIProviderStore = .shared, footer: Text? = nil) {
+    public init(
+        store: AIProviderStore = .shared,
+        configuration: AIKitConfiguration = AIKitConfiguration(),
+        footer: Text? = nil
+    ) {
         self.store = store
+        self.configuration = configuration
         self.footer = footer
     }
 
     public var body: some View {
         Section {
             NavigationLink {
-                AIProviderSettingsForm(store: store)
+                AIProviderSettingsForm(store: store, configuration: configuration)
             } label: {
                 LabeledContent {
-                    Text(store.activeProvider?.displayName ?? "Not Set Up")
+                    Text(store.activeProvider?.displayName ?? String(localized: "Not Set Up"))
                 } label: {
                     Label {
-                        Text("AI Providers")
+                        Text(configuration.rowTitle)
                     } icon: {
-                        SettingsTile(symbolName: "sparkles", tint: .indigo)
+                        SettingsTile(symbolName: configuration.rowSymbol, tint: configuration.rowTint)
                     }
                 }
             }
         } footer: {
             footer
         }
-    }
-}
-
-/// Settings-app style rounded icon tile.
-struct SettingsTile: View {
-    let symbolName: String
-    let tint: Color
-    @ScaledMetric private var size: CGFloat
-
-    init(symbolName: String, tint: Color, size: CGFloat = 29) {
-        self.symbolName = symbolName
-        self.tint = tint
-        _size = ScaledMetric(wrappedValue: size, relativeTo: .body)
-    }
-
-    var body: some View {
-        Image(systemName: symbolName)
-            .font(.system(size: size * 0.55, weight: .semibold))
-            .foregroundStyle(.white)
-            .frame(width: size, height: size)
-            .background(tint.gradient, in: .rect(cornerRadius: size * 0.225))
     }
 }
 

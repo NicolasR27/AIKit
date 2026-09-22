@@ -14,5 +14,9 @@ let package = Package(
                 .defaultIsolation(MainActor.self),
             ]
         ),
+        .testTarget(
+            name: "AIKitTests",
+            dependencies: ["AIKit"],
+        ),
     ]
 )

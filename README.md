@@ -22,10 +22,20 @@ Already have a Settings screen? Add one row instead:
 AIProviderSettingsSection()       // inside your Form, in a NavigationStack
 ```
 
+## Customize
+
+```swift
+AIProviderSettingsView(configuration: AIKitConfiguration(title: "Assistant", tint: .orange))
+```
+
+Title, colors, row icon, and which notes/pickers show are all optional —
+see [Packages/AIKit/README.md](Packages/AIKit/README.md#customize).
+
 ## Call the AI
 
 ```swift
-if let ai = AIProviderStore.shared.activeCredentials {
+// From async code (e.g. your networking service), use await:
+if let ai = await AIProviderStore.shared.activeCredentials {
     ai.provider   // .openAI, .anthropic, …
     ai.model      // model the user picked
     ai.apiKey     // user's key (from Keychain)

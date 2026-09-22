@@ -16,5 +16,10 @@ let package = Package(
                 .defaultIsolation(MainActor.self),
             ]
         ),
+        .testTarget(
+            name: "AIKitTests",
+            dependencies: ["AIKit"],
+            path: "Packages/AIKit/Tests/AIKitTests",
+        ),
     ]
 )

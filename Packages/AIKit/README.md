@@ -62,8 +62,11 @@ NavigationLink("AI Providers") {
 
 **3. Read credentials when you make a request**
 
+`AIProviderStore` lives on the main actor. From SwiftUI or other `@MainActor`
+code read it directly; from anywhere else, `await` it.
+
 ```swift
-guard let credentials = providers.activeCredentials,
+guard let credentials = await AIProviderStore.shared.activeCredentials,
       let model = credentials.model,
       let baseURL = credentials.baseURL else {
     // Nothing connected yet: show the settings.
@@ -79,6 +82,27 @@ OpenAI, Mistral, OpenRouter and Ollama (`/v1`) all accept the same OpenAI-style
 `POST {baseURL}/chat/completions` with `Authorization: Bearer <key>`. Anthropic
 uses `POST {baseURL}/messages` with `x-api-key` and `anthropic-version: 2023-06-01`.
 Gemini uses `POST {baseURL}/models/{model}:generateContent` with `x-goog-api-key`.
+
+## Customize
+
+Pass an `AIKitConfiguration` to any of the three views. Every property has a default,
+so set only what you want to change:
+
+```swift
+AIProviderSettingsSection(configuration: AIKitConfiguration(
+    title: "Assistant",          // list title
+    tint: .orange,               // buttons, links, toggles (nil = your app's tint)
+    rowTitle: "Assistant",       // the row in your Settings
+    rowSymbol: "brain",          // SF Symbol in the row's icon tile
+    rowTint: .orange,            // icon tile color
+    showsDefaultProviderPicker: true,
+    showsOpenRouterSignIn: true,
+    billingNote: nil,            // nil hides the billing footer
+    privacyNote: nil             // nil hides the Keychain note
+))
+```
+
+Which providers appear (and in what order) is set on the store — see below.
 
 ## Options
 
@@ -117,3 +141,12 @@ blocks. If you offer `.ollama`, add this to your app's Info.plist:
 ```
 
 Leave `.ollama` out of `providers` and you can skip this.
+
+## Tests
+
+```sh
+cd Packages/AIKit
+xcodebuild test -scheme AIKit -destination 'platform=iOS Simulator,name=iPhone 18 Pro'
+```
+
+Network calls are stubbed, and store tests use Ollama so they never touch the Keychain.

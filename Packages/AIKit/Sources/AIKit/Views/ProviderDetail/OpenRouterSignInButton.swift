@@ -3,7 +3,7 @@ import SwiftUI
 
 /// One-tap OpenRouter login: opens a secure web sheet, then saves the minted key.
 struct OpenRouterSignInButton: View {
-    @Environment(AIProviderStore.self) private var store
+    let store: AIProviderStore
     @Environment(\.webAuthenticationSession) private var webAuthenticationSession
 
     @State private var isSigningIn = false
@@ -21,6 +21,7 @@ struct OpenRouterSignInButton: View {
                     Image(systemName: "person.badge.key.fill")
                 }
             }
+            .foregroundStyle(.white)
             .frame(maxWidth: .infinity)
         }
         .buttonStyle(.borderedProminent)
