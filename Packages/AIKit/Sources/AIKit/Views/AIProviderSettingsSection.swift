@@ -8,10 +8,16 @@ import SwiftUI
 ///         AccountSection()
 ///         AIProviderSettingsSection()
 ///     }
+///
+/// Pass `selection` to mirror the user's default provider into your own state:
+///
+///     @State private var selectedAIProvider: AIProvider?
+///     AIProviderSettingsSection(selection: $selectedAIProvider)
 public struct AIProviderSettingsSection: View {
     private let store: AIProviderStore
     private let configuration: AIKitConfiguration
     private let footer: Text?
+    private let selection: Binding<AIProvider?>?
 
     public init(
         store: AIProviderStore = .shared,
@@ -21,6 +27,21 @@ public struct AIProviderSettingsSection: View {
         self.store = store
         self.configuration = configuration
         self.footer = footer
+        self.selection = nil
+    }
+
+    /// - Parameter selection: Kept in sync with `store.activeProvider` both ways.
+    ///   Setting it to a provider that isn't connected is ignored and snaps back.
+    public init(
+        selection: Binding<AIProvider?>,
+        store: AIProviderStore = .shared,
+        configuration: AIKitConfiguration = AIKitConfiguration(),
+        footer: Text? = nil
+    ) {
+        self.store = store
+        self.configuration = configuration
+        self.footer = footer
+        self.selection = selection
     }
 
     public var body: some View {
@@ -41,6 +62,35 @@ public struct AIProviderSettingsSection: View {
         } footer: {
             footer
         }
+        .onChange(of: store.activeProvider, initial: true) { _, provider in
+            if selection?.wrappedValue != provider {
+                selection?.wrappedValue = provider
+            }
+        }
+        .onChange(of: selection?.wrappedValue) { _, provider in
+            selectionChanged(to: provider)
+        }
+    }
+
+    private func selectionChanged(to provider: AIProvider?) {
+        guard let selection, provider != store.activeProvider else { return }
+        if let provider, !store.isConnected(provider) {
+            selection.wrappedValue = store.activeProvider
+        } else {
+            store.activeProvider = provider
+        }
+    }
+}
+
+#Preview("Selection binding") {
+    @Previewable @State var selectedAIProvider: AIProvider?
+
+    NavigationStack {
+        Form {
+            AIProviderSettingsSection(selection: $selectedAIProvider, store: AIProviderStore())
+            Text("Selected: \(selectedAIProvider?.displayName ?? "None")")
+        }
+        .navigationTitle("Settings")
     }
 }
 

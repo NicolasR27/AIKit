@@ -22,6 +22,14 @@ Already have a Settings screen? Add one row instead:
 AIProviderSettingsSection()       // inside your Form, in a NavigationStack
 ```
 
+Want the user's pick in your own state? Bind it:
+
+```swift
+@State private var selectedAIProvider: AIProvider?
+
+AIProviderSettingsSection(selection: $selectedAIProvider)
+```
+
 ## Customize
 
 ```swift
