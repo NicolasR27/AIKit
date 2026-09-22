@@ -30,6 +30,13 @@ Want the user's pick in your own state? Bind it:
 AIProviderSettingsSection(selection: $selectedAIProvider)
 ```
 
+Show which AI is in use anywhere (updates live):
+
+```swift
+CurrentAIProviderRow()                                   // "Current AI   Anthropic / claude-sonnet-5"
+Text(AIProviderStore.shared.activeProvider?.displayName ?? "None")   // just the name
+```
+
 ## Customize
 
 ```swift

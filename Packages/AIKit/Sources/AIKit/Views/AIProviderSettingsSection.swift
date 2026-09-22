@@ -74,10 +74,8 @@ public struct AIProviderSettingsSection: View {
 
     private func selectionChanged(to provider: AIProvider?) {
         guard let selection, provider != store.activeProvider else { return }
-        if let provider, !store.isConnected(provider) {
+        if !store.selectProvider(provider) {
             selection.wrappedValue = store.activeProvider
-        } else {
-            store.activeProvider = provider
         }
     }
 }
@@ -88,7 +86,7 @@ public struct AIProviderSettingsSection: View {
     NavigationStack {
         Form {
             AIProviderSettingsSection(selection: $selectedAIProvider, store: AIProviderStore())
-            Text("Selected: \(selectedAIProvider?.displayName ?? "None")")
+            LabeledContent("Selected", value: selectedAIProvider?.displayName ?? "None")
         }
         .navigationTitle("Settings")
     }

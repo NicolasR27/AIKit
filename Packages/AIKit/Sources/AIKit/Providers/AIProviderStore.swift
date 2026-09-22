@@ -96,6 +96,15 @@ public final class AIProviderStore {
         )
     }
 
+    /// Makes `provider` the default if it's connected, or clears the default when `nil`.
+    /// Returns `false` and leaves `activeProvider` unchanged for a provider that isn't connected.
+    @discardableResult
+    public func selectProvider(_ provider: AIProvider?) -> Bool {
+        if let provider, !isConnected(provider) { return false }
+        activeProvider = provider
+        return true
+    }
+
     /// Removes every saved key and setting, e.g. when the user signs out of your app.
     public func disconnectAll() {
         providers.forEach(disconnect)
