@@ -70,19 +70,12 @@ AIProviderSettingsView(configuration: AIKitConfiguration(title: "Assistant", tin
 
 ### Change the icon
 
-The "AI Providers" row in your Settings uses a Settings-style tile: an SF Symbol on a
-colored rounded square. Change either one:
-
 ```swift
 AIProviderSettingsSection(configuration: AIKitConfiguration(
-    rowSymbol: "brain",       // any SF Symbol name (browse them in Apple's SF Symbols app)
-    rowTint: .orange          // tile color
+    rowSymbol: "brain",   // SF Symbol name
+    rowTint: .orange      // background color
 ))
 ```
-
-Defaults: `sparkles` on `.indigo`. The symbol is drawn white, so pick a tint that
-white shows up on. The icons next to each provider (OpenAI, Anthropic, …) are
-built into AIKit and can't be changed yet.
 
 Title, colors, row icon, and which notes/pickers show are all optional —
 see [Packages/AIKit/README.md](Packages/AIKit/README.md#customize).
