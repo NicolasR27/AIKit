@@ -98,22 +98,13 @@ private struct ProviderRow: View {
     }
 }
 
-/// Rounded-square tile like the icons in the Settings app.
+/// A provider's Settings-app style icon tile.
 struct ProviderIcon: View {
     let provider: AIProvider
-    @ScaledMetric private var size: CGFloat
-
-    init(provider: AIProvider, size: CGFloat = 29) {
-        self.provider = provider
-        _size = ScaledMetric(wrappedValue: size, relativeTo: .body)
-    }
+    var size: CGFloat = 29
 
     var body: some View {
-        Image(systemName: provider.symbolName)
-            .font(.system(size: size * 0.55, weight: .semibold))
-            .foregroundStyle(.white)
-            .frame(width: size, height: size)
-            .background(provider.tint.gradient, in: .rect(cornerRadius: size * 0.225))
+        SettingsTile(symbolName: provider.symbolName, tint: provider.tint, size: size)
     }
 }
 

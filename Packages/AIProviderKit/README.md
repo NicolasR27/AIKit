@@ -45,11 +45,20 @@ import SwiftUI
     AIProviderSettingsView(store: providers)
 }
 
-// Pushed from your existing settings (uses your NavigationStack)
+// One row inside your existing settings Form: "AI Providers · OpenAI ›"
+Form {
+    AccountSection()
+    AIProviderSettingsSection(store: providers)
+}
+
+// Or push the full form from your own link (uses your NavigationStack)
 NavigationLink("AI Providers") {
     AIProviderSettingsForm(store: providers)
 }
 ```
+
+`AIProviderSettingsSection` and `AIProviderSettingsForm` must sit inside a
+`NavigationStack`; `AIProviderSettingsView` brings its own.
 
 **3. Read credentials when you make a request**
 
