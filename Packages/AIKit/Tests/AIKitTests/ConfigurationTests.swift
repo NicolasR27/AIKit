@@ -12,4 +12,15 @@ struct ConfigurationTests {
         #expect(base.withRowIcon(nil, .orange).rowSymbol == "sparkles")
         #expect(base.withRowIcon("brain", nil).rowTint == .indigo)
     }
+
+    @Test func providerIconsFallBackToDefaults() {
+        var config = AIKitConfiguration()
+        config.providerIcons = [.openAI: "bolt"]
+        config.providerIconColors = [.openAI: .teal]
+
+        #expect(config.iconSymbol(for: .openAI) == "bolt")
+        #expect(config.iconColor(for: .openAI) == .teal)
+        #expect(config.iconSymbol(for: .anthropic) == AIProvider.anthropic.symbolName)
+        #expect(config.iconColor(for: .anthropic) == AIProvider.anthropic.tint)
+    }
 }

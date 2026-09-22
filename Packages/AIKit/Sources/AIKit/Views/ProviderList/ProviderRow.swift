@@ -3,6 +3,7 @@ import SwiftUI
 struct ProviderRow: View {
     let store: AIProviderStore
     let provider: AIProvider
+    let configuration: AIKitConfiguration
 
     var body: some View {
         LabeledContent {
@@ -11,7 +12,7 @@ struct ProviderRow: View {
             Label {
                 Text(provider.displayName)
             } icon: {
-                ProviderIcon(provider: provider)
+                ProviderIcon(provider: provider, configuration: configuration)
             }
         }
     }

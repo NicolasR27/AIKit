@@ -1,7 +1,8 @@
 import SwiftUI
 
 extension AIProvider {
-    /// Icon tile color. Avoids black/white so tiles stay visible in both light and dark mode.
+    /// Default icon tile color. Apps override it with `AIKitConfiguration.providerIconColors`.
+    /// Avoids black/white so tiles stay visible in both light and dark mode.
     var tint: Color {
         switch self {
         case .openAI: .green

@@ -27,7 +27,7 @@ struct ProviderListForm: View {
                     NavigationLink {
                         ProviderDetailView(store: store, provider: provider, configuration: configuration)
                     } label: {
-                        ProviderRow(store: store, provider: provider)
+                        ProviderRow(store: store, provider: provider, configuration: configuration)
                     }
                 }
             }

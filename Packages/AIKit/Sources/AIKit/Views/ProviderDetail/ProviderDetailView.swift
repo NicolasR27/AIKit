@@ -17,7 +17,7 @@ struct ProviderDetailView: View {
 
     var body: some View {
         Form {
-            ProviderHeader(provider: provider)
+            ProviderHeader(provider: provider, configuration: configuration)
 
             if provider == .openRouter, !isConnected, configuration.showsOpenRouterSignIn {
                 OpenRouterSignInSection(store: store)

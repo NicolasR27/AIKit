@@ -12,7 +12,12 @@ struct SelectedProviderExample: View {
             Form {
                 // The user picks a provider here; `selectedAIProvider` stays in sync.
                 // `icon` is any SF Symbol name; `iconColor` is the tile behind it. Both optional.
-                AIProviderSettingsSection(selection: $selectedAIProvider, icon: "brain", iconColor: .orange)
+                AIProviderSettingsSection(
+                    selection: $selectedAIProvider,
+                    icon: "brain",
+                    iconColor: .orange,
+                    configuration: providerIconConfiguration
+                )
                 CurrentAIProviderRow()
 
                 Section("In Code") {
@@ -26,6 +31,15 @@ struct SelectedProviderExample: View {
                 providerChanged(to: provider)
             }
         }
+    }
+
+    /// Swaps the icons next to each provider inside AIKit's screens.
+    /// Providers left out keep their default icon.
+    private var providerIconConfiguration: AIKitConfiguration {
+        var config = AIKitConfiguration()
+        config.providerIcons = [.openAI: "bolt", .anthropic: "leaf"]
+        config.providerIconColors = [.openAI: .teal, .anthropic: .brown]
+        return config
     }
 
     /// Reads the choice straight from the store; works anywhere in the app.

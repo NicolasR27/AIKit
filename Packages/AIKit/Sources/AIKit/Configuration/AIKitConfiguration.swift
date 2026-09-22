@@ -23,6 +23,12 @@ public nonisolated struct AIKitConfiguration: Sendable {
     /// Background of the row's icon tile.
     public var rowTint: Color
 
+    /// SF Symbols that replace the built-in provider icons, e.g. `[.openAI: "bolt"]`.
+    /// Providers you leave out keep their default icon.
+    public var providerIcons: [AIProvider: String]
+    /// Tile colors that replace the built-in ones, e.g. `[.openAI: .teal]`.
+    public var providerIconColors: [AIProvider: Color]
+
     /// Shows the "Default Provider" picker at the top of the list.
     public var showsDefaultProviderPicker: Bool
     /// Offers one-tap "Sign in with OpenRouter" on the OpenRouter page.
@@ -38,6 +44,8 @@ public nonisolated struct AIKitConfiguration: Sendable {
         rowTitle: LocalizedStringResource = "AI Providers",
         rowSymbol: String = "sparkles",
         rowTint: Color = .indigo,
+        providerIcons: [AIProvider: String] = [:],
+        providerIconColors: [AIProvider: Color] = [:],
         showsDefaultProviderPicker: Bool = true,
         showsOpenRouterSignIn: Bool = true,
         billingNote: LocalizedStringResource? = "The app sends requests to this provider using your own account. You're billed by the provider, not by us.",
@@ -48,6 +56,8 @@ public nonisolated struct AIKitConfiguration: Sendable {
         self.rowTitle = rowTitle
         self.rowSymbol = rowSymbol
         self.rowTint = rowTint
+        self.providerIcons = providerIcons
+        self.providerIconColors = providerIconColors
         self.showsDefaultProviderPicker = showsDefaultProviderPicker
         self.showsOpenRouterSignIn = showsOpenRouterSignIn
         self.billingNote = billingNote
@@ -56,6 +66,14 @@ public nonisolated struct AIKitConfiguration: Sendable {
 }
 
 extension AIKitConfiguration {
+    func iconSymbol(for provider: AIProvider) -> String {
+        providerIcons[provider] ?? provider.symbolName
+    }
+
+    func iconColor(for provider: AIProvider) -> Color {
+        providerIconColors[provider] ?? provider.tint
+    }
+
     /// Copy with the row icon replaced where a value is given.
     func withRowIcon(_ symbol: String?, _ tint: Color?) -> AIKitConfiguration {
         var copy = self

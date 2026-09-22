@@ -33,6 +33,7 @@ public nonisolated enum AIProvider: String, CaseIterable, Identifiable, Codable,
         }
     }
 
+    /// Default SF Symbol. Apps override it with `AIKitConfiguration.providerIcons`.
     public var symbolName: String {
         switch self {
         case .openAI: "circle.hexagongrid"

@@ -68,11 +68,29 @@ Working example: [SelectedProviderExample.swift](AI%20Providers/Examples/Selecte
 AIProviderSettingsView(configuration: AIKitConfiguration(title: "Assistant", tint: .orange))
 ```
 
-### Change the icon
+### Change the icons
+
+Put this in **your app**, in the file where you show AIKit (e.g. `SettingsView.swift`,
+or your `App` file if AIKit is the whole screen). You don't edit anything inside AIKit.
+
+**The "AI Providers" row** in your Settings:
 
 ```swift
 AIProviderSettingsSection(icon: "brain", iconColor: .orange)
 ```
+
+**The provider icons** (OpenAI, Anthropic, …) on every AIKit screen:
+
+```swift
+var config = AIKitConfiguration()
+config.providerIcons = [.openAI: "bolt", .anthropic: "leaf"]       // SF Symbol names
+config.providerIconColors = [.openAI: .teal, .anthropic: .brown]  // tile colors
+
+AIProviderSettingsSection(configuration: config)   // or AIProviderSettingsView(configuration: config)
+```
+
+Leave a provider out and it keeps its default icon. Icon names come from Apple's free
+**SF Symbols** app.
 
 Title, colors, row icon, and which notes/pickers show are all optional —
 see [Packages/AIKit/README.md](Packages/AIKit/README.md#customize).
