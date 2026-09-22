@@ -2,26 +2,47 @@ import Foundation
 import Observation
 
 /// Source of truth for which providers are connected and which one the app uses.
+///
+/// Create one at app launch, keep it in `@State`, and hand it to `AIProviderSettingsView`.
+/// Read `activeCredentials` whenever you need to call the user's AI provider.
 @Observable
-final class ProviderStore {
-    private static let settingsKey = "providerSettings"
-    private static let activeKey = "activeProvider"
+public final class AIProviderStore {
+    private static let settingsKey = "AIProviderKit.settings"
+    private static let activeKey = "AIProviderKit.activeProvider"
+
+    /// Providers shown in settings, in display order.
+    public let providers: [AIProvider]
+
+    /// The provider your app should send requests to. Users choose it in settings.
+    public var activeProvider: AIProvider? {
+        didSet { defaults.set(activeProvider?.rawValue, forKey: Self.activeKey) }
+    }
 
     private(set) var settings: [String: ProviderSettings]
 
     /// Last four characters of each saved key, cached so views never read the Keychain while rendering.
     private var keyHints: [String: String] = [:]
 
-    var activeProvider: AIProvider? {
-        didSet { defaults.set(activeProvider?.rawValue, forKey: Self.activeKey) }
-    }
-
+    @ObservationIgnored let openRouterCallbackScheme: String
+    @ObservationIgnored let openRouterKeyLabel: String
     @ObservationIgnored private let defaults: UserDefaults
-    @ObservationIgnored private let client: ProviderClient
+    @ObservationIgnored private let client = ProviderClient()
 
-    init(defaults: UserDefaults = .standard, client: ProviderClient = ProviderClient()) {
+    /// - Parameters:
+    ///   - providers: Which providers to offer, in display order.
+    ///   - openRouterCallbackScheme: URL scheme OpenRouter redirects to after sign-in. No Info.plist entry needed.
+    ///   - openRouterKeyLabel: Name shown next to the key in the user's OpenRouter dashboard.
+    ///   - defaults: Where non-secret settings are saved. API keys always go to the Keychain.
+    public init(
+        providers: [AIProvider] = AIProvider.allCases,
+        openRouterCallbackScheme: String = "aiproviderkit",
+        openRouterKeyLabel: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "iOS App",
+        defaults: UserDefaults = .standard
+    ) {
+        self.providers = providers
+        self.openRouterCallbackScheme = openRouterCallbackScheme
+        self.openRouterKeyLabel = openRouterKeyLabel
         self.defaults = defaults
-        self.client = client
 
         if let data = defaults.data(forKey: Self.settingsKey),
            let saved = try? JSONDecoder().decode([String: ProviderSettings].self, from: data) {
@@ -29,27 +50,57 @@ final class ProviderStore {
         } else {
             settings = [:]
         }
-        activeProvider = defaults.string(forKey: Self.activeKey).flatMap(AIProvider.init(rawValue:))
+        activeProvider = defaults.string(forKey: Self.activeKey)
+            .flatMap(AIProvider.init(rawValue:))
+            .flatMap { providers.contains($0) ? $0 : nil }
 
-        for provider in AIProvider.allCases where provider.requiresAPIKey {
+        for provider in providers where provider.requiresAPIKey {
             if let key = KeychainStore.read(provider.rawValue) {
                 keyHints[provider.rawValue] = String(key.suffix(4))
             }
         }
     }
 
-    // MARK: - Queries
+    // MARK: - Public API
 
-    func settings(for provider: AIProvider) -> ProviderSettings {
-        settings[provider.rawValue] ?? ProviderSettings(baseURL: provider.defaultBaseURL)
+    public var connectedProviders: [AIProvider] {
+        providers.filter(isConnected)
     }
 
-    func isConnected(_ provider: AIProvider) -> Bool {
+    public func isConnected(_ provider: AIProvider) -> Bool {
         settings(for: provider).lastVerified != nil
     }
 
-    var connectedProviders: [AIProvider] {
-        AIProvider.allCases.filter(isConnected)
+    /// Credentials for the provider the user picked as default, or `nil` if nothing is connected.
+    /// Reads the Keychain, so call it when you make a request rather than from a view body.
+    public var activeCredentials: AIProviderCredentials? {
+        activeProvider.flatMap(credentials(for:))
+    }
+
+    /// Credentials for a specific connected provider.
+    public func credentials(for provider: AIProvider) -> AIProviderCredentials? {
+        guard isConnected(provider) else { return nil }
+        let settings = settings(for: provider)
+        let baseURL = provider.usesCustomBaseURL
+            ? settings.baseURL.flatMap(URL.init(string:))
+            : provider.defaultAPIBaseURL
+        return AIProviderCredentials(
+            provider: provider,
+            model: settings.selectedModel,
+            apiKey: provider.requiresAPIKey ? KeychainStore.read(provider.rawValue) : nil,
+            baseURL: baseURL
+        )
+    }
+
+    /// Removes every saved key and setting, e.g. when the user signs out of your app.
+    public func disconnectAll() {
+        providers.forEach(disconnect)
+    }
+
+    // MARK: - Used by the settings views
+
+    func settings(for provider: AIProvider) -> ProviderSettings {
+        settings[provider.rawValue] ?? ProviderSettings(baseURL: provider.defaultBaseURL)
     }
 
     func hasStoredKey(for provider: AIProvider) -> Bool {
@@ -61,17 +112,10 @@ final class ProviderStore {
         keyHints[provider.rawValue].map { "••••" + $0 }
     }
 
-    /// Reads the Keychain; call when making a request, not from a view body.
-    func storedKey(for provider: AIProvider) -> String? {
-        KeychainStore.read(provider.rawValue)
-    }
-
-    // MARK: - Mutations
-
     /// Verifies the credentials, then saves them. Pass `nil` for `apiKey` to re-test the stored key.
     func connect(_ provider: AIProvider, apiKey: String?, baseURL: String?) async throws {
         let trimmedKey = apiKey?.trimmingCharacters(in: .whitespacesAndNewlines)
-        let key = (trimmedKey?.isEmpty == false ? trimmedKey : nil) ?? storedKey(for: provider)
+        let key = (trimmedKey?.isEmpty == false ? trimmedKey : nil) ?? KeychainStore.read(provider.rawValue)
         let url = baseURL?.trimmingCharacters(in: .whitespacesAndNewlines)
 
         let models = try await client.fetchModels(for: provider, apiKey: key, baseURL: url)
@@ -101,7 +145,7 @@ final class ProviderStore {
 
     /// Runs OpenRouter's OAuth flow. `authenticate` presents the web sheet and returns the callback URL.
     func signInWithOpenRouter(authenticate: (URL) async throws -> URL) async throws {
-        let auth = OpenRouterAuth()
+        let auth = OpenRouterAuth(callbackScheme: openRouterCallbackScheme, keyLabel: openRouterKeyLabel)
         let callbackURL = try await authenticate(auth.authURL)
         let key = try await auth.exchange(callbackURL: callbackURL)
         try await connect(.openRouter, apiKey: key, baseURL: nil)

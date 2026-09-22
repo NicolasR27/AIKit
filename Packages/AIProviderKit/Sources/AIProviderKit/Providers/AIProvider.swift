@@ -1,8 +1,7 @@
 import Foundation
 
-/// Every provider the app knows how to connect to.
-enum AIProvider: String, CaseIterable, Identifiable, Codable {
-    case apple
+/// Every provider the kit knows how to connect to.
+public nonisolated enum AIProvider: String, CaseIterable, Identifiable, Codable, Sendable {
     case openAI
     case anthropic
     case gemini
@@ -10,11 +9,10 @@ enum AIProvider: String, CaseIterable, Identifiable, Codable {
     case openRouter
     case ollama
 
-    var id: String { rawValue }
+    public var id: String { rawValue }
 
-    var displayName: String {
+    public var displayName: String {
         switch self {
-        case .apple: "Apple Intelligence"
         case .openAI: "OpenAI"
         case .anthropic: "Anthropic"
         case .gemini: "Google Gemini"
@@ -24,9 +22,8 @@ enum AIProvider: String, CaseIterable, Identifiable, Codable {
         }
     }
 
-    var subtitle: String {
+    public var subtitle: String {
         switch self {
-        case .apple: "On-device, private, no key needed"
         case .openAI: "GPT models"
         case .anthropic: "Claude models"
         case .gemini: "Gemini models"
@@ -36,9 +33,8 @@ enum AIProvider: String, CaseIterable, Identifiable, Codable {
         }
     }
 
-    var symbolName: String {
+    public var symbolName: String {
         switch self {
-        case .apple: "apple.intelligence"
         case .openAI: "circle.hexagongrid"
         case .anthropic: "asterisk"
         case .gemini: "sparkle"
@@ -48,10 +44,18 @@ enum AIProvider: String, CaseIterable, Identifiable, Codable {
         }
     }
 
-    var requiresAPIKey: Bool {
+    public var requiresAPIKey: Bool { self != .ollama }
+
+    /// Root of the provider's REST API, for building your own requests.
+    /// For Ollama, `AIProviderCredentials.baseURL` carries the user's server address instead.
+    public var defaultAPIBaseURL: URL? {
         switch self {
-        case .apple, .ollama: false
-        default: true
+        case .openAI: URL(string: "https://api.openai.com/v1")
+        case .anthropic: URL(string: "https://api.anthropic.com/v1")
+        case .gemini: URL(string: "https://generativelanguage.googleapis.com/v1beta")
+        case .mistral: URL(string: "https://api.mistral.ai/v1")
+        case .openRouter: URL(string: "https://openrouter.ai/api/v1")
+        case .ollama: URL(string: "http://localhost:11434")
         }
     }
 
@@ -80,7 +84,6 @@ enum AIProvider: String, CaseIterable, Identifiable, Codable {
         case .mistral: URL(string: "https://console.mistral.ai/api-keys")
         case .openRouter: URL(string: "https://openrouter.ai/keys")
         case .ollama: URL(string: "https://ollama.com/download")
-        case .apple: nil
         }
     }
 }

@@ -5,12 +5,10 @@ import Foundation
 /// mints an API key for them, so there's nothing to copy and paste.
 /// https://openrouter.ai/docs/guides/overview/auth/oauth
 struct OpenRouterAuth {
-    static let callbackScheme = "aiproviders"
-
     let codeVerifier: String
     let authURL: URL
 
-    init(keyLabel: String = "AI Providers iOS") {
+    init(callbackScheme: String, keyLabel: String) {
         var bytes = [UInt8](repeating: 0, count: 32)
         _ = SecRandomCopyBytes(kSecRandomDefault, bytes.count, &bytes)
         codeVerifier = Data(bytes).base64URLEncoded()
@@ -19,7 +17,7 @@ struct OpenRouterAuth {
 
         var components = URLComponents(string: "https://openrouter.ai/auth")!
         components.queryItems = [
-            URLQueryItem(name: "callback_url", value: "\(Self.callbackScheme)://oauth/openrouter"),
+            URLQueryItem(name: "callback_url", value: "\(callbackScheme)://oauth/openrouter"),
             URLQueryItem(name: "code_challenge", value: challenge),
             URLQueryItem(name: "code_challenge_method", value: "S256"),
             URLQueryItem(name: "key_label", value: keyLabel),

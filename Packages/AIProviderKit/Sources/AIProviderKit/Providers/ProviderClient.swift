@@ -1,5 +1,4 @@
 import Foundation
-import FoundationModels
 
 enum ProviderError: LocalizedError {
     case missingKey
@@ -34,9 +33,6 @@ struct ProviderClient {
 
     func fetchModels(for provider: AIProvider, apiKey: String?, baseURL: String?) async throws -> [String] {
         switch provider {
-        case .apple:
-            return try appleModels()
-
         case .openAI:
             let data = try await get("https://api.openai.com/v1/models", bearer: apiKey)
             return try decode(DataList.self, data).data.map(\.id).sorted()
@@ -56,7 +52,7 @@ struct ProviderClient {
                                      headers: ["x-goog-api-key": apiKey])
             return try decode(GeminiModels.self, data).models
                 .filter { $0.supportedGenerationMethods?.contains("generateContent") ?? true }
-                .map { $0.name.replacingOccurrences(of: "models/", with: "") }
+                .map { String($0.name.trimmingPrefix("models/")) }
                 .sorted()
 
         case .mistral:
@@ -74,23 +70,6 @@ struct ProviderClient {
             let trimmed = base.hasSuffix("/") ? String(base.dropLast()) : base
             let data = try await get(trimmed + "/api/tags")
             return try decode(OllamaTags.self, data).models.map(\.name).sorted()
-        }
-    }
-
-    // MARK: - Apple Intelligence
-
-    private func appleModels() throws -> [String] {
-        switch SystemLanguageModel.default.availability {
-        case .available:
-            return ["On-device model"]
-        case .unavailable(.deviceNotEligible):
-            throw ProviderError.unavailable("This device doesn't support Apple Intelligence.")
-        case .unavailable(.appleIntelligenceNotEnabled):
-            throw ProviderError.unavailable("Turn on Apple Intelligence in Settings to use the on-device model.")
-        case .unavailable(.modelNotReady):
-            throw ProviderError.unavailable("The on-device model is still downloading. Try again shortly.")
-        case .unavailable:
-            throw ProviderError.unavailable("Apple Intelligence isn't available right now.")
         }
     }
 

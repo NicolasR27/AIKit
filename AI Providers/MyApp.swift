@@ -1,12 +1,12 @@
+import AIProviderKit
 import SwiftUI
 
 @main struct MyApp: App {
-    @State private var providers = ProviderStore()
+    @State private var providers = AIProviderStore()
 
     var body: some Scene {
         WindowGroup {
-            SettingsView()
-                .environment(providers)
+            AIProviderSettingsView(store: providers)
         }
     }
 }

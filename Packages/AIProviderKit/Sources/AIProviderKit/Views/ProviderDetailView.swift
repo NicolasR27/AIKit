@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ProviderDetailView: View {
-    @Environment(ProviderStore.self) private var store
+    @Environment(AIProviderStore.self) private var store
     let provider: AIProvider
 
     @State private var keyDraft = ""
@@ -196,10 +196,7 @@ struct ProviderDetailView: View {
     }
 
     private var connectTitle: String {
-        switch provider {
-        case .apple: isConnected ? "Check Again" : "Check Availability"
-        default: isConnected && keyDraft.isEmpty ? "Test Connection" : "Connect"
-        }
+        isConnected && keyDraft.isEmpty ? "Test Connection" : "Connect"
     }
 
     private func connect() async {
@@ -232,5 +229,5 @@ private extension View {
     NavigationStack {
         ProviderDetailView(provider: .anthropic)
     }
-    .environment(ProviderStore())
+    .environment(AIProviderStore())
 }

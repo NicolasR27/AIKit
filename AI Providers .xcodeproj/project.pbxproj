@@ -6,6 +6,10 @@
 	objectVersion = 90;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		0000000000000000000A0001 /* AIProviderKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0000000000000000000A0002 /* AIProviderKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		000000000000000000000120 /* AI Providers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AI Providers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -22,6 +26,7 @@
 		000000000000000130000000 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
+				0000000000000000000A0001 /* AIProviderKit in Frameworks */,
 			);
 		};
 /* End PBXFrameworksBuildPhase section */
@@ -60,6 +65,9 @@
 				000000000000000000000010 /* AI Providers */,
 			);
 			name = "AI Providers";
+			packageProductDependencies = (
+				0000000000000000000A0002 /* AIProviderKit */,
+			);
 			productName = MyApp;
 			productReference = 000000000000000000000120 /* AI Providers.app */;
 			productType = "com.apple.product-type.application";
@@ -88,6 +96,9 @@
 			);
 			mainGroup = 000000000000000000000001;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0000000000000000000A0003 /* XCLocalSwiftPackageReference "Packages/AIProviderKit" */,
+			);
 			preferredProjectObjectVersion = 90;
 			productRefGroup = 000000000000000000000020 /* Products */;
 			projectDirPath = "";
@@ -347,6 +358,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		0000000000000000000A0003 /* XCLocalSwiftPackageReference "Packages/AIProviderKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/AIProviderKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0000000000000000000A0002 /* AIProviderKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AIProviderKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 000000000000000000000000 /* Project object */;
 }

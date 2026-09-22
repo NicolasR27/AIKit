@@ -3,7 +3,7 @@ import SwiftUI
 /// Searchable list, since some providers (OpenRouter) return hundreds of models.
 /// OpenRouter IDs look like `anthropic/claude-…`, so they're grouped by lab.
 struct ModelPickerView: View {
-    @Environment(ProviderStore.self) private var store
+    @Environment(AIProviderStore.self) private var store
     @Environment(\.dismiss) private var dismiss
     let provider: AIProvider
 
