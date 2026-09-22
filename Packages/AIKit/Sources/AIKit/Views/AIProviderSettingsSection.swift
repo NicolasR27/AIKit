@@ -19,13 +19,18 @@ public struct AIProviderSettingsSection: View {
     private let footer: Text?
     private let selection: Binding<AIProvider?>?
 
+    /// - Parameters:
+    ///   - icon: SF Symbol for the row's tile. Overrides `configuration.rowSymbol`.
+    ///   - iconColor: The tile's background. Overrides `configuration.rowTint`.
     public init(
+        icon: String? = nil,
+        iconColor: Color? = nil,
         store: AIProviderStore = .shared,
         configuration: AIKitConfiguration = AIKitConfiguration(),
         footer: Text? = nil
     ) {
         self.store = store
-        self.configuration = configuration
+        self.configuration = configuration.withRowIcon(icon, iconColor)
         self.footer = footer
         self.selection = nil
     }
@@ -34,12 +39,14 @@ public struct AIProviderSettingsSection: View {
     ///   Setting it to a provider that isn't connected is ignored and snaps back.
     public init(
         selection: Binding<AIProvider?>,
+        icon: String? = nil,
+        iconColor: Color? = nil,
         store: AIProviderStore = .shared,
         configuration: AIKitConfiguration = AIKitConfiguration(),
         footer: Text? = nil
     ) {
         self.store = store
-        self.configuration = configuration
+        self.configuration = configuration.withRowIcon(icon, iconColor)
         self.footer = footer
         self.selection = selection
     }

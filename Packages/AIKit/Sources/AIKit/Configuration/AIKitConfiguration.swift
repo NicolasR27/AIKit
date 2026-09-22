@@ -54,3 +54,13 @@ public nonisolated struct AIKitConfiguration: Sendable {
         self.privacyNote = privacyNote
     }
 }
+
+extension AIKitConfiguration {
+    /// Copy with the row icon replaced where a value is given.
+    func withRowIcon(_ symbol: String?, _ tint: Color?) -> AIKitConfiguration {
+        var copy = self
+        if let symbol { copy.rowSymbol = symbol }
+        if let tint { copy.rowTint = tint }
+        return copy
+    }
+}

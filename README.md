@@ -71,10 +71,7 @@ AIProviderSettingsView(configuration: AIKitConfiguration(title: "Assistant", tin
 ### Change the icon
 
 ```swift
-AIProviderSettingsSection(configuration: AIKitConfiguration(
-    rowSymbol: "brain",   // SF Symbol name
-    rowTint: .orange      // background color
-))
+AIProviderSettingsSection(icon: "brain", iconColor: .orange)
 ```
 
 Title, colors, row icon, and which notes/pickers show are all optional —
