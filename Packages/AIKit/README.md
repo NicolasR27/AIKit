@@ -111,6 +111,12 @@ AIProviderSettingsSection(configuration: AIKitConfiguration(
 ))
 ```
 
+### Change the icon
+
+```swift
+AIProviderSettingsSection(icon: "brain", iconColor: .orange)
+```
+
 Which providers appear (and in what order) is set on the store — see below.
 
 ## Options

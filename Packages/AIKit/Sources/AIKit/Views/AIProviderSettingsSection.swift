@@ -13,6 +13,10 @@ import SwiftUI
 ///
 ///     @State private var selectedAIProvider: AIProvider?
 ///     AIProviderSettingsSection(selection: $selectedAIProvider)
+///
+/// Change the row's icon with any SF Symbol name and a background color:
+///
+///     AIProviderSettingsSection(icon: "brain", iconColor: .orange)
 public struct AIProviderSettingsSection: View {
     private let store: AIProviderStore
     private let configuration: AIKitConfiguration

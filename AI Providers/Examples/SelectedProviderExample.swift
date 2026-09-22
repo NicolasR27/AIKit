@@ -11,7 +11,8 @@ struct SelectedProviderExample: View {
         NavigationStack {
             Form {
                 // The user picks a provider here; `selectedAIProvider` stays in sync.
-                AIProviderSettingsSection(selection: $selectedAIProvider)
+                // `icon` is any SF Symbol name; `iconColor` is the tile behind it. Both optional.
+                AIProviderSettingsSection(selection: $selectedAIProvider, icon: "brain", iconColor: .orange)
                 CurrentAIProviderRow()
 
                 Section("In Code") {
