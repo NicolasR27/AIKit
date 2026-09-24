@@ -50,7 +50,7 @@ public final class AIProviderStore {
 
         if let data = defaults.data(forKey: Self.settingsKey),
            let saved = try? JSONDecoder().decode([String: ProviderSettings].self, from: data) {
-            settings = saved
+            settings = Self.droppingNonChatModels(saved)
         } else {
             settings = [:]
         }
@@ -196,6 +196,21 @@ public final class AIProviderStore {
     private func update(_ provider: AIProvider, _ value: ProviderSettings) {
         settings[provider.rawValue] = value
         persist()
+    }
+
+    /// Lists saved before non-chat models were filtered out may still hold them,
+    /// possibly as the selected model. Prune them so sends don't fail.
+    private static func droppingNonChatModels(_ saved: [String: ProviderSettings]) -> [String: ProviderSettings] {
+        saved.reduce(into: [:]) { result, entry in
+            var value = entry.value
+            if let provider = AIProvider(rawValue: entry.key) {
+                value.availableModels = ChatModels.filter(value.availableModels, for: provider)
+                if let selected = value.selectedModel, !ChatModels.isChatModel(selected, for: provider) {
+                    value.selectedModel = value.availableModels.first
+                }
+            }
+            result[entry.key] = value
+        }
     }
 
     private func persist() {

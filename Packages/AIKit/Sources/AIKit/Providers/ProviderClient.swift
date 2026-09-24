@@ -13,7 +13,7 @@ struct ProviderClient {
 
         case .openAI:
             let data = try await get("https://api.openai.com/v1/models", bearer: apiKey)
-            return try decode(DataList.self, data).data.map(\.id).sorted()
+            return ChatModels.filter(try decode(DataList.self, data).data.map(\.id), for: .openAI).sorted()
 
         case .anthropic:
             guard let apiKey, !apiKey.isEmpty else { throw ProviderError.missingKey }
@@ -35,7 +35,7 @@ struct ProviderClient {
 
         case .mistral:
             let data = try await get("https://api.mistral.ai/v1/models", bearer: apiKey)
-            return Array(Set(try decode(DataList.self, data).data.map(\.id))).sorted()
+            return ChatModels.filter(Array(Set(try decode(DataList.self, data).data.map(\.id))), for: .mistral).sorted()
 
         case .openRouter:
             // The models endpoint is public, so hit /key to actually validate the key.

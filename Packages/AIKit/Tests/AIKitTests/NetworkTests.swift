@@ -21,6 +21,49 @@ struct NetworkTests {
         #expect(request.value(forHTTPHeaderField: "Authorization") == "Bearer sk-test")
     }
 
+    @Test func openAIDropsModelsThatCantChat() async throws {
+        let client = ProviderClient(session: StubURLProtocol.session { _ in
+            .init(json: #"""
+            {"data":[{"id":"gpt-4o-mini"},{"id":"gpt-3.5-turbo-instruct"},{"id":"davinci-002"},
+                     {"id":"text-embedding-3-small"},{"id":"whisper-1"},{"id":"tts-1"},{"id":"dall-e-3"},
+                     {"id":"gpt-image-1"},{"id":"omni-moderation-latest"},{"id":"o1-pro"},{"id":"o3-mini"}]}
+            """#)
+        })
+
+        let models = try await client.fetchModels(for: .openAI, apiKey: "sk-test", baseURL: nil)
+
+        #expect(models == ["gpt-4o-mini", "o3-mini"])
+    }
+
+    @Test func notAChatModelErrorNamesTheModel() async {
+        let client = ProviderClient(session: StubURLProtocol.session { _ in
+            .init(status: 404, json: #"{"error":{"message":"This is not a chat model and thus not supported in the v1/chat/completions endpoint. Did you mean to use v1/completions?"}}"#)
+        })
+        let credentials = AIProviderCredentials(provider: .openAI, model: "gpt-3.5-turbo-instruct", apiKey: "k",
+                                                baseURL: AIProvider.openAI.defaultAPIBaseURL)
+
+        await #expect {
+            try await client.chat([.user("Hi")], system: nil, credentials: credentials, model: "gpt-3.5-turbo-instruct")
+        } throws: { error in
+            error.localizedDescription.contains("“gpt-3.5-turbo-instruct” can't be used for chat")
+        }
+    }
+
+    @Test func savedNonChatModelIsReplacedOnLaunch() throws {
+        let defaults = UserDefaults(suiteName: "AIKitTests.\(UUID().uuidString)")!
+        let saved = [AIProvider.openAI.rawValue: ProviderSettings(
+            selectedModel: "gpt-3.5-turbo-instruct",
+            availableModels: ["gpt-3.5-turbo-instruct", "gpt-4o-mini", "whisper-1"],
+            lastVerified: .now
+        )]
+        defaults.set(try JSONEncoder().encode(saved), forKey: "AIKit.settings")
+
+        let store = AIProviderStore(providers: [.openAI], defaults: defaults)
+
+        #expect(store.settings(for: .openAI).availableModels == ["gpt-4o-mini"])
+        #expect(store.settings(for: .openAI).selectedModel == "gpt-4o-mini")
+    }
+
     @Test func anthropicKeepsNewestFirstOrderAndSendsVersionHeader() async throws {
         let client = ProviderClient(session: StubURLProtocol.session { _ in
             .init(json: #"{"data":[{"id":"claude-new"},{"id":"claude-old"}],"has_more":false}"#)

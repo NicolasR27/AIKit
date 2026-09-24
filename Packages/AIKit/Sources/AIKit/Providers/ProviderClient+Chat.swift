@@ -15,6 +15,29 @@ extension ProviderClient {
         let key = credentials.apiKey ?? ""
         if credentials.provider.requiresAPIKey, key.isEmpty { throw ProviderError.missingKey }
 
+        do {
+            return try await chatOverHTTP(messages, system: system, credentials: credentials,
+                                          baseURL: baseURL, key: key, model: model)
+        } catch ProviderError.server(_, let message?) where Self.isNotAChatModelMessage(message) {
+            throw ProviderError.notAChatModel(model)
+        }
+    }
+
+    /// OpenAI's wording when a completion-only or Responses-only model hits /chat/completions.
+    static func isNotAChatModelMessage(_ message: String) -> Bool {
+        message.localizedStandardContains("not a chat model")
+            || message.localizedStandardContains("not supported in the v1/chat/completions")
+            || message.localizedStandardContains("only supported in v1/responses")
+    }
+
+    private func chatOverHTTP(
+        _ messages: [AIMessage],
+        system: String?,
+        credentials: AIProviderCredentials,
+        baseURL: URL,
+        key: String,
+        model: String
+    ) async throws -> String {
         let reply: String
         switch credentials.provider {
         case .openAI, .mistral, .openRouter:

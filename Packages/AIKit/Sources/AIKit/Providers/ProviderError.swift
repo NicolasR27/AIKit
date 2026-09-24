@@ -7,6 +7,7 @@ enum ProviderError: LocalizedError {
     case server(status: Int, message: String?)
     case unreachable(String)
     case unavailable(String)
+    case notAChatModel(String)
 
     var errorDescription: String? {
         switch self {
@@ -24,6 +25,8 @@ enum ProviderError: LocalizedError {
             "Couldn't reach the provider. \(detail)"
         case .unavailable(let reason):
             reason
+        case .notAChatModel(let model):
+            String(localized: "“\(model)” can't be used for chat. Choose a different model in AI provider settings.")
         }
     }
 }
