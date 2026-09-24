@@ -49,3 +49,24 @@ struct ModelGroupTests {
         #expect(groups[0].displayName(for: "gpt-a") == "gpt-a")
     }
 }
+
+@MainActor
+struct AppleIntelligenceTests {
+    @Test func needsNoKeyOrServer() {
+        #expect(AIProvider.apple.isOnDevice)
+        #expect(!AIProvider.apple.requiresAPIKey)
+        #expect(AIProvider.apple.defaultAPIBaseURL == nil)
+    }
+
+    @Test func savedSettingsGiveKeylessCredentials() throws {
+        let defaults = UserDefaults(suiteName: "AIKitTests.\(UUID().uuidString)")!
+        let settings = [AIProvider.apple.rawValue: ProviderSettings(selectedModel: AppleIntelligence.modelName, lastVerified: .now)]
+        defaults.set(try JSONEncoder().encode(settings), forKey: "AIKit.settings")
+        let store = AIProviderStore(providers: [.apple], defaults: defaults)
+
+        let credentials = try #require(store.credentials(for: .apple))
+        #expect(credentials.model == AppleIntelligence.modelName)
+        #expect(credentials.apiKey == nil)
+        #expect(credentials.baseURL == nil)
+    }
+}

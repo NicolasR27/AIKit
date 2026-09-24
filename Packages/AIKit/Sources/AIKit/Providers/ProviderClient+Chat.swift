@@ -8,6 +8,9 @@ extension ProviderClient {
         credentials: AIProviderCredentials,
         model: String
     ) async throws -> String {
+        if credentials.provider == .apple {
+            return try await AppleIntelligence.chat(messages, system: system)
+        }
         guard let baseURL = credentials.baseURL else { throw ProviderError.invalidBaseURL }
         let key = credentials.apiKey ?? ""
         if credentials.provider.requiresAPIKey, key.isEmpty { throw ProviderError.missingKey }
@@ -64,6 +67,9 @@ extension ProviderClient {
                 headers: [:]
             )
             reply = try decode(OllamaChat.Response.self, data).message.content
+
+        case .apple:
+            preconditionFailure("Handled above; Apple Intelligence doesn't use HTTP.")
         }
 
         guard !reply.isEmpty else { throw AIKitError.emptyResponse }

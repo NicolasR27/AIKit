@@ -30,20 +30,33 @@ struct ProviderDetailView: View {
                 ServerSection(provider: provider, baseURL: $baseURLDraft)
             }
 
-            ConnectSection(
-                title: connectTitle,
-                isWorking: isWorking,
-                isEnabled: canConnect,
-                showsSuccess: isConnected && errorMessage == nil,
-                errorMessage: errorMessage,
-                lastVerified: store.settings(for: provider).lastVerified,
-                connect: requestConnect
-            )
+            if provider.isOnDevice {
+                OnDeviceToggleSection(
+                    provider: provider,
+                    isOn: Binding(get: { isConnected || isWorking }, set: setEnabled),
+                    isWorking: isWorking,
+                    errorMessage: errorMessage
+                )
+            } else {
+                ConnectSection(
+                    title: connectTitle,
+                    isWorking: isWorking,
+                    isEnabled: canConnect,
+                    showsSuccess: isConnected && errorMessage == nil,
+                    errorMessage: errorMessage,
+                    lastVerified: store.settings(for: provider).lastVerified,
+                    connect: requestConnect
+                )
+            }
 
             if isConnected {
-                ModelSection(store: store, provider: provider)
+                if !provider.isOnDevice {
+                    ModelSection(store: store, provider: provider)
+                }
                 DefaultProviderSection(store: store, provider: provider)
-                DisconnectSection(provider: provider, disconnect: disconnect)
+                if !provider.isOnDevice {
+                    DisconnectSection(provider: provider, disconnect: disconnect)
+                }
             }
         }
         .navigationTitle(provider.displayName)
@@ -79,6 +92,15 @@ struct ProviderDetailView: View {
 
     private func requestConnect() {
         connectRequest = UUID()
+    }
+
+    /// Turning the toggle on checks the model is available before saving; off forgets it.
+    private func setEnabled(_ isOn: Bool) {
+        if isOn {
+            requestConnect()
+        } else {
+            disconnect()
+        }
     }
 
     private func disconnect() {

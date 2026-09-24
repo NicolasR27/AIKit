@@ -7,6 +7,10 @@ struct ProviderClient {
 
     func fetchModels(for provider: AIProvider, apiKey: String?, baseURL: String?) async throws -> [String] {
         switch provider {
+        case .apple:
+            try AppleIntelligence.checkAvailability()
+            return [AppleIntelligence.modelName]
+
         case .openAI:
             let data = try await get("https://api.openai.com/v1/models", bearer: apiKey)
             return try decode(DataList.self, data).data.map(\.id).sorted()

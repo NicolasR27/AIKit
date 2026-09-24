@@ -88,6 +88,7 @@ Replies arrive in one piece (no streaming yet). Each provider is called with its
 | Anthropic | `POST /v1/messages` |
 | Google Gemini | `POST /models/{model}:generateContent` |
 | Ollama | `POST /api/chat` |
+| Apple Intelligence | On-device via Foundation Models (no key, turned on with a switch) |
 
 Need raw access instead? `AIProviderStore.shared.activeCredentials` gives you the
 provider, model, key and API base URL to build your own requests.
