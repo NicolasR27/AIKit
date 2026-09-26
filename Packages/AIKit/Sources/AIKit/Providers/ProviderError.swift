@@ -8,6 +8,8 @@ enum ProviderError: LocalizedError {
     case unreachable(String)
     case unavailable(String)
     case notAChatModel(String)
+    case unreadableImage
+    case imagesNotSupported(String)
 
     var errorDescription: String? {
         switch self {
@@ -27,6 +29,10 @@ enum ProviderError: LocalizedError {
             reason
         case .notAChatModel(let model):
             String(localized: "“\(model)” can't be used for chat. Choose a different model in AI provider settings.")
+        case .unreadableImage:
+            String(localized: "That photo couldn't be read. Try a JPEG or PNG.")
+        case .imagesNotSupported(let reason):
+            reason
         }
     }
 }

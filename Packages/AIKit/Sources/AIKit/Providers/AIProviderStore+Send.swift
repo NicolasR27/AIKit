@@ -4,8 +4,9 @@ extension AIProviderStore {
     /// Sends one prompt to the user's default provider and model and returns the reply.
     ///
     ///     let reply = try await AIProviderStore.shared.send("Summarize this: …")
-    public func send(_ prompt: String, system: String? = nil) async throws -> String {
-        try await send([.user(prompt)], system: system)
+    ///     let reply = try await AIProviderStore.shared.send("What watch is this?", images: [photoData])
+    public func send(_ prompt: String, images: [Data] = [], system: String? = nil) async throws -> String {
+        try await send([.user(prompt, images: images)], system: system)
     }
 
     /// Sends a whole conversation (oldest first) and returns the assistant's next reply.

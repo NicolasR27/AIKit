@@ -42,8 +42,16 @@ extension ProviderClient {
         switch credentials.provider {
         case .openAI, .mistral, .openRouter:
             // All three speak the OpenAI Chat Completions format.
-            var turns = messages.map { OpenAIChat.Message(role: $0.role.rawValue, content: $0.content) }
-            if let system { turns.insert(.init(role: "system", content: system), at: 0) }
+            var turns = try messages.map { message in
+                let images = try message.images.map(ImageEncoding.jpegBase64)
+                guard !images.isEmpty else {
+                    return OpenAIChat.RequestMessage(role: message.role.rawValue, content: .text(message.content))
+                }
+                let parts = images.map { OpenAIChat.Part(type: "image_url", image_url: .init(url: "data:image/jpeg;base64,\($0)")) }
+                    + [OpenAIChat.Part(type: "text", text: message.content)]
+                return OpenAIChat.RequestMessage(role: message.role.rawValue, content: .parts(parts))
+            }
+            if let system { turns.insert(.init(role: "system", content: .text(system)), at: 0) }
             let data = try await post(
                 baseURL.appending(path: "chat/completions"),
                 body: OpenAIChat.Request(model: model, messages: turns),
@@ -58,7 +66,16 @@ extension ProviderClient {
                     model: model,
                     max_tokens: 4096,
                     system: system,
-                    messages: messages.map { .init(role: $0.role.rawValue, content: $0.content) }
+                    messages: try messages.map { message in
+                        let images = try message.images.map(ImageEncoding.jpegBase64)
+                        guard !images.isEmpty else {
+                            return AnthropicChat.Message(role: message.role.rawValue, content: .text(message.content))
+                        }
+                        let blocks = images.map {
+                            AnthropicChat.Block(type: "image", source: .init(type: "base64", media_type: "image/jpeg", data: $0))
+                        } + [AnthropicChat.Block(type: "text", text: message.content)]
+                        return AnthropicChat.Message(role: message.role.rawValue, content: .blocks(blocks))
+                    }
                 ),
                 headers: ["x-api-key": key, "anthropic-version": "2023-06-01"]
             )
@@ -71,8 +88,12 @@ extension ProviderClient {
                 baseURL.appending(path: "models/\(model):generateContent"),
                 body: GeminiChat.Request(
                     systemInstruction: system.map { .init(role: nil, parts: [.init(text: $0)]) },
-                    contents: messages.map {
-                        .init(role: $0.role == .assistant ? "model" : "user", parts: [.init(text: $0.content)])
+                    contents: try messages.map { message in
+                        let images = try message.images.map {
+                            GeminiChat.Part(inlineData: .init(mimeType: "image/jpeg", data: try ImageEncoding.jpegBase64(from: $0)))
+                        }
+                        return .init(role: message.role == .assistant ? "model" : "user",
+                                     parts: images + [.init(text: message.content)])
                     }
                 ),
                 headers: ["x-goog-api-key": key]
@@ -82,8 +103,12 @@ extension ProviderClient {
                 .joined() ?? ""
 
         case .ollama:
-            var turns = messages.map { OllamaChat.Message(role: $0.role.rawValue, content: $0.content) }
-            if let system { turns.insert(.init(role: "system", content: system), at: 0) }
+            var turns = try messages.map { message in
+                let images = try message.images.map(ImageEncoding.jpegBase64)
+                return OllamaChat.Message(role: message.role.rawValue, content: message.content,
+                                          images: images.isEmpty ? nil : images)
+            }
+            if let system { turns.insert(.init(role: "system", content: system, images: nil), at: 0) }
             let data = try await post(
                 baseURL.appending(path: "api/chat"),
                 body: OllamaChat.Request(model: model, messages: turns, stream: false),
@@ -113,8 +138,28 @@ extension ProviderClient {
 // MARK: - Wire formats
 
 private enum OpenAIChat {
-    struct Message: Codable { let role: String; let content: String? }
-    struct Request: Encodable { let model: String; let messages: [Message] }
+    struct Message: Decodable { let role: String; let content: String? }
+    /// A plain string for text-only turns, or text + image parts when the turn has photos.
+    enum Content: Encodable {
+        case text(String)
+        case parts([Part])
+
+        func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            switch self {
+            case .text(let text): try container.encode(text)
+            case .parts(let parts): try container.encode(parts)
+            }
+        }
+    }
+    struct Part: Encodable {
+        struct ImageURL: Encodable { let url: String }
+        let type: String
+        var text: String?
+        var image_url: ImageURL?
+    }
+    struct RequestMessage: Encodable { let role: String; let content: Content }
+    struct Request: Encodable { let model: String; let messages: [RequestMessage] }
     struct Response: Decodable {
         struct Choice: Decodable { let message: Message }
         let choices: [Choice]
@@ -122,7 +167,25 @@ private enum OpenAIChat {
 }
 
 private enum AnthropicChat {
-    struct Message: Encodable { let role: String; let content: String }
+    enum Content: Encodable {
+        case text(String)
+        case blocks([Block])
+
+        func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            switch self {
+            case .text(let text): try container.encode(text)
+            case .blocks(let blocks): try container.encode(blocks)
+            }
+        }
+    }
+    struct Block: Encodable {
+        struct Source: Encodable { let type: String; let media_type: String; let data: String }
+        let type: String
+        var text: String?
+        var source: Source?
+    }
+    struct Message: Encodable { let role: String; let content: Content }
     struct Request: Encodable {
         let model: String
         let max_tokens: Int
@@ -130,13 +193,17 @@ private enum AnthropicChat {
         let messages: [Message]
     }
     struct Response: Decodable {
-        struct Block: Decodable { let text: String? }
-        let content: [Block]
+        struct TextBlock: Decodable { let text: String? }
+        let content: [TextBlock]
     }
 }
 
 private enum GeminiChat {
-    struct Part: Codable { let text: String? }
+    struct InlineData: Codable { let mimeType: String; let data: String }
+    struct Part: Codable {
+        var text: String?
+        var inlineData: InlineData?
+    }
     struct Content: Codable { let role: String?; let parts: [Part]? }
     struct Request: Encodable {
         let systemInstruction: Content?
@@ -149,7 +216,7 @@ private enum GeminiChat {
 }
 
 private enum OllamaChat {
-    struct Message: Codable { let role: String; let content: String }
+    struct Message: Codable { let role: String; let content: String; var images: [String]? }
     struct Request: Encodable { let model: String; let messages: [Message]; let stream: Bool }
     struct Response: Decodable { let message: Message }
 }

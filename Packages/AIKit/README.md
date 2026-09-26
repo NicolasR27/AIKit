@@ -8,7 +8,7 @@ pay the provider for usage instead of you.
 - Keys stored in the Keychain (this device only), never in UserDefaults
 - Searchable model picker filled from the provider's live model list
 - One-tap **Sign in with OpenRouter** (OAuth PKCE) for access to every lab's models with one key
-- iOS 26+, Swift 6, no third-party dependencies
+- iOS 27+, Swift 6, no third-party dependencies
 
 ## Install
 
@@ -72,6 +72,11 @@ let answer = try await AIProviderStore.shared.send(
     system: "Answer briefly.",
     provider: .anthropic
 )
+```
+
+```swift
+// Photos: pass image bytes (HEIC/JPEG/PNG; resized to 1568 px and sent as JPEG).
+let watch = try await AIProviderStore.shared.send("What watch is this?", images: [photoData])
 ```
 
 Errors have a user-readable `localizedDescription`. `AIKitError.notConnected` and

@@ -1,7 +1,7 @@
 # AIKit
 
 Let users connect their own AI account (OpenAI, Anthropic, Gemini, Mistral,
-OpenRouter, Ollama) from a native iOS settings screen. iOS 26+.
+OpenRouter, Ollama) from a native iOS settings screen. iOS 27+.
 
 ## Install
 
@@ -112,5 +112,22 @@ let reply = try await AIProviderStore.shared.send(
 ```
 
 If nothing is connected it throws `AIKitError.notConnected`; show the settings.
+
+## Send a photo
+
+Pass the image's bytes. HEIC, JPEG and PNG all work, and big photos are shrunk for you.
+
+```swift
+import PhotosUI
+
+// In your view, after the user picks a photo with PhotosPicker:
+let photo = try await pickerItem.loadTransferable(type: Data.self)!
+let reply = try await AIProviderStore.shared.send("What watch is this? Give brand, model and reference.",
+                                                  images: [photo])
+```
+
+Works with every provider, including Apple Intelligence (on-device, no key).
+The user's model has to support images: current OpenAI, Claude and Gemini models do; on Ollama use one like `llava`.
+If the device's Apple Intelligence can't read photos, `send` throws an error saying so. Show it to the user.
 
 More options: [Packages/AIKit/README.md](Packages/AIKit/README.md)

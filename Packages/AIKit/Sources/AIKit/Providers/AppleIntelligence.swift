@@ -33,8 +33,18 @@ enum AppleIntelligence {
         if let system {
             entries.append(.instructions(.init(segments: [.text(.init(content: system))], toolDefinitions: [])))
         }
+        if messages.contains(where: { !$0.images.isEmpty }),
+           !SystemLanguageModel.default.capabilities.contains(.vision) {
+            throw ProviderError.imagesNotSupported(
+                String(localized: "Apple Intelligence can't read photos on this device. Choose a cloud provider in AI provider settings.")
+            )
+        }
+
         for message in messages.dropLast() {
-            let segments: [Transcript.Segment] = [.text(.init(content: message.content))]
+            let images: [Transcript.Segment] = try message.images.map {
+                .attachment(.init(content: .image(.init(try ImageEncoding.cgImage(from: $0)))))
+            }
+            let segments: [Transcript.Segment] = images + [.text(.init(content: message.content))]
             switch message.role {
             case .user: entries.append(.prompt(.init(segments: segments)))
             case .assistant: entries.append(.response(.init(assetIDs: [], segments: segments)))
@@ -42,7 +52,11 @@ enum AppleIntelligence {
         }
 
         let session = LanguageModelSession(transcript: Transcript(entries: entries))
-        let reply = try await session.respond(to: last.content).content
+        let attachments = try last.images.map { Attachment(try ImageEncoding.cgImage(from: $0)) }
+        let reply = try await session.respond {
+            for attachment in attachments { attachment }
+            last.content
+        }.content
         guard !reply.isEmpty else { throw AIKitError.emptyResponse }
         return reply
     }
