@@ -121,7 +121,7 @@ Pass the image's bytes. HEIC, JPEG and PNG all work, and big photos are shrunk f
 import PhotosUI
 
 // In your view, after the user picks a photo with PhotosPicker:
-let photo = try await pickerItem.loadTransferable(type: Data.self)!
+guard let photo = try await pickerItem.loadTransferable(type: Data.self) else { return }
 let reply = try await AIProviderStore.shared.send("What watch is this? Give brand, model and reference.",
                                                   images: [photo])
 ```
@@ -129,5 +129,37 @@ let reply = try await AIProviderStore.shared.send("What watch is this? Give bran
 Works with every provider, including Apple Intelligence (on-device, no key).
 The user's model has to support images: current OpenAI, Claude and Gemini models do; on Ollama use one like `llava`.
 If the device's Apple Intelligence can't read photos, `send` throws an error saying so. Show it to the user.
+
+## Fix "does not have a valid endpoint"
+
+If your app shows this error (or anything that fails only when **Apple Intelligence** is picked),
+it's building its own request from `baseURL`. Apple Intelligence runs on the device,
+so its `baseURL` is always `nil`. Let AIKit send the request instead:
+
+1. **Update the package.** In Xcode: **File ▸ Packages ▸ Update to Latest Package Versions**.
+   Set your app's minimum iOS version to **27**.
+2. **Find your request code.** Search your app for `baseURL` or `activeCredentials`.
+   It usually looks like this:
+
+   ```swift
+   guard let credentials = await AIProviderStore.shared.activeCredentials,
+         let baseURL = credentials.baseURL else {
+       throw ImportError.invalidEndpoint          // "does not have a valid endpoint"
+   }
+   var request = URLRequest(url: baseURL.appending(path: "chat/completions"))
+   // …build JSON, add the API key, send, decode the reply…
+   ```
+
+3. **Replace all of it with one call:**
+
+   ```swift
+   let reply = try await AIProviderStore.shared.send(prompt, images: [photoData])
+   ```
+
+   Leave out `images:` if you're only sending text.
+4. **Show the error as-is:** `error.localizedDescription` already tells the user what to do
+   (connect a provider, pick a model, or choose one that can read photos).
+
+That's it. It now works with every provider, including Apple Intelligence.
 
 More options: [Packages/AIKit/README.md](Packages/AIKit/README.md)

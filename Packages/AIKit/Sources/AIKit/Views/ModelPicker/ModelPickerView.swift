@@ -8,13 +8,14 @@ struct ModelPickerView: View {
     let provider: AIProvider
 
     @State private var query = ""
+    /// Search results, grouped once per change instead of on every render.
+    @State private var groups: [ModelGroup] = []
+
+    private var settings: ProviderSettings { store.settings(for: provider) }
 
     var body: some View {
-        let settings = store.settings(for: provider)
-        let models = filtered(settings.availableModels)
-
         List {
-            ForEach(ModelGroup.grouping(models)) { group in
+            ForEach(groups) { group in
                 Section(group.vendor) {
                     ForEach(group.models, id: \.self) { model in
                         ModelRow(
@@ -27,7 +28,7 @@ struct ModelPickerView: View {
             }
         }
         .overlay {
-            if models.isEmpty {
+            if groups.isEmpty {
                 if query.isEmpty {
                     ContentUnavailableView("No Models", systemImage: "cpu",
                                            description: Text("Test the connection again to refresh the list."))
@@ -38,11 +39,14 @@ struct ModelPickerView: View {
         }
         .searchable(text: $query, prompt: "Search models")
         .navigationTitle("Model")
+        .onChange(of: query, initial: true, regroup)
+        .onChange(of: settings.availableModels, regroup)
     }
 
-    private func filtered(_ models: [String]) -> [String] {
-        guard !query.isEmpty else { return models }
-        return models.filter { $0.localizedStandardContains(query) }
+    private func regroup() {
+        let models = settings.availableModels
+        let matches = query.isEmpty ? models : models.filter { $0.localizedStandardContains(query) }
+        groups = ModelGroup.grouping(matches)
     }
 
     private func choose(_ model: String) {

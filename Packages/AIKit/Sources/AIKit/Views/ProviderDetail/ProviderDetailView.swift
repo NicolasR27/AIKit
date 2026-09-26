@@ -10,10 +10,14 @@ struct ProviderDetailView: View {
     @State private var revealsKey = false
     @State private var isWorking = false
     @State private var errorMessage: String?
+    /// Mirrors `showsOnDeviceOn`; the user flipping it connects or disconnects Apple Intelligence.
+    @State private var isOnDeviceEnabled = false
     /// Setting this starts a connection check; `.task(id:)` cancels it if the user leaves.
     @State private var connectRequest: UUID?
 
     private var isConnected: Bool { store.isConnected(provider) }
+    /// The toggle shows on while connected, and while a connection check is running.
+    private var showsOnDeviceOn: Bool { isConnected || isWorking }
 
     var body: some View {
         Form {
@@ -33,10 +37,18 @@ struct ProviderDetailView: View {
             if provider.isOnDevice {
                 OnDeviceToggleSection(
                     provider: provider,
-                    isOn: Binding(get: { isConnected || isWorking }, set: setEnabled),
+                    isOn: $isOnDeviceEnabled,
                     isWorking: isWorking,
                     errorMessage: errorMessage
                 )
+                .onChange(of: showsOnDeviceOn, initial: true) { _, isOn in
+                    isOnDeviceEnabled = isOn
+                }
+                .onChange(of: isOnDeviceEnabled) { _, isOn in
+                    // Ignore the sync above; only react to the user flipping the switch.
+                    guard isOn != showsOnDeviceOn else { return }
+                    setEnabled(isOn)
+                }
             } else {
                 ConnectSection(
                     title: connectTitle,
