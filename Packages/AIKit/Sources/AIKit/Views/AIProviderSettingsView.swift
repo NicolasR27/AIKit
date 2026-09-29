@@ -22,7 +22,7 @@ public struct AIProviderSettingsView: View {
                     // Only when shown as a sheet/cover; as a root view or tab there's nothing to go back to.
                     if isPresented {
                         ToolbarItem(placement: .cancellationAction) {
-                            Button("Close", systemImage: "xmark", role: .close, action: close)
+                            Button(.close, systemImage: "xmark", role: .close, action: close)
                         }
                     }
                 }

@@ -107,7 +107,7 @@ struct ProviderClient {
         do {
             return try JSONDecoder().decode(type, from: data)
         } catch {
-            throw ProviderError.server(status: 200, message: "Unexpected response from the provider.")
+            throw ProviderError.server(status: 200, message: String(localized: .unexpectedResponseError))
         }
     }
 }

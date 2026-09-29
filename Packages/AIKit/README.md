@@ -143,6 +143,14 @@ Leave a provider out and it keeps its default icon. Icon names come from Apple's
 
 Which providers appear (and in what order) is set on the store — see below.
 
+## Languages
+
+AIKit's screens and error messages come in English, Spanish, Italian, German and French.
+They switch automatically with the phone's language, as long as **your app** lists that language too:
+in Xcode, select your project ▸ **Info** ▸ **Localizations** ▸ **+**, and add the languages you want.
+(Or add `CFBundleLocalizations` with `en`, `es`, `it`, `de`, `fr` to your Info.plist.)
+If your app only lists English, AIKit shows English.
+
 ## Options
 
 ```swift

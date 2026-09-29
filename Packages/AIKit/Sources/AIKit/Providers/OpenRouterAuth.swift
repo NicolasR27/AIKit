@@ -30,7 +30,7 @@ struct OpenRouterAuth {
         let code = URLComponents(url: callbackURL, resolvingAgainstBaseURL: false)?
             .queryItems?.first { $0.name == "code" }?.value
         guard let code, !code.isEmpty else {
-            throw ProviderError.unavailable("OpenRouter didn't return a sign-in code. Please try again.")
+            throw ProviderError.unavailable(String(localized: .noSignInCodeError))
         }
 
         var request = URLRequest(url: URL(string: "https://openrouter.ai/api/v1/auth/keys")!)
@@ -46,7 +46,7 @@ struct OpenRouterAuth {
         let status = (response as? HTTPURLResponse)?.statusCode ?? 0
         guard (200..<300).contains(status),
               let key = try? JSONDecoder().decode(ExchangeResponse.self, from: data).key else {
-            throw ProviderError.server(status: status, message: "OpenRouter couldn't finish signing you in.")
+            throw ProviderError.server(status: status, message: String(localized: .signInFailedError))
         }
         return key
     }

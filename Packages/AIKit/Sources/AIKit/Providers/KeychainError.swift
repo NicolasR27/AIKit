@@ -6,6 +6,6 @@ struct KeychainError: LocalizedError {
 
     var errorDescription: String? {
         let message = SecCopyErrorMessageString(status, nil) as String? ?? "status \(status)"
-        return "Couldn't save to the Keychain (\(message))."
+        return String(localized: .keychainError(message))
     }
 }

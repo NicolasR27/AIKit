@@ -30,15 +30,14 @@ struct ModelPickerView: View {
         .overlay {
             if groups.isEmpty {
                 if query.isEmpty {
-                    ContentUnavailableView("No Models", systemImage: "cpu",
-                                           description: Text("Test the connection again to refresh the list."))
+                    ContentUnavailableView(.noModels, systemImage: "cpu", description: Text(.noModelsDescription))
                 } else {
                     ContentUnavailableView.search
                 }
             }
         }
-        .searchable(text: $query, prompt: "Search models")
-        .navigationTitle("Model")
+        .searchable(text: $query, prompt: .searchModels)
+        .navigationTitle(.model)
         .onChange(of: query, initial: true, regroup)
         .onChange(of: settings.availableModels, regroup)
     }

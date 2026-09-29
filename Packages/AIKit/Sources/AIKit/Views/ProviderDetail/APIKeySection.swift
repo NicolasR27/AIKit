@@ -11,25 +11,25 @@ struct APIKeySection: View {
             HStack {
                 Group {
                     if revealsKey {
-                        TextField("API Key", text: $keyDraft, prompt: Text(keyPrompt))
+                        TextField(.apiKey, text: $keyDraft, prompt: Text(keyPrompt))
                     } else {
-                        SecureField("API Key", text: $keyDraft, prompt: Text(keyPrompt))
+                        SecureField(.apiKey, text: $keyDraft, prompt: Text(keyPrompt))
                     }
                 }
                 .secretEntry()
                 .labelsHidden()
 
-                Button(revealsKey ? "Hide Key" : "Show Key",
+                Button(revealsKey ? .hideKey : .showKey,
                        systemImage: revealsKey ? "eye.slash" : "eye",
                        action: toggleReveal)
                     .labelStyle(.iconOnly)
                     .buttonStyle(.borderless)
             }
         } header: {
-            Text("API Key")
+            Text(.apiKey)
         } footer: {
             if let url = provider.keyConsoleURL {
-                Link("Get your \(provider.displayName) API key", destination: url)
+                Link(.getAPIKey(provider.displayName), destination: url)
             }
         }
     }

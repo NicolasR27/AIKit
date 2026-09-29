@@ -7,17 +7,17 @@ struct ServerSection: View {
 
     var body: some View {
         Section {
-            TextField("Server URL", text: $baseURL, prompt: Text(provider.defaultBaseURL ?? ""))
+            TextField(.serverURL, text: $baseURL, prompt: Text(provider.defaultBaseURL ?? ""))
                 .secretEntry()
                 .keyboardType(.URL)
                 .labelsHidden()
         } header: {
-            Text("Server")
+            Text(.server)
         } footer: {
             VStack(alignment: .leading) {
-                Text("Run Ollama on a computer on your network. From another device, use that computer's local IP address instead of localhost.")
+                Text(.ollamaFooter)
                 if let url = provider.keyConsoleURL {
-                    Link("Download Ollama", destination: url)
+                    Link(.downloadOllama, destination: url)
                 }
             }
         }

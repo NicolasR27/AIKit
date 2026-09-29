@@ -8,8 +8,9 @@ import SwiftUI
 ///     config.tint = .orange
 ///     AIProviderSettingsView(configuration: config)
 ///
-/// Text is `LocalizedStringResource`, so string literals are looked up in your app's
-/// String Catalog and can be translated there.
+/// AIKit's own text comes translated (English, Spanish, Italian, German, French).
+/// Text you set here is `LocalizedStringResource`, so your string literals are looked up
+/// in your app's String Catalog and can be translated there.
 public nonisolated struct AIKitConfiguration: Sendable {
     /// Navigation title of the provider list.
     public var title: LocalizedStringResource
@@ -39,17 +40,17 @@ public nonisolated struct AIKitConfiguration: Sendable {
     public var privacyNote: LocalizedStringResource?
 
     public init(
-        title: LocalizedStringResource = "AI Providers",
+        title: LocalizedStringResource = .aiProviders,
         tint: Color? = nil,
-        rowTitle: LocalizedStringResource = "AI Providers",
+        rowTitle: LocalizedStringResource = .aiProviders,
         rowSymbol: String = "sparkles",
         rowTint: Color = .indigo,
         providerIcons: [AIProvider: String] = [:],
         providerIconColors: [AIProvider: Color] = [:],
         showsDefaultProviderPicker: Bool = true,
         showsOpenRouterSignIn: Bool = true,
-        billingNote: LocalizedStringResource? = "The app sends requests to this provider using your own account. You're billed by the provider, not by us.",
-        privacyNote: LocalizedStringResource? = "API keys are stored in your device's Keychain and are only sent to the provider they belong to."
+        billingNote: LocalizedStringResource? = .billingNote,
+        privacyNote: LocalizedStringResource? = .privacyNote
     ) {
         self.title = title
         self.tint = tint

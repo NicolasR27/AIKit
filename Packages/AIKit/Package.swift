@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "AIKit",
+    defaultLocalization: "en",
     platforms: [.iOS("27.0")],
     products: [
         .library(name: "AIKit", targets: ["AIKit"]),
@@ -10,6 +11,7 @@ let package = Package(
     targets: [
         .target(
             name: "AIKit",
+            resources: [.process("Resources")],
             swiftSettings: [
                 .defaultIsolation(MainActor.self),
             ]

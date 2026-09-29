@@ -8,7 +8,7 @@ struct DefaultProviderSection: View {
 
     var body: some View {
         Section {
-            Toggle("Use as Default", isOn: $isDefault)
+            Toggle(.useAsDefault, isOn: $isDefault)
         }
         .onAppear(perform: syncFromStore)
         .onChange(of: isDefault) { _, isOn in

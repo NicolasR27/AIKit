@@ -61,7 +61,7 @@ public struct AIProviderSettingsSection: View {
                 AIProviderSettingsForm(store: store, configuration: configuration)
             } label: {
                 LabeledContent {
-                    Text(store.activeProvider?.displayName ?? String(localized: "Not Set Up"))
+                    Text(store.activeProvider?.displayName ?? String(localized: .notSetUp))
                 } label: {
                     Label {
                         Text(configuration.rowTitle)

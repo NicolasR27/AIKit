@@ -14,23 +14,22 @@ enum ProviderError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .missingKey:
-            "Enter an API key first."
+            String(localized: .missingKeyError)
         case .invalidBaseURL:
-            "That server address isn't a valid URL."
+            String(localized: .invalidBaseURLError)
         case .invalidKey(let message):
             // Providers' own wording varies ("User not found.", "Invalid API Key"), so lead with a clear sentence.
-            message.map { String(localized: "This API key was rejected (\($0)).") }
-                ?? String(localized: "This API key was rejected.")
+            message.map { String(localized: .keyRejectedError($0)) } ?? String(localized: .keyRejectedError)
         case .server(let status, let message):
-            message ?? "The provider returned HTTP \(status)."
+            message ?? String(localized: .httpError(status))
         case .unreachable(let detail):
-            "Couldn't reach the provider. \(detail)"
+            String(localized: .unreachableError(detail))
         case .unavailable(let reason):
             reason
         case .notAChatModel(let model):
-            String(localized: "“\(model)” can't be used for chat. Choose a different model in AI provider settings.")
+            String(localized: .notAChatModelError(model))
         case .unreadableImage:
-            String(localized: "That photo couldn't be read. Try a JPEG or PNG.")
+            String(localized: .unreadableImageError)
         case .imagesNotSupported(let reason):
             reason
         }

@@ -13,7 +13,7 @@ struct OpenRouterSignInButton: View {
     var body: some View {
         Button(action: signIn) {
             Label {
-                Text(isSigningIn ? "Signing In…" : "Sign in with OpenRouter")
+                Text(isSigningIn ? .signingIn : .signInWithOpenRouter)
             } icon: {
                 if isSigningIn {
                     ProgressView()
@@ -28,7 +28,7 @@ struct OpenRouterSignInButton: View {
         .controlSize(.large)
         .tint(AIProvider.openRouter.tint)
         .disabled(isSigningIn)
-        .alert("Couldn't Sign In", isPresented: $showsError) {
+        .alert(.couldntSignIn, isPresented: $showsError) {
         } message: {
             Text(errorMessage)
         }

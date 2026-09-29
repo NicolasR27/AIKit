@@ -84,7 +84,7 @@ struct ProviderDetailView: View {
     }
 
     private var keyPrompt: String {
-        store.maskedKey(for: provider).map { String(localized: "Saved key \($0)") } ?? provider.keyPlaceholder
+        store.maskedKey(for: provider).map { String(localized: .savedKey($0)) } ?? provider.keyPlaceholder
     }
 
     private var canConnect: Bool {
@@ -92,8 +92,8 @@ struct ProviderDetailView: View {
         return !keyDraft.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || store.hasStoredKey(for: provider)
     }
 
-    private var connectTitle: LocalizedStringKey {
-        isConnected && keyDraft.isEmpty ? "Test Connection" : "Connect"
+    private var connectTitle: LocalizedStringResource {
+        isConnected && keyDraft.isEmpty ? .testConnection : .connect
     }
 
     private func loadDrafts() {

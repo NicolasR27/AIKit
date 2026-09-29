@@ -11,7 +11,7 @@ struct OnDeviceToggleSection: View {
         Section {
             Toggle(isOn: $isOn) {
                 HStack {
-                    Text("Use \(provider.displayName)")
+                    Text(.useProvider(provider.displayName))
                     if isWorking {
                         Spacer()
                         ProgressView()
@@ -25,7 +25,7 @@ struct OnDeviceToggleSection: View {
                 Label(errorMessage, systemImage: "exclamationmark.triangle.fill")
                     .foregroundStyle(.red)
             } else {
-                Text("Runs on this device. Your requests never leave it and there's nothing to pay.")
+                Text(.onDeviceFooter)
             }
         }
     }

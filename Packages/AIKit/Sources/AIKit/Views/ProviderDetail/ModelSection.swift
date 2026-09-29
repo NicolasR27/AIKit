@@ -5,11 +5,11 @@ struct ModelSection: View {
     let provider: AIProvider
 
     var body: some View {
-        Section("Model") {
+        Section(.model) {
             NavigationLink {
                 ModelPickerView(store: store, provider: provider)
             } label: {
-                LabeledContent("Model", value: store.settings(for: provider).selectedModel ?? String(localized: "None"))
+                LabeledContent(.model, value: store.settings(for: provider).selectedModel ?? String(localized: .none))
             }
         }
     }

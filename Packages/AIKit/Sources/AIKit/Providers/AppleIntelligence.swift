@@ -12,13 +12,13 @@ enum AppleIntelligence {
         case .available:
             return
         case .unavailable(.deviceNotEligible):
-            throw ProviderError.unavailable(String(localized: "This device doesn't support Apple Intelligence."))
+            throw ProviderError.unavailable(String(localized: .deviceNotEligibleError))
         case .unavailable(.appleIntelligenceNotEnabled):
-            throw ProviderError.unavailable(String(localized: "Turn on Apple Intelligence in Settings to use the on-device model."))
+            throw ProviderError.unavailable(String(localized: .appleIntelligenceOffError))
         case .unavailable(.modelNotReady):
-            throw ProviderError.unavailable(String(localized: "The on-device model is still downloading. Try again shortly."))
+            throw ProviderError.unavailable(String(localized: .modelNotReadyError))
         case .unavailable:
-            throw ProviderError.unavailable(String(localized: "Apple Intelligence isn't available right now."))
+            throw ProviderError.unavailable(String(localized: .appleIntelligenceUnavailableError))
         }
     }
 
@@ -26,7 +26,7 @@ enum AppleIntelligence {
     static func chat(_ messages: [AIMessage], system: String?) async throws -> String {
         try checkAvailability()
         guard let last = messages.last, last.role == .user else {
-            throw ProviderError.unavailable(String(localized: "The conversation must end with a user message."))
+            throw ProviderError.unavailable(String(localized: .mustEndWithUserError))
         }
 
         var entries: [Transcript.Entry] = []
@@ -36,7 +36,7 @@ enum AppleIntelligence {
         if messages.contains(where: { !$0.images.isEmpty }),
            !SystemLanguageModel.default.capabilities.contains(.vision) {
             throw ProviderError.imagesNotSupported(
-                String(localized: "Apple Intelligence can't read photos on this device. Choose a cloud provider in AI provider settings.")
+                String(localized: .photosNotSupportedError)
             )
         }
 

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ConnectSection: View {
-    let title: LocalizedStringKey
+    let title: LocalizedStringResource
     let isWorking: Bool
     let isEnabled: Bool
     let showsSuccess: Bool
@@ -31,7 +31,7 @@ struct ConnectSection: View {
                 Label(errorMessage, systemImage: "exclamationmark.triangle.fill")
                     .foregroundStyle(.red)
             } else if let lastVerified {
-                Text("Verified \(lastVerified, format: .relative(presentation: .named)).")
+                Text(.verified(lastVerified))
             }
         }
     }

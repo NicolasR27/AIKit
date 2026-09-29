@@ -26,13 +26,13 @@ public nonisolated enum AIProvider: String, CaseIterable, Identifiable, Codable,
 
     public var subtitle: String {
         switch self {
-        case .apple: "On-device, private, no key needed"
-        case .openAI: "GPT models"
-        case .anthropic: "Claude models"
-        case .gemini: "Gemini models"
-        case .mistral: "Mistral & Codestral models"
-        case .openRouter: "Hundreds of models, one key"
-        case .ollama: "Models running on your own machine"
+        case .apple: String(localized: .appleSubtitle)
+        case .openAI: String(localized: .openAISubtitle)
+        case .anthropic: String(localized: .anthropicSubtitle)
+        case .gemini: String(localized: .geminiSubtitle)
+        case .mistral: String(localized: .mistralSubtitle)
+        case .openRouter: String(localized: .openRouterSubtitle)
+        case .ollama: String(localized: .ollamaSubtitle)
         }
     }
 
@@ -82,7 +82,7 @@ public nonisolated enum AIProvider: String, CaseIterable, Identifiable, Codable,
         case .anthropic: "sk-ant-..."
         case .gemini: "AIza..."
         case .openRouter: "sk-or-..."
-        default: "API key"
+        default: String(localized: .apiKeyPlaceholder)
         }
     }
 

@@ -10,7 +10,7 @@ public struct CurrentAIProviderRow: View {
     private let store: AIProviderStore
     private let title: LocalizedStringResource
 
-    public init(_ title: LocalizedStringResource = "Current AI", store: AIProviderStore = .shared) {
+    public init(_ title: LocalizedStringResource = .currentAI, store: AIProviderStore = .shared) {
         self.store = store
         self.title = title
     }
@@ -21,12 +21,13 @@ public struct CurrentAIProviderRow: View {
                 VStack(alignment: .trailing) {
                     Text(provider.displayName)
                     if let model = store.settings(for: provider).selectedModel {
-                        Text(model)
+                        // The on-device model's ID is an English placeholder, so show a translated name.
+                        Text(provider.isOnDevice ? String(localized: .onDeviceModel) : model)
                             .font(.caption)
                     }
                 }
             } else {
-                Text("Not Set Up")
+                Text(.notSetUp)
             }
         } label: {
             Text(title)

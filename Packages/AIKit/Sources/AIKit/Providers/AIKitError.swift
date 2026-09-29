@@ -12,9 +12,9 @@ public nonisolated enum AIKitError: LocalizedError, Equatable {
 
     public var errorDescription: String? {
         switch self {
-        case .notConnected: String(localized: "Connect an AI provider in settings first.")
-        case .noModelSelected: String(localized: "Choose a model in AI provider settings first.")
-        case .emptyResponse: String(localized: "The AI provider returned an empty reply.")
+        case .notConnected: String(localized: .notConnectedError)
+        case .noModelSelected: String(localized: .noModelSelectedError)
+        case .emptyResponse: String(localized: .emptyResponseError)
         }
     }
 }

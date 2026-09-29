@@ -8,13 +8,11 @@ struct DisconnectSection: View {
 
     var body: some View {
         Section {
-            Button("Disconnect", role: .destructive, action: askToDisconnect)
-                .confirmationDialog("Disconnect \(provider.displayName)?", isPresented: $confirmsDisconnect) {
-                    Button("Disconnect", role: .destructive, action: disconnect)
+            Button(.disconnect, role: .destructive, action: askToDisconnect)
+                .confirmationDialog(.disconnectProvider(provider.displayName), isPresented: $confirmsDisconnect) {
+                    Button(.disconnect, role: .destructive, action: disconnect)
                 } message: {
-                    Text(provider.requiresAPIKey
-                         ? "Your saved key will be removed from this device."
-                         : "Your saved server and model will be removed from this device.")
+                    Text(provider.requiresAPIKey ? .disconnectKeyMessage : .disconnectServerMessage)
                 }
         }
     }

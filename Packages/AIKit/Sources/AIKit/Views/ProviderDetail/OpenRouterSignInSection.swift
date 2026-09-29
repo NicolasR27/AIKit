@@ -7,7 +7,7 @@ struct OpenRouterSignInSection: View {
         Section {
             OpenRouterSignInButton(store: store)
         } footer: {
-            Text("Creates a key in your OpenRouter account automatically. Or paste an existing key below.")
+            Text(.openRouterFooter)
         }
     }
 }

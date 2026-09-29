@@ -8,8 +8,8 @@ struct ProviderListForm: View {
         Form {
             if configuration.showsDefaultProviderPicker {
                 Section {
-                    Picker("Default Provider", selection: $store.activeProvider) {
-                        Text("None").tag(AIProvider?.none)
+                    Picker(.defaultProvider, selection: $store.activeProvider) {
+                        Text(.none).tag(AIProvider?.none)
                         ForEach(store.connectedProviders) { provider in
                             Text(provider.displayName).tag(Optional(provider))
                         }
@@ -22,7 +22,7 @@ struct ProviderListForm: View {
                 }
             }
 
-            Section("Providers") {
+            Section(.providers) {
                 ForEach(store.providers) { provider in
                     NavigationLink {
                         ProviderDetailView(store: store, provider: provider, configuration: configuration)
