@@ -31,7 +31,7 @@ struct ModelPickerView: View {
         }
         .searchable(text: $viewModel.query, prompt: .searchModels)
         .navigationTitle(.model)
-        .onChange(of: viewModel.availableModels) {
+        .onChange(of: viewModel.availableModels, initial: true) {
             viewModel.regroup()
         }
     }

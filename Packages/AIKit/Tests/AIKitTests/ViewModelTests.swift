@@ -199,6 +199,9 @@ struct ModelPickerViewModelTests {
 
     @Test func searchFiltersAndRegroups() throws {
         let viewModel = ModelPickerViewModel(store: try makeStore(), provider: .openRouter)
+        #expect(viewModel.groups.isEmpty, "Grouping waits for the view to appear")
+
+        viewModel.regroup()
         #expect(viewModel.groups.map(\.vendor) == ["anthropic", "openai"])
 
         viewModel.query = "claude"

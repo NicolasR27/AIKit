@@ -16,7 +16,6 @@ final class ModelPickerViewModel {
     init(store: AIProviderStore, provider: AIProvider) {
         self.store = store
         self.provider = provider
-        regroup()
     }
 
     var availableModels: [String] { store.settings(for: provider).availableModels }
@@ -31,7 +30,8 @@ final class ModelPickerViewModel {
         store.selectModel(model, for: provider)
     }
 
-    /// Call when `availableModels` changes, e.g. after a re-check while the picker is open.
+    /// Groups the models matching `query`. The view calls it when it appears and whenever
+    /// `availableModels` changes, so creating the view model stays cheap.
     func regroup() {
         let models = availableModels
         let matches = query.isEmpty ? models : models.filter { $0.localizedStandardContains(query) }
