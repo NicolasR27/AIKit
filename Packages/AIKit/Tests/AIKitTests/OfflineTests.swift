@@ -60,12 +60,12 @@ struct AppleIntelligenceTests {
 
     @Test func savedSettingsGiveKeylessCredentials() throws {
         let defaults = UserDefaults(suiteName: "AIKitTests.\(UUID().uuidString)")!
-        let settings = [AIProvider.apple.rawValue: ProviderSettings(selectedModel: AppleIntelligence.modelName, lastVerified: .now)]
+        let settings = [AIProvider.apple.rawValue: ProviderSettings(selectedModel: AppleIntelligenceBackend.modelName, lastVerified: .now)]
         defaults.set(try JSONEncoder().encode(settings), forKey: "AIKit.settings")
         let store = AIProviderStore(providers: [.apple], defaults: defaults)
 
         let credentials = try #require(store.credentials(for: .apple))
-        #expect(credentials.model == AppleIntelligence.modelName)
+        #expect(credentials.model == AppleIntelligenceBackend.modelName)
         #expect(credentials.apiKey == nil)
         #expect(credentials.baseURL == nil)
     }
