@@ -2,7 +2,7 @@
 
 Drop-in "bring your own key" settings for iOS apps. Users connect their own
 OpenAI, Anthropic, Google Gemini, Mistral, OpenRouter or Ollama account, so they
-pay the provider for usage instead of you.
+pay the provider for usage instead of you. Apple Intelligence works too, on the device, with no key.
 
 - Settings-app style screen, keys verified against the provider before saving
 - Keys stored in the Keychain (this device only), never in UserDefaults
@@ -197,7 +197,7 @@ cd Packages/AIKit
 xcodebuild test -scheme AIKit -destination 'platform=iOS Simulator,name=iPhone 18 Pro'
 ```
 
-Network calls are stubbed, and store tests use Ollama so they never touch the Keychain.
+Network calls are stubbed, and tests that save API keys keep them in memory, so nothing is written to the Keychain.
 
 To also run a real round-trip against Ollama on your Mac (`ollama pull smollm:135m` first):
 
@@ -219,3 +219,24 @@ xcodebuild test -scheme AIKit -destination 'platform=iOS Simulator,name=iPhone 1
 ```
 
 Pin a model with e.g. `TEST_RUNNER_OPENAI_MODEL=…`.
+
+## How it's built
+
+For working on AIKit itself. Apps using it don't need any of this.
+
+```
+Sources/AIKit/
+  Models/        AIProvider, AIMessage, credentials, errors
+  Store/         AIProviderStore: what's connected, the default, send()
+  Persistence/   Keychain for keys, UserDefaults for everything else
+  Networking/    ProviderClient picks a backend; HTTPClient does the requests
+    Backends/    one file per provider: its URLs and JSON
+  Features/      one folder per screen: the view, its view model, its sections
+```
+
+Screens use MVVM: each screen's `@Observable` view model holds its state and actions
+(and has tests), and its sections just show what they're given.
+
+**Adding a provider:** add a case to `AIProvider`, write a `ProviderBackend` in
+`Networking/Backends/`, and return it from `ProviderClient.backend(for:)`.
+The compiler points to the remaining switches (name, icon, subtitle, key link).

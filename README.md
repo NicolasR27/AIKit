@@ -1,7 +1,7 @@
 # AIKit
 
 Let users connect their own AI account (OpenAI, Anthropic, Gemini, Mistral,
-OpenRouter, Ollama) from a native iOS settings screen. iOS 27+.
+OpenRouter, Ollama) or turn on Apple Intelligence from a native iOS settings screen. iOS 27+.
 
 ## Install
 
