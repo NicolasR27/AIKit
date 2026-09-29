@@ -150,6 +150,7 @@ They switch automatically with the phone's language, as long as **your app** lis
 in Xcode, select your project ▸ **Info** ▸ **Localizations** ▸ **+**, and add the languages you want.
 (Or add `CFBundleLocalizations` with `en`, `es`, `it`, `de`, `fr` to your Info.plist.)
 If your app only lists English, AIKit shows English.
+If your app is in a language AIKit doesn't have yet (say, Japanese), AIKit's screens fall back to English.
 
 ## Options
 
