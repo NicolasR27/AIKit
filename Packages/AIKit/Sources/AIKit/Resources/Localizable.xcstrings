@@ -2,6 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "AI Providers" : {
+      "comment" : "Title of the AI provider settings screen and the row that opens it",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -30,6 +31,7 @@
       }
     },
     "API Key" : {
+      "comment" : "Section title above the API key field",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -87,6 +89,7 @@
       }
     },
     "API keys are stored in your device's Keychain and are only sent to the provider they belong to." : {
+      "comment" : "Footer explaining where API keys are stored and who they are sent to",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -115,6 +118,7 @@
       }
     },
     "Apple Intelligence can't read photos on this device. Choose a cloud provider in AI provider settings." : {
+      "comment" : "Error when a photo is sent to Apple Intelligence on a device without image support",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -143,6 +147,7 @@
       }
     },
     "Apple Intelligence isn't available right now." : {
+      "comment" : "Generic error when Apple Intelligence can't be used",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -171,6 +176,7 @@
       }
     },
     "Choose a model in AI provider settings first." : {
+      "comment" : "Error when a provider is connected but no model is chosen",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -199,6 +205,7 @@
       }
     },
     "Claude models" : {
+      "comment" : "Subtitle under Anthropic in the provider list. Claude is a product name",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -227,6 +234,7 @@
       }
     },
     "Close" : {
+      "comment" : "Button that dismisses the AI provider settings sheet",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -255,6 +263,7 @@
       }
     },
     "Connect" : {
+      "comment" : "Button that checks the API key or server and saves it",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -283,6 +292,7 @@
       }
     },
     "Connect an AI provider in settings first." : {
+      "comment" : "Error when the app tries to use AI before any provider is connected",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -311,6 +321,7 @@
       }
     },
     "Connected" : {
+      "comment" : "Status next to a provider that has a working API key or server",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -339,6 +350,7 @@
       }
     },
     "Couldn't reach the provider. %@" : {
+      "comment" : "Error when the network request fails. The argument is the system's network error message",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -367,6 +379,7 @@
       }
     },
     "Couldn't save to the Keychain (%@)." : {
+      "comment" : "Error when the API key can't be saved securely. The argument is the system error message",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -395,6 +408,7 @@
       }
     },
     "Couldn't Sign In" : {
+      "comment" : "Error title when OpenRouter sign-in fails",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -423,6 +437,7 @@
       }
     },
     "Creates a key in your OpenRouter account automatically. Or paste an existing key below." : {
+      "comment" : "Footer explaining that signing in to OpenRouter creates an API key automatically",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -451,6 +466,7 @@
       }
     },
     "Current AI" : {
+      "comment" : "Row label showing which AI provider and model the app currently uses",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -508,6 +524,7 @@
       }
     },
     "Default Provider" : {
+      "comment" : "Section title and picker label for the provider the app uses by default",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -536,6 +553,7 @@
       }
     },
     "Disconnect" : {
+      "comment" : "Destructive button that removes the saved key or server for this provider",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -564,6 +582,7 @@
       }
     },
     "Disconnect %@?" : {
+      "comment" : "Confirmation dialog title. The argument is the provider name, e.g. Anthropic",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -592,6 +611,7 @@
       }
     },
     "Download Ollama" : {
+      "comment" : "Link to download the Ollama app",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -620,6 +640,7 @@
       }
     },
     "Enter an API key first." : {
+      "comment" : "Error when Connect is tapped with an empty API key field",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -648,6 +669,7 @@
       }
     },
     "Gemini models" : {
+      "comment" : "Subtitle under Google Gemini in the provider list. Gemini is a product name",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -676,6 +698,7 @@
       }
     },
     "Get your %@ API key" : {
+      "comment" : "Link to the provider's website to create an API key. The argument is the provider name, e.g. OpenAI",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -704,6 +727,7 @@
       }
     },
     "GPT models" : {
+      "comment" : "Subtitle under OpenAI in the provider list. GPT is a product name",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -732,6 +756,7 @@
       }
     },
     "Hide Key" : {
+      "comment" : "Accessibility label for the button that hides the typed API key",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -760,6 +785,7 @@
       }
     },
     "Hundreds of models, one key" : {
+      "comment" : "Subtitle under OpenRouter: one key gives access to many models",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -788,6 +814,7 @@
       }
     },
     "Mistral & Codestral models" : {
+      "comment" : "Subtitle under Mistral in the provider list. Mistral and Codestral are product names",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -816,6 +843,7 @@
       }
     },
     "Model" : {
+      "comment" : "Section title and label for choosing which AI model to use",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -844,6 +872,7 @@
       }
     },
     "Models running on your own machine" : {
+      "comment" : "Subtitle under Ollama: models run on the user's own computer",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -872,6 +901,7 @@
       }
     },
     "No Models" : {
+      "comment" : "Empty-state title when the provider returned no models",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -900,6 +930,7 @@
       }
     },
     "None" : {
+      "comment" : "Picker option meaning no default AI provider is selected",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -928,6 +959,7 @@
       }
     },
     "Not Connected" : {
+      "comment" : "Status next to a provider that has no API key or server saved",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -956,6 +988,7 @@
       }
     },
     "Not Set Up" : {
+      "comment" : "Shown in place of a provider name when no AI provider is chosen yet",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -984,6 +1017,7 @@
       }
     },
     "On-device model" : {
+      "comment" : "Label for Apple's on-device language model",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1012,6 +1046,7 @@
       }
     },
     "On-device, private, no key needed" : {
+      "comment" : "Subtitle under Apple Intelligence in the provider list",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1040,6 +1075,7 @@
       }
     },
     "OpenRouter couldn't finish signing you in." : {
+      "comment" : "Error when exchanging the OpenRouter sign-in code for a key fails",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1068,6 +1104,7 @@
       }
     },
     "OpenRouter didn't return a sign-in code. Please try again." : {
+      "comment" : "Error when OpenRouter's sign-in page returns without a code",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1096,6 +1133,7 @@
       }
     },
     "Providers" : {
+      "comment" : "Section title above the list of AI providers (OpenAI, Anthropic, …)",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1124,6 +1162,7 @@
       }
     },
     "Run Ollama on a computer on your network. From another device, use that computer's local IP address instead of localhost." : {
+      "comment" : "Footer explaining how to reach an Ollama server running on another computer",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1152,6 +1191,7 @@
       }
     },
     "Runs on this device. Your requests never leave it and there's nothing to pay." : {
+      "comment" : "Footer explaining that the on-device model is private and free",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1180,6 +1220,7 @@
       }
     },
     "Saved key %@" : {
+      "comment" : "Shows the last characters of the saved API key. The argument is like ••••a1b2",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1208,6 +1249,7 @@
       }
     },
     "Search models" : {
+      "comment" : "Placeholder in the model search field",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1236,6 +1278,7 @@
       }
     },
     "Server" : {
+      "comment" : "Section title for the Ollama server address",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1264,6 +1307,7 @@
       }
     },
     "Server URL" : {
+      "comment" : "Placeholder in the Ollama server address field",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1292,6 +1336,7 @@
       }
     },
     "Show Key" : {
+      "comment" : "Accessibility label for the button that reveals the typed API key",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1320,6 +1365,7 @@
       }
     },
     "Sign in with OpenRouter" : {
+      "comment" : "Button that starts signing in to OpenRouter in a browser",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1348,6 +1394,7 @@
       }
     },
     "Signing In…" : {
+      "comment" : "Button title while the OpenRouter sign-in is in progress",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1376,6 +1423,7 @@
       }
     },
     "Test Connection" : {
+      "comment" : "Button that re-checks a saved API key or server",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1404,6 +1452,7 @@
       }
     },
     "Test the connection again to refresh the list." : {
+      "comment" : "Empty-state message when the provider returned no models",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1432,6 +1481,7 @@
       }
     },
     "That photo couldn't be read. Try a JPEG or PNG." : {
+      "comment" : "Error when an attached photo can't be decoded",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1460,6 +1510,7 @@
       }
     },
     "That server address isn't a valid URL." : {
+      "comment" : "Error when the typed server address can't be parsed",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1488,6 +1539,7 @@
       }
     },
     "The AI provider returned an empty reply." : {
+      "comment" : "Error when the AI provider replied with no text",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1516,6 +1568,7 @@
       }
     },
     "The app sends requests to this provider using your own account. You're billed by the provider, not by us." : {
+      "comment" : "Footer explaining that the user's own provider account is billed, not the app developer",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1544,6 +1597,7 @@
       }
     },
     "The conversation must end with a user message." : {
+      "comment" : "Developer-facing error: the last chat message must come from the user",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1572,6 +1626,7 @@
       }
     },
     "The on-device model is still downloading. Try again shortly." : {
+      "comment" : "Error while Apple's on-device model is still downloading",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1600,6 +1655,7 @@
       }
     },
     "The provider returned HTTP %lld." : {
+      "comment" : "Error with an HTTP status code number, e.g. 500",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1628,6 +1684,7 @@
       }
     },
     "This API key was rejected (%@)." : {
+      "comment" : "Error when the provider refuses the API key. The argument is the provider's reason, in English",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1656,6 +1713,7 @@
       }
     },
     "This API key was rejected." : {
+      "comment" : "Error when the provider refuses the API key; the one-argument form appends the provider's reason",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1684,6 +1742,7 @@
       }
     },
     "This device doesn't support Apple Intelligence." : {
+      "comment" : "Error on devices that don't support Apple Intelligence",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1712,6 +1771,7 @@
       }
     },
     "Turn on Apple Intelligence in Settings to use the on-device model." : {
+      "comment" : "Error when Apple Intelligence is turned off in the Settings app",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1740,6 +1800,7 @@
       }
     },
     "Unexpected response from the provider." : {
+      "comment" : "Error when the provider's reply can't be understood",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1768,6 +1829,7 @@
       }
     },
     "Use %@" : {
+      "comment" : "Toggle label to turn on an on-device provider. The argument is the provider name, e.g. Apple Intelligence",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1796,6 +1858,7 @@
       }
     },
     "Use as Default" : {
+      "comment" : "Button that makes this provider the one the app uses",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1824,6 +1887,7 @@
       }
     },
     "Verified %@." : {
+      "comment" : "Footer saying when the connection was last checked. The argument is a relative date like yesterday or 5 minutes ago",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1852,6 +1916,7 @@
       }
     },
     "Your saved key will be removed from this device." : {
+      "comment" : "Confirmation dialog message when disconnecting a cloud provider",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1880,6 +1945,7 @@
       }
     },
     "Your saved server and model will be removed from this device." : {
+      "comment" : "Confirmation dialog message when disconnecting a local Ollama server",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1908,6 +1974,7 @@
       }
     },
     "“%@” can't be used for chat. Choose a different model in AI provider settings." : {
+      "comment" : "Error when the chosen model can't chat (e.g. an embedding model). The argument is the model ID",
       "localizations" : {
         "es" : {
           "stringUnit" : {
