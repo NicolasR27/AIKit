@@ -9,12 +9,16 @@ public nonisolated enum AIKitError: LocalizedError, Equatable {
     case noModelSelected
     /// The provider answered but the reply had no text.
     case emptyResponse
+    /// Web search was asked of a provider that can't do it (Apple Intelligence, Ollama).
+    /// Check `AIProvider.supportsWebSearch` to hide your search switch instead.
+    case webSearchNotSupported(AIProvider)
 
     public var errorDescription: String? {
         switch self {
         case .notConnected: String(localized: .notConnectedError)
         case .noModelSelected: String(localized: .noModelSelectedError)
         case .emptyResponse: String(localized: .emptyResponseError)
+        case .webSearchNotSupported(let provider): String(localized: .webSearchNotSupportedError(provider.displayName))
         }
     }
 }

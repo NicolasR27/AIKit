@@ -71,5 +71,11 @@ struct LiveCloudTests {
 
         print("\(provider.displayName) \(model) replied: \(reply)")
         #expect(!reply.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+
+        // 3. Same call AIProviderStore.searchWeb makes. Costs a search on the user's account.
+        let answer = try await client.searchWeb([.user("Search the web: what is the latest stable Swift version? One sentence.")],
+                                                system: nil, credentials: credentials, model: model)
+        print("\(provider.displayName) \(model) searched: \(answer.text)\n  sources: \(answer.sources.map(\.url))")
+        #expect(!answer.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
     }
 }

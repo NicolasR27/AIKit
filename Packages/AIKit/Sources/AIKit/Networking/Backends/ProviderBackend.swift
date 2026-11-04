@@ -9,4 +9,13 @@ protocol ProviderBackend {
     func models() async throws -> [String]
     /// The assistant's reply to `messages` (oldest first). May be empty; the caller rejects that.
     func reply(to messages: [AIMessage], system: String?, model: String) async throws -> String
+    /// Like `reply`, but the provider's own web search tool runs first. Only called for providers
+    /// whose `supportsWebSearch` is true.
+    func searchWeb(_ messages: [AIMessage], system: String?, model: String) async throws -> AIAnswer
+}
+
+extension ProviderBackend {
+    func searchWeb(_ messages: [AIMessage], system: String?, model: String) async throws -> AIAnswer {
+        preconditionFailure("\(Self.self) has no web search; ProviderClient checks supportsWebSearch first.")
+    }
 }

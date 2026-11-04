@@ -8,6 +8,7 @@ pay the provider for usage instead of you. Apple Intelligence works too, on the 
 - Keys stored in the Keychain (this device only), never in UserDefaults
 - Searchable model picker filled from the provider's live model list
 - One-tap **Sign in with OpenRouter** (OAuth PKCE) for access to every lab's models with one key
+- Live web search: add `webSearch: true` and the AI looks things up before answering, with links
 - iOS 27+, Swift 6, no third-party dependencies
 
 ## Install
@@ -79,6 +80,24 @@ let answer = try await AIProviderStore.shared.send(
 let watch = try await AIProviderStore.shared.send("What watch is this?", images: [photoData])
 ```
 
+**Search the web** (for news, prices, scores, anything newer than the model):
+
+```swift
+// Just the answer:
+let reply = try await AIProviderStore.shared.send("Who won the game last night?", webSearch: true)
+
+// The answer plus the pages it used:
+let answer = try await AIProviderStore.shared.searchWeb("Who won the game last night?")
+Text(answer.text)
+ForEach(answer.sources) { Link($0.title, destination: $0.url) }
+```
+
+That's all. The provider runs the search itself (and can open pages it finds, or ones you
+paste into the prompt), so there's nothing else to set up. Searches are billed to the user's
+provider account like any other request. Apple Intelligence and Ollama can't search; hide
+your search switch with `if AIProviderStore.shared.canSearchWeb { … }`, or catch
+`AIKitError.webSearchNotSupported`.
+
 Errors have a user-readable `localizedDescription`. `AIKitError.notConnected` and
 `.noModelSelected` mean the user needs to finish setup, so show the settings.
 
@@ -94,6 +113,21 @@ Replies arrive in one piece (no streaming yet). Each provider is called with its
 | Google Gemini | `POST /models/{model}:generateContent` |
 | Ollama | `POST /api/chat` |
 | Apple Intelligence | On-device via Foundation Models (no key, turned on with a switch) |
+
+With `webSearch: true` (or `searchWeb`), each provider uses its own built-in search:
+
+| Provider | Web search |
+| --- | --- |
+| OpenAI | `POST /responses` with the `web_search` tool |
+| Anthropic | `POST /v1/messages` with the `web_search` and `web_fetch` tools (search only on Claude 4.5 and older) |
+| Google Gemini | `generateContent` with Google Search and URL context |
+| Mistral | `POST /v1/conversations` with the `web_search` tool |
+| OpenRouter | `POST /chat/completions` with the `web` plugin (any model) |
+| Ollama, Apple Intelligence | Not available |
+
+Some providers need it switched on first: an Anthropic org admin enables web search in the
+Claude Console, and older models (e.g. Gemini 1.5) can't search at all; the provider's
+error message is passed through.
 
 Need raw access instead? `AIProviderStore.shared.activeCredentials` gives you the
 provider, model, key and API base URL to build your own requests.

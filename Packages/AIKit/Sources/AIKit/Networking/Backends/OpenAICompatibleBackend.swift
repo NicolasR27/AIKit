@@ -30,6 +30,30 @@ struct OpenAICompatibleBackend: ProviderBackend {
         )
         return try http.decode(Response.self, from: data).choices.first?.message.content ?? ""
     }
+
+    /// Each provider has its own way to search: OpenAI's Responses API, Mistral's Conversations
+    /// API, and OpenRouter's web plugin, which works with every model it offers.
+    func searchWeb(_ messages: [AIMessage], system: String?, model: String) async throws -> AIAnswer {
+        switch provider {
+        case .openAI:
+            return try await openAIWebSearch(messages, system: system, model: model)
+        case .mistral:
+            return try await mistralWebSearch(messages, system: system, model: model)
+        default:
+            var turns = try messages.map(RequestMessage.init)
+            if let system { turns.insert(RequestMessage(role: "system", content: .text(system)), at: 0) }
+
+            let data = try await http.post(
+                baseURL.appending(path: "chat/completions"),
+                body: Request(model: model, messages: turns, plugins: [Plugin(id: "web")]),
+                headers: HTTPClient.bearer(apiKey),
+                timeout: HTTPClient.webSearchTimeout
+            )
+            let message = try http.decode(Response.self, from: data).choices.first?.message
+            let pages = message?.annotations?.compactMap(\.url_citation).map { ($0.title, $0.url) } ?? []
+            return AIAnswer(text: message?.content ?? "", sources: AIWebSource.list(pages))
+        }
+    }
 }
 
 // MARK: - Wire format
@@ -42,6 +66,12 @@ private struct ModelList: Decodable {
 private struct Request: Encodable {
     let model: String
     let messages: [RequestMessage]
+    var plugins: [Plugin]?
+}
+
+/// OpenRouter's add-ons; `web` searches with the model's own provider when it can, Exa otherwise.
+private struct Plugin: Encodable {
+    let id: String
 }
 
 private struct RequestMessage: Encodable {
@@ -88,6 +118,11 @@ private struct Part: Encodable {
 
 private struct Response: Decodable {
     struct Choice: Decodable { let message: Message }
-    struct Message: Decodable { let content: String? }
+    struct Message: Decodable {
+        let content: String?
+        var annotations: [Annotation]?
+    }
+    struct Annotation: Decodable { let url_citation: Citation? }
+    struct Citation: Decodable { let url: String?; let title: String? }
     let choices: [Choice]
 }

@@ -12,9 +12,9 @@ struct HTTPClient {
         return try await perform(request)
     }
 
-    /// Generation can take a while on large models.
-    func post(_ url: URL, body: some Encodable, headers: [String: String] = [:]) async throws -> Data {
-        var request = URLRequest(url: url, timeoutInterval: 120)
+    /// Generation can take a while on large models, and longer still when the model browses the web.
+    func post(_ url: URL, body: some Encodable, headers: [String: String] = [:], timeout: TimeInterval = 120) async throws -> Data {
+        var request = URLRequest(url: url, timeoutInterval: timeout)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         headers.forEach { request.setValue($1, forHTTPHeaderField: $0) }
@@ -68,6 +68,9 @@ struct HTTPClient {
 }
 
 extension HTTPClient {
+    /// A web search can run several searches and page reads before the reply comes back.
+    static let webSearchTimeout: TimeInterval = 300
+
     static func bearer(_ key: String) -> [String: String] {
         ["Authorization": "Bearer \(key)"]
     }

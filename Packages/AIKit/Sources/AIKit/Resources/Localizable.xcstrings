@@ -1,6 +1,35 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@ can't search the web. Choose a different provider in AI provider settings." : {
+      "comment" : "Error when web search is asked of a provider that can't do it. The argument is the provider name, e.g. Ollama",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ no puede buscar en la web. Elige otro proveedor en los ajustes de proveedores de IA."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ non può cercare sul web. Scegli un altro provider nelle impostazioni dei provider di IA."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ kann nicht im Web suchen. Wähle in den KI-Anbieter-Einstellungen einen anderen Anbieter."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ ne peut pas faire de recherche sur le web. Choisissez un autre fournisseur dans les réglages des fournisseurs d'IA."
+          }
+        }
+      }
+    },
     "AI Providers" : {
       "comment" : "Title of the AI provider settings screen and the row that opens it",
       "localizations" : {

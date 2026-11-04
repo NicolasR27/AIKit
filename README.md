@@ -62,6 +62,24 @@ Change it from code with `AIProviderStore.shared.selectProvider(.openAI)`. It re
 `false` if that provider isn't connected. Off the main actor, `await` these calls.
 Working example: [SelectedProviderExample.swift](AI%20Providers/Examples/SelectedProviderExample.swift).
 
+## Ask the AI
+
+```swift
+let reply = try await AIProviderStore.shared.send("Write a haiku about Lisbon")
+
+// Let it search the live web first:
+let news = try await AIProviderStore.shared.send("What happened in tech today?", webSearch: true)
+
+// Or get the links it used, too:
+let answer = try await AIProviderStore.shared.searchWeb("What happened in tech today?")
+answer.text                       // the reply
+answer.sources                    // [AIWebSource]: title + url
+```
+
+Web search works with every provider except Apple Intelligence and Ollama
+(`AIProviderStore.shared.canSearchWeb` tells you). More in
+[Packages/AIKit/README.md](Packages/AIKit/README.md#use-it-3-steps).
+
 ## Customize
 
 ```swift

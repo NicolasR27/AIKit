@@ -30,6 +30,29 @@ struct GeminiBackend: ProviderBackend {
             .compactMap(\.text)
             .joined() ?? ""
     }
+
+    /// Grounds the reply in Google Search, and lets Gemini read any page linked in the conversation.
+    func searchWeb(_ messages: [AIMessage], system: String?, model: String) async throws -> AIAnswer {
+        let data = try await http.post(
+            baseURL.appending(path: "models/\(model):generateContent"),
+            body: Request(
+                systemInstruction: system.map { Content(role: nil, parts: [Part(text: $0)]) },
+                contents: try messages.map(Content.init),
+                tools: [Tool(googleSearch: Empty()), Tool(urlContext: Empty())]
+            ),
+            headers: headers,
+            timeout: HTTPClient.webSearchTimeout
+        )
+        guard let candidate = try http.decode(Response.self, from: data).candidates?.first else { return AIAnswer(text: "") }
+        let searched = candidate.groundingMetadata?.groundingChunks?.compactMap(\.web).map { ($0.title, $0.uri) } ?? []
+        let opened = candidate.urlContextMetadata?.urlMetadata?
+            .filter { $0.urlRetrievalStatus == "URL_RETRIEVAL_STATUS_SUCCESS" }
+            .map { (String?.none, $0.retrievedUrl) } ?? []
+        return AIAnswer(
+            text: candidate.content?.parts?.compactMap(\.text).joined() ?? "",
+            sources: AIWebSource.list(searched + opened)
+        )
+    }
 }
 
 // MARK: - Wire format
@@ -45,7 +68,15 @@ private struct ModelList: Decodable {
 private struct Request: Encodable {
     let systemInstruction: Content?
     let contents: [Content]
+    var tools: [Tool]?
 }
+
+private struct Tool: Encodable {
+    var googleSearch: Empty?
+    var urlContext: Empty?
+}
+
+private struct Empty: Encodable {}
 
 private struct Content: Codable {
     let role: String?
@@ -76,6 +107,21 @@ private struct InlineData: Codable {
 }
 
 private struct Response: Decodable {
-    struct Candidate: Decodable { let content: Content? }
+    struct Candidate: Decodable {
+        let content: Content?
+        var groundingMetadata: GroundingMetadata?
+        var urlContextMetadata: URLContextMetadata?
+    }
     let candidates: [Candidate]?
+}
+
+private struct GroundingMetadata: Decodable {
+    struct Chunk: Decodable { let web: Web? }
+    struct Web: Decodable { let uri: String?; let title: String? }
+    let groundingChunks: [Chunk]?
+}
+
+private struct URLContextMetadata: Decodable {
+    struct Item: Decodable { let retrievedUrl: String?; let urlRetrievalStatus: String? }
+    let urlMetadata: [Item]?
 }

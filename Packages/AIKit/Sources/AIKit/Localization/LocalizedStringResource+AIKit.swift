@@ -100,6 +100,9 @@ nonisolated extension LocalizedStringResource {
     static func notAChatModelError(_ model: String) -> Self {
         Self("“\(model)” can't be used for chat. Choose a different model in AI provider settings.", bundle: #bundle, comment: "Error when the chosen model can't chat (e.g. an embedding model). The argument is the model ID")
     }
+    static func webSearchNotSupportedError(_ provider: String) -> Self {
+        Self("\(provider) can't search the web. Choose a different provider in AI provider settings.", bundle: #bundle, comment: "Error when web search is asked of a provider that can't do it. The argument is the provider name, e.g. Ollama")
+    }
     static var unreadableImageError: Self { Self("That photo couldn't be read. Try a JPEG or PNG.", bundle: #bundle, comment: "Error when an attached photo can't be decoded") }
     static var unexpectedResponseError: Self { Self("Unexpected response from the provider.", bundle: #bundle, comment: "Error when the provider's reply can't be understood") }
     static func keychainError(_ detail: String) -> Self { Self("Couldn't save to the Keychain (\(detail)).", bundle: #bundle, comment: "Error when the API key can't be saved securely. The argument is the system error message") }

@@ -32,6 +32,27 @@ struct ProviderClient {
         return reply
     }
 
+    /// Same as `chat`, but the provider searches and reads the live web first and reports its sources.
+    func searchWeb(
+        _ messages: [AIMessage],
+        system: String?,
+        credentials: AIProviderCredentials,
+        model: String
+    ) async throws -> AIAnswer {
+        guard credentials.provider.supportsWebSearch else {
+            throw AIKitError.webSearchNotSupported(credentials.provider)
+        }
+        let backend = try backend(for: credentials.provider, apiKey: credentials.apiKey, baseURL: credentials.baseURL)
+        let answer: AIAnswer
+        do {
+            answer = try await backend.searchWeb(messages, system: system, model: model)
+        } catch ProviderError.server(_, let message?) where Self.isNotAChatModelMessage(message) {
+            throw ProviderError.notAChatModel(model)
+        }
+        guard !answer.text.isEmpty else { throw AIKitError.emptyResponse }
+        return answer
+    }
+
     // MARK: - Routing
 
     private func backend(for provider: AIProvider, apiKey: String?, baseURL: URL?) throws -> any ProviderBackend {
