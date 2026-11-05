@@ -100,6 +100,7 @@ extension NetworkTests {
         #expect(body["tool_choice"] as? String == "required")
         #expect(body["store"] as? Bool == false)
         #expect(tools().map { $0["type"] as? String } == ["web_search"])
+        #expect(tools().first?["external_web_access"] as? Bool == true)
         #expect(body["input"] as? [[String: String]] == [["role": "user", "content": "Weather in Lisbon?"]])
     }
 

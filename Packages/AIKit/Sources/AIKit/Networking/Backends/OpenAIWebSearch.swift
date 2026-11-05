@@ -10,7 +10,7 @@ extension OpenAICompatibleBackend {
                 model: model,
                 instructions: system,
                 input: try messages.map(InputMessage.init),
-                tools: [ResponsesTool(type: "web_search")],
+                tools: [ResponsesTool(type: "web_search", external_web_access: true)],
                 tool_choice: "required",
                 store: false
             ),
@@ -43,6 +43,8 @@ private struct ResponsesRequest: Encodable {
 
 private struct ResponsesTool: Encodable {
     let type: String
+    /// Fetch live pages, not OpenAI's cached index. True is the documented default; spelled out so it stays that way.
+    let external_web_access: Bool
 }
 
 private struct InputMessage: Encodable {
