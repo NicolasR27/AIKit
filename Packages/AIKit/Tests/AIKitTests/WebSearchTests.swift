@@ -187,6 +187,81 @@ extension NetworkTests {
         #expect(StubURLProtocol.bodies[0]["system"] as? String == "Be brief")
     }
 
+    // MARK: - The "Search the Web" switch
+
+    /// A connected Anthropic store whose stub answers the model list and then any chat or search.
+    private func anthropicStore() async throws -> AIProviderStore {
+        let store = makeTestStore([.anthropic])
+        store.client = ProviderClient(session: StubURLProtocol.session { request in
+            request.url?.path().hasSuffix("/models") == true
+                ? .init(json: #"{"data":[{"id":"claude-opus-5"}]}"#)
+                : .init(json: #"{"stop_reason":"end_turn","content":[{"type":"text","text":"Reply"}]}"#)
+        })
+        try await store.connect(.anthropic, apiKey: "key", baseURL: nil)
+        return store
+    }
+
+    private func lastTools() -> [String]? {
+        (StubURLProtocol.bodies.last?["tools"] as? [[String: Any]])?.compactMap { $0["type"] as? String }
+    }
+
+    @Test func sendSearchesByDefault() async throws {
+        let store = try await anthropicStore()
+        #expect(store.webSearchEnabled)
+
+        _ = try await store.send("Write a report on Swift 7")
+
+        #expect(lastTools() == ["web_search_20260209", "web_fetch_20260209"])
+        #expect((StubURLProtocol.bodies.last?["system"] as? String)?.hasPrefix(ProviderClient.webSearchDirective) == true)
+    }
+
+    @Test func switchOffMeansPlainChat() async throws {
+        let store = try await anthropicStore()
+        store.webSearchEnabled = false
+
+        _ = try await store.send("Hi", system: "Be brief")
+
+        #expect(lastTools() == nil)
+        #expect(StubURLProtocol.bodies.last?["system"] as? String == "Be brief")
+    }
+
+    @Test func explicitWebSearchOverridesTheSwitch() async throws {
+        let store = try await anthropicStore()
+        store.webSearchEnabled = false
+        _ = try await store.send("Hi", webSearch: true)
+        #expect(lastTools() == ["web_search_20260209", "web_fetch_20260209"])
+
+        store.webSearchEnabled = true
+        _ = try await store.send("Hi", webSearch: false)
+        #expect(lastTools() == nil)
+    }
+
+    @Test func providersThatCantSearchJustChat() async throws {
+        let store = AIProviderStore(providers: [.ollama], defaults: UserDefaults(suiteName: "AIKitTests.\(UUID().uuidString)")!)
+        store.client = ProviderClient(session: StubURLProtocol.session { request in
+            request.url?.path() == "/api/tags"
+                ? .init(json: #"{"models":[{"name":"llama3"}]}"#)
+                : .init(json: #"{"message":{"role":"assistant","content":"Pong"}}"#)
+        })
+        try await store.connect(.ollama, apiKey: nil, baseURL: nil)
+        #expect(store.webSearchEnabled)
+
+        let reply = try await store.send("Ping")
+
+        #expect(reply == "Pong")
+        #expect(StubURLProtocol.requests.last?.url?.path() == "/api/chat")
+    }
+
+    @Test func switchPersistsAcrossStoreInstances() {
+        let defaults = UserDefaults(suiteName: "AIKitTests.\(UUID().uuidString)")!
+        let first = AIProviderStore(providers: [.openAI], defaults: defaults)
+        #expect(first.webSearchEnabled)
+        first.webSearchEnabled = false
+
+        let second = AIProviderStore(providers: [.openAI], defaults: defaults)
+        #expect(!second.webSearchEnabled)
+    }
+
     // MARK: - Providers without search
 
     @Test(arguments: [AIProvider.apple, .ollama])

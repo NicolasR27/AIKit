@@ -1,2036 +1,2094 @@
 {
-  "sourceLanguage" : "en",
-  "strings" : {
-    "%@ can't search the web. Choose a different provider in AI provider settings." : {
-      "comment" : "Error when web search is asked of a provider that can't do it. The argument is the provider name, e.g. Ollama",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ no puede buscar en la web. Elige otro proveedor en los ajustes de proveedores de IA."
+  "sourceLanguage": "en",
+  "strings": {
+    "%@ can't search the web. Choose a different provider in AI provider settings.": {
+      "comment": "Error when web search is asked of a provider that can't do it. The argument is the provider name, e.g. Ollama",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ no puede buscar en la web. Elige otro proveedor en los ajustes de proveedores de IA."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ non può cercare sul web. Scegli un altro provider nelle impostazioni dei provider di IA."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ non può cercare sul web. Scegli un altro provider nelle impostazioni dei provider di IA."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ kann nicht im Web suchen. Wähle in den KI-Anbieter-Einstellungen einen anderen Anbieter."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kann nicht im Web suchen. Wähle in den KI-Anbieter-Einstellungen einen anderen Anbieter."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ ne peut pas faire de recherche sur le web. Choisissez un autre fournisseur dans les réglages des fournisseurs d'IA."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ne peut pas faire de recherche sur le web. Choisissez un autre fournisseur dans les réglages des fournisseurs d'IA."
           }
         }
       }
     },
-    "AI Providers" : {
-      "comment" : "Title of the AI provider settings screen and the row that opens it",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Proveedores de IA"
+    "AI Providers": {
+      "comment": "Title of the AI provider settings screen and the row that opens it",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proveedores de IA"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Provider di IA"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Provider di IA"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "KI-Anbieter"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KI-Anbieter"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fournisseurs d'IA"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fournisseurs d'IA"
           }
         }
       }
     },
-    "API Key" : {
-      "comment" : "Section title above the API key field",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clave de API"
+    "API Key": {
+      "comment": "Section title above the API key field",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clave de API"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chiave API"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chiave API"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API-Schlüssel"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API-Schlüssel"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clé API"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clé API"
           }
         }
       }
     },
-    "API key" : {
-      "comment" : "Placeholder in the API key field",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clave de API"
+    "API key": {
+      "comment": "Placeholder in the API key field",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clave de API"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chiave API"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chiave API"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API-Schlüssel"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API-Schlüssel"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clé API"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clé API"
           }
         }
       }
     },
-    "API keys are stored in your device's Keychain and are only sent to the provider they belong to." : {
-      "comment" : "Footer explaining where API keys are stored and who they are sent to",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Las claves de API se guardan en el llavero de tu dispositivo y solo se envían al proveedor al que pertenecen."
+    "API keys are stored in your device's Keychain and are only sent to the provider they belong to.": {
+      "comment": "Footer explaining where API keys are stored and who they are sent to",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las claves de API se guardan en el llavero de tu dispositivo y solo se envían al proveedor al que pertenecen."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le chiavi API sono salvate nel portachiavi del dispositivo e vengono inviate solo al provider a cui appartengono."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le chiavi API sono salvate nel portachiavi del dispositivo e vengono inviate solo al provider a cui appartengono."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API-Schlüssel werden im Schlüsselbund deines Geräts gespeichert und nur an den Anbieter gesendet, zu dem sie gehören."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API-Schlüssel werden im Schlüsselbund deines Geräts gespeichert und nur an den Anbieter gesendet, zu dem sie gehören."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les clés API sont stockées dans le trousseau de votre appareil et ne sont envoyées qu'au fournisseur auquel elles appartiennent."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les clés API sont stockées dans le trousseau de votre appareil et ne sont envoyées qu'au fournisseur auquel elles appartiennent."
           }
         }
       }
     },
-    "Apple Intelligence can't read photos on this device. Choose a cloud provider in AI provider settings." : {
-      "comment" : "Error when a photo is sent to Apple Intelligence on a device without image support",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence no puede leer fotos en este dispositivo. Elige un proveedor en la nube en los ajustes de proveedores de IA."
+    "Apple Intelligence can't read photos on this device. Choose a cloud provider in AI provider settings.": {
+      "comment": "Error when a photo is sent to Apple Intelligence on a device without image support",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence no puede leer fotos en este dispositivo. Elige un proveedor en la nube en los ajustes de proveedores de IA."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence non può leggere le foto su questo dispositivo. Scegli un provider cloud nelle impostazioni dei provider di IA."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence non può leggere le foto su questo dispositivo. Scegli un provider cloud nelle impostazioni dei provider di IA."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence kann auf diesem Gerät keine Fotos lesen. Wähle in den KI-Anbieter-Einstellungen einen Cloud-Anbieter."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence kann auf diesem Gerät keine Fotos lesen. Wähle in den KI-Anbieter-Einstellungen einen Cloud-Anbieter."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence ne peut pas lire les photos sur cet appareil. Choisissez un fournisseur cloud dans les réglages des fournisseurs d'IA."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence ne peut pas lire les photos sur cet appareil. Choisissez un fournisseur cloud dans les réglages des fournisseurs d'IA."
           }
         }
       }
     },
-    "Apple Intelligence isn't available right now." : {
-      "comment" : "Generic error when Apple Intelligence can't be used",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence no está disponible en este momento."
+    "Apple Intelligence isn't available right now.": {
+      "comment": "Generic error when Apple Intelligence can't be used",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence no está disponible en este momento."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence non è disponibile al momento."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence non è disponibile al momento."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence ist gerade nicht verfügbar."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence ist gerade nicht verfügbar."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence n'est pas disponible pour le moment."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Intelligence n'est pas disponible pour le moment."
           }
         }
       }
     },
-    "Choose a model in AI provider settings first." : {
-      "comment" : "Error when a provider is connected but no model is chosen",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Primero elige un modelo en los ajustes de proveedores de IA."
+    "Choose a model in AI provider settings first.": {
+      "comment": "Error when a provider is connected but no model is chosen",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primero elige un modelo en los ajustes de proveedores de IA."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prima scegli un modello nelle impostazioni dei provider di IA."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prima scegli un modello nelle impostazioni dei provider di IA."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wähle zuerst ein Modell in den KI-Anbieter-Einstellungen."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle zuerst ein Modell in den KI-Anbieter-Einstellungen."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choisissez d'abord un modèle dans les réglages des fournisseurs d'IA."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez d'abord un modèle dans les réglages des fournisseurs d'IA."
           }
         }
       }
     },
-    "Claude models" : {
-      "comment" : "Subtitle under Anthropic in the provider list. Claude is a product name",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modelos Claude"
+    "Claude models": {
+      "comment": "Subtitle under Anthropic in the provider list. Claude is a product name",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos Claude"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modelli Claude"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelli Claude"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Claude-Modelle"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude-Modelle"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modèles Claude"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles Claude"
           }
         }
       }
     },
-    "Close" : {
-      "comment" : "Button that dismisses the AI provider settings sheet",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cerrar"
+    "Close": {
+      "comment": "Button that dismisses the AI provider settings sheet",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chiudi"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chiudi"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schließen"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schließen"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fermer"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermer"
           }
         }
       }
     },
-    "Connect" : {
-      "comment" : "Button that checks the API key or server and saves it",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Conectar"
+    "Connect": {
+      "comment": "Button that checks the API key or server and saves it",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conectar"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connetti"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connetti"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbinden"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verbinden"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connecter"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connecter"
           }
         }
       }
     },
-    "Connect an AI provider in settings first." : {
-      "comment" : "Error when the app tries to use AI before any provider is connected",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Primero conecta un proveedor de IA en los ajustes."
+    "Connect an AI provider in settings first.": {
+      "comment": "Error when the app tries to use AI before any provider is connected",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primero conecta un proveedor de IA en los ajustes."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prima collega un provider di IA nelle impostazioni."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prima collega un provider di IA nelle impostazioni."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbinde zuerst einen KI-Anbieter in den Einstellungen."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verbinde zuerst einen KI-Anbieter in den Einstellungen."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connectez d'abord un fournisseur d'IA dans les réglages."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connectez d'abord un fournisseur d'IA dans les réglages."
           }
         }
       }
     },
-    "Connected" : {
-      "comment" : "Status next to a provider that has a working API key or server",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Conectado"
+    "Connected": {
+      "comment": "Status next to a provider that has a working API key or server",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conectado"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connesso"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connesso"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbunden"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verbunden"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connecté"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connecté"
           }
         }
       }
     },
-    "Couldn't reach the provider. %@" : {
-      "comment" : "Error when the network request fails. The argument is the system's network error message",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No se pudo contactar con el proveedor. %@"
+    "Couldn't Sign In": {
+      "comment": "Error title when OpenRouter sign-in fails",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo iniciar sesión"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impossibile raggiungere il provider. %@"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile accedere"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Der Anbieter ist nicht erreichbar. %@"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anmeldung fehlgeschlagen"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impossible de joindre le fournisseur. %@"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connexion impossible"
           }
         }
       }
     },
-    "Couldn't save to the Keychain (%@)." : {
-      "comment" : "Error when the API key can't be saved securely. The argument is the system error message",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No se pudo guardar en el llavero (%@)."
+    "Couldn't reach the provider. %@": {
+      "comment": "Error when the network request fails. The argument is the system's network error message",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo contactar con el proveedor. %@"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impossibile salvare nel portachiavi (%@)."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile raggiungere il provider. %@"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Speichern im Schlüsselbund fehlgeschlagen (%@)."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Anbieter ist nicht erreichbar. %@"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impossible d'enregistrer dans le trousseau (%@)."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de joindre le fournisseur. %@"
           }
         }
       }
     },
-    "Couldn't Sign In" : {
-      "comment" : "Error title when OpenRouter sign-in fails",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No se pudo iniciar sesión"
+    "Couldn't save to the Keychain (%@).": {
+      "comment": "Error when the API key can't be saved securely. The argument is the system error message",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo guardar en el llavero (%@)."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impossibile accedere"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile salvare nel portachiavi (%@)."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Anmeldung fehlgeschlagen"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speichern im Schlüsselbund fehlgeschlagen (%@)."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connexion impossible"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible d'enregistrer dans le trousseau (%@)."
           }
         }
       }
     },
-    "Creates a key in your OpenRouter account automatically. Or paste an existing key below." : {
-      "comment" : "Footer explaining that signing in to OpenRouter creates an API key automatically",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Crea una clave en tu cuenta de OpenRouter automáticamente. O pega una clave existente abajo."
+    "Creates a key in your OpenRouter account automatically. Or paste an existing key below.": {
+      "comment": "Footer explaining that signing in to OpenRouter creates an API key automatically",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea una clave en tu cuenta de OpenRouter automáticamente. O pega una clave existente abajo."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Crea automaticamente una chiave nel tuo account OpenRouter. Oppure incolla una chiave esistente qui sotto."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea automaticamente una chiave nel tuo account OpenRouter. Oppure incolla una chiave esistente qui sotto."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erstellt automatisch einen Schlüssel in deinem OpenRouter-Account. Oder füge unten einen vorhandenen Schlüssel ein."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erstellt automatisch einen Schlüssel in deinem OpenRouter-Account. Oder füge unten einen vorhandenen Schlüssel ein."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Crée automatiquement une clé dans votre compte OpenRouter. Ou collez une clé existante ci-dessous."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crée automatiquement une clé dans votre compte OpenRouter. Ou collez une clé existante ci-dessous."
           }
         }
       }
     },
-    "Current AI" : {
-      "comment" : "Row label showing which AI provider and model the app currently uses",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IA actual"
+    "Current AI": {
+      "comment": "Row label showing which AI provider and model the app currently uses",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA actual"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IA attuale"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA attuale"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktuelle KI"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktuelle KI"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IA actuelle"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA actuelle"
           }
         }
       }
     },
-    "Default" : {
-      "comment" : "Status of the provider the app uses",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Predeterminado"
+    "Default": {
+      "comment": "Status of the provider the app uses",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Predeterminado"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Predefinito"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Predefinito"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Standard"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Par défaut"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Par défaut"
           }
         }
       }
     },
-    "Default Provider" : {
-      "comment" : "Section title and picker label for the provider the app uses by default",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Proveedor predeterminado"
+    "Default Provider": {
+      "comment": "Section title and picker label for the provider the app uses by default",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proveedor predeterminado"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Provider predefinito"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Provider predefinito"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Standardanbieter"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standardanbieter"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fournisseur par défaut"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fournisseur par défaut"
           }
         }
       }
     },
-    "Disconnect" : {
-      "comment" : "Destructive button that removes the saved key or server for this provider",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desconectar"
+    "Disconnect": {
+      "comment": "Destructive button that removes the saved key or server for this provider",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desconectar"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnetti"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disconnetti"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trennen"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trennen"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Déconnecter"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déconnecter"
           }
         }
       }
     },
-    "Disconnect %@?" : {
-      "comment" : "Confirmation dialog title. The argument is the provider name, e.g. Anthropic",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Desconectar %@?"
+    "Disconnect %@?": {
+      "comment": "Confirmation dialog title. The argument is the provider name, e.g. Anthropic",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Desconectar %@?"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnettere %@?"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disconnettere %@?"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ trennen?"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ trennen?"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Déconnecter %@ ?"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déconnecter %@ ?"
           }
         }
       }
     },
-    "Download Ollama" : {
-      "comment" : "Link to download the Ollama app",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Descargar Ollama"
+    "Download Ollama": {
+      "comment": "Link to download the Ollama app",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descargar Ollama"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scarica Ollama"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scarica Ollama"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ollama herunterladen"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ollama herunterladen"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Télécharger Ollama"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Télécharger Ollama"
           }
         }
       }
     },
-    "Enter an API key first." : {
-      "comment" : "Error when Connect is tapped with an empty API key field",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Primero introduce una clave de API."
+    "Enter an API key first.": {
+      "comment": "Error when Connect is tapped with an empty API key field",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primero introduce una clave de API."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prima inserisci una chiave API."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prima inserisci una chiave API."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gib zuerst einen API-Schlüssel ein."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gib zuerst einen API-Schlüssel ein."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Saisissez d'abord une clé API."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saisissez d'abord une clé API."
           }
         }
       }
     },
-    "Gemini models" : {
-      "comment" : "Subtitle under Google Gemini in the provider list. Gemini is a product name",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modelos Gemini"
+    "GPT models": {
+      "comment": "Subtitle under OpenAI in the provider list. GPT is a product name",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos GPT"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modelli Gemini"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelli GPT"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gemini-Modelle"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GPT-Modelle"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modèles Gemini"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles GPT"
           }
         }
       }
     },
-    "Get your %@ API key" : {
-      "comment" : "Link to the provider's website to create an API key. The argument is the provider name, e.g. OpenAI",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obtén tu clave de API de %@"
+    "Gemini models": {
+      "comment": "Subtitle under Google Gemini in the provider list. Gemini is a product name",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos Gemini"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ottieni la tua chiave API di %@"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelli Gemini"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API-Schlüssel für %@ erhalten"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gemini-Modelle"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obtenir votre clé API %@"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles Gemini"
           }
         }
       }
     },
-    "GPT models" : {
-      "comment" : "Subtitle under OpenAI in the provider list. GPT is a product name",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modelos GPT"
+    "Get your %@ API key": {
+      "comment": "Link to the provider's website to create an API key. The argument is the provider name, e.g. OpenAI",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obtén tu clave de API de %@"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modelli GPT"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ottieni la tua chiave API di %@"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GPT-Modelle"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API-Schlüssel für %@ erhalten"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modèles GPT"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obtenir votre clé API %@"
           }
         }
       }
     },
-    "Hide Key" : {
-      "comment" : "Accessibility label for the button that hides the typed API key",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ocultar clave"
+    "Hide Key": {
+      "comment": "Accessibility label for the button that hides the typed API key",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocultar clave"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nascondi chiave"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nascondi chiave"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schlüssel ausblenden"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schlüssel ausblenden"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Masquer la clé"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masquer la clé"
           }
         }
       }
     },
-    "Hundreds of models, one key" : {
-      "comment" : "Subtitle under OpenRouter: one key gives access to many models",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cientos de modelos, una sola clave"
+    "Hundreds of models, one key": {
+      "comment": "Subtitle under OpenRouter: one key gives access to many models",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cientos de modelos, una sola clave"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Centinaia di modelli, una sola chiave"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Centinaia di modelli, una sola chiave"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hunderte Modelle, ein Schlüssel"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hunderte Modelle, ein Schlüssel"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Des centaines de modèles, une seule clé"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des centaines de modèles, une seule clé"
           }
         }
       }
     },
-    "Mistral & Codestral models" : {
-      "comment" : "Subtitle under Mistral in the provider list. Mistral and Codestral are product names",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modelos Mistral y Codestral"
+    "Mistral & Codestral models": {
+      "comment": "Subtitle under Mistral in the provider list. Mistral and Codestral are product names",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos Mistral y Codestral"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modelli Mistral e Codestral"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelli Mistral e Codestral"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mistral- und Codestral-Modelle"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mistral- und Codestral-Modelle"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modèles Mistral et Codestral"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles Mistral et Codestral"
           }
         }
       }
     },
-    "Model" : {
-      "comment" : "Section title and label for choosing which AI model to use",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modelo"
+    "Model": {
+      "comment": "Section title and label for choosing which AI model to use",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelo"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modello"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modello"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modell"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modell"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modèle"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèle"
           }
         }
       }
     },
-    "Models running on your own machine" : {
-      "comment" : "Subtitle under Ollama: models run on the user's own computer",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modelos que se ejecutan en tu propio equipo"
+    "Models running on your own machine": {
+      "comment": "Subtitle under Ollama: models run on the user's own computer",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelos que se ejecutan en tu propio equipo"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modelli in esecuzione sul tuo computer"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelli in esecuzione sul tuo computer"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modelle, die auf deinem eigenen Rechner laufen"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelle, die auf deinem eigenen Rechner laufen"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modèles exécutés sur votre propre machine"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles exécutés sur votre propre machine"
           }
         }
       }
     },
-    "No Models" : {
-      "comment" : "Empty-state title when the provider returned no models",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No hay modelos"
+    "No Models": {
+      "comment": "Empty-state title when the provider returned no models",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay modelos"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nessun modello"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun modello"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keine Modelle"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Modelle"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun modèle"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun modèle"
           }
         }
       }
     },
-    "None" : {
-      "comment" : "Picker option meaning no default AI provider is selected",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ninguno"
+    "None": {
+      "comment": "Picker option meaning no default AI provider is selected",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ninguno"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nessuno"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuno"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ohne"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun"
           }
         }
       }
     },
-    "Not Connected" : {
-      "comment" : "Status next to a provider that has no API key or server saved",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No conectado"
+    "Not Connected": {
+      "comment": "Status next to a provider that has no API key or server saved",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No conectado"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Non connesso"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non connesso"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nicht verbunden"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht verbunden"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Non connecté"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non connecté"
           }
         }
       }
     },
-    "Not Set Up" : {
-      "comment" : "Shown in place of a provider name when no AI provider is chosen yet",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sin configurar"
+    "Not Set Up": {
+      "comment": "Shown in place of a provider name when no AI provider is chosen yet",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin configurar"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Non configurato"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non configurato"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nicht eingerichtet"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht eingerichtet"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Non configuré"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non configuré"
           }
         }
       }
     },
-    "On-device model" : {
-      "comment" : "Label for Apple's on-device language model",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modelo en el dispositivo"
+    "On-device model": {
+      "comment": "Label for Apple's on-device language model",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelo en el dispositivo"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modello sul dispositivo"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modello sul dispositivo"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modell auf dem Gerät"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modell auf dem Gerät"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modèle sur l'appareil"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèle sur l'appareil"
           }
         }
       }
     },
-    "On-device, private, no key needed" : {
-      "comment" : "Subtitle under Apple Intelligence in the provider list",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En el dispositivo, privado, sin clave"
+    "On-device, private, no key needed": {
+      "comment": "Subtitle under Apple Intelligence in the provider list",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En el dispositivo, privado, sin clave"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sul dispositivo, privato, nessuna chiave richiesta"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sul dispositivo, privato, nessuna chiave richiesta"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auf dem Gerät, privat, kein Schlüssel nötig"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf dem Gerät, privat, kein Schlüssel nötig"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sur l'appareil, privé, sans clé"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur l'appareil, privé, sans clé"
           }
         }
       }
     },
-    "OpenRouter couldn't finish signing you in." : {
-      "comment" : "Error when exchanging the OpenRouter sign-in code for a key fails",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OpenRouter no pudo completar el inicio de sesión."
+    "OpenRouter couldn't finish signing you in.": {
+      "comment": "Error when exchanging the OpenRouter sign-in code for a key fails",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenRouter no pudo completar el inicio de sesión."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OpenRouter non è riuscito a completare l'accesso."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenRouter non è riuscito a completare l'accesso."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OpenRouter konnte die Anmeldung nicht abschließen."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenRouter konnte die Anmeldung nicht abschließen."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OpenRouter n'a pas pu finaliser votre connexion."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenRouter n'a pas pu finaliser votre connexion."
           }
         }
       }
     },
-    "OpenRouter didn't return a sign-in code. Please try again." : {
-      "comment" : "Error when OpenRouter's sign-in page returns without a code",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OpenRouter no devolvió un código de inicio de sesión. Inténtalo de nuevo."
+    "OpenRouter didn't return a sign-in code. Please try again.": {
+      "comment": "Error when OpenRouter's sign-in page returns without a code",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenRouter no devolvió un código de inicio de sesión. Inténtalo de nuevo."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OpenRouter non ha restituito un codice di accesso. Riprova."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenRouter non ha restituito un codice di accesso. Riprova."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OpenRouter hat keinen Anmeldecode zurückgegeben. Bitte versuche es erneut."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenRouter hat keinen Anmeldecode zurückgegeben. Bitte versuche es erneut."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OpenRouter n'a pas renvoyé de code de connexion. Veuillez réessayer."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenRouter n'a pas renvoyé de code de connexion. Veuillez réessayer."
           }
         }
       }
     },
-    "Providers" : {
-      "comment" : "Section title above the list of AI providers (OpenAI, Anthropic, …)",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Proveedores"
+    "Providers": {
+      "comment": "Section title above the list of AI providers (OpenAI, Anthropic, …)",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proveedores"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Provider"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Provider"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Anbieter"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anbieter"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fournisseurs"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fournisseurs"
           }
         }
       }
     },
-    "Run Ollama on a computer on your network. From another device, use that computer's local IP address instead of localhost." : {
-      "comment" : "Footer explaining how to reach an Ollama server running on another computer",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ejecuta Ollama en un equipo de tu red. Desde otro dispositivo, usa la dirección IP local de ese equipo en lugar de localhost."
+    "Run Ollama on a computer on your network. From another device, use that computer's local IP address instead of localhost.": {
+      "comment": "Footer explaining how to reach an Ollama server running on another computer",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ejecuta Ollama en un equipo de tu red. Desde otro dispositivo, usa la dirección IP local de ese equipo en lugar de localhost."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Esegui Ollama su un computer della tua rete. Da un altro dispositivo, usa l'indirizzo IP locale di quel computer invece di localhost."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esegui Ollama su un computer della tua rete. Da un altro dispositivo, usa l'indirizzo IP locale di quel computer invece di localhost."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Führe Ollama auf einem Computer in deinem Netzwerk aus. Verwende auf einem anderen Gerät statt localhost die lokale IP-Adresse dieses Computers."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Führe Ollama auf einem Computer in deinem Netzwerk aus. Verwende auf einem anderen Gerät statt localhost die lokale IP-Adresse dieses Computers."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exécutez Ollama sur un ordinateur de votre réseau. Depuis un autre appareil, utilisez l'adresse IP locale de cet ordinateur au lieu de localhost."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exécutez Ollama sur un ordinateur de votre réseau. Depuis un autre appareil, utilisez l'adresse IP locale de cet ordinateur au lieu de localhost."
           }
         }
       }
     },
-    "Runs on this device. Your requests never leave it and there's nothing to pay." : {
-      "comment" : "Footer explaining that the on-device model is private and free",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Se ejecuta en este dispositivo. Tus solicitudes nunca salen de él y no hay nada que pagar."
+    "Runs on this device. Your requests never leave it and there's nothing to pay.": {
+      "comment": "Footer explaining that the on-device model is private and free",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se ejecuta en este dispositivo. Tus solicitudes nunca salen de él y no hay nada que pagar."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Funziona su questo dispositivo. Le tue richieste non lo lasciano mai e non c'è nulla da pagare."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Funziona su questo dispositivo. Le tue richieste non lo lasciano mai e non c'è nulla da pagare."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Läuft auf diesem Gerät. Deine Anfragen verlassen es nie und es fallen keine Kosten an."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Läuft auf diesem Gerät. Deine Anfragen verlassen es nie und es fallen keine Kosten an."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "S'exécute sur cet appareil. Vos requêtes ne le quittent jamais et il n'y a rien à payer."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "S'exécute sur cet appareil. Vos requêtes ne le quittent jamais et il n'y a rien à payer."
           }
         }
       }
     },
-    "Saved key %@" : {
-      "comment" : "Shows the last characters of the saved API key. The argument is like ••••a1b2",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clave guardada %@"
+    "Saved key %@": {
+      "comment": "Shows the last characters of the saved API key. The argument is like ••••a1b2",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clave guardada %@"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chiave salvata %@"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chiave salvata %@"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gespeicherter Schlüssel %@"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gespeicherter Schlüssel %@"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clé enregistrée %@"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clé enregistrée %@"
           }
         }
       }
     },
-    "Search models" : {
-      "comment" : "Placeholder in the model search field",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Buscar modelos"
+    "Search models": {
+      "comment": "Placeholder in the model search field",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar modelos"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cerca modelli"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerca modelli"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modelle durchsuchen"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelle durchsuchen"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rechercher des modèles"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher des modèles"
           }
         }
       }
     },
-    "Server" : {
-      "comment" : "Section title for the Ollama server address",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Servidor"
+    "Search the Web": {
+      "comment": "Switch that lets the AI look things up on the web before answering",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar en la web"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Server"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerca sul web"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Server"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Web suchen"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Serveur"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher sur le Web"
           }
         }
       }
     },
-    "Server URL" : {
-      "comment" : "Placeholder in the Ollama server address field",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "URL del servidor"
+    "Server": {
+      "comment": "Section title for the Ollama server address",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servidor"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "URL del server"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Server"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Server-URL"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Server"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "URL du serveur"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serveur"
           }
         }
       }
     },
-    "Show Key" : {
-      "comment" : "Accessibility label for the button that reveals the typed API key",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar clave"
+    "Server URL": {
+      "comment": "Placeholder in the Ollama server address field",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "URL del servidor"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostra chiave"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "URL del server"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schlüssel einblenden"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Server-URL"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afficher la clé"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "URL du serveur"
           }
         }
       }
     },
-    "Sign in with OpenRouter" : {
-      "comment" : "Button that starts signing in to OpenRouter in a browser",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Iniciar sesión con OpenRouter"
+    "Show Key": {
+      "comment": "Accessibility label for the button that reveals the typed API key",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar clave"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Accedi con OpenRouter"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostra chiave"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mit OpenRouter anmelden"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schlüssel einblenden"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Se connecter avec OpenRouter"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher la clé"
           }
         }
       }
     },
-    "Signing In…" : {
-      "comment" : "Button title while the OpenRouter sign-in is in progress",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Iniciando sesión…"
+    "Sign in with OpenRouter": {
+      "comment": "Button that starts signing in to OpenRouter in a browser",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciar sesión con OpenRouter"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Accesso in corso…"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accedi con OpenRouter"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Anmeldung …"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit OpenRouter anmelden"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connexion…"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se connecter avec OpenRouter"
           }
         }
       }
     },
-    "Test Connection" : {
-      "comment" : "Button that re-checks a saved API key or server",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Probar conexión"
+    "Signing In…": {
+      "comment": "Button title while the OpenRouter sign-in is in progress",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciando sesión…"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verifica connessione"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accesso in corso…"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbindung testen"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anmeldung …"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tester la connexion"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connexion…"
           }
         }
       }
     },
-    "Test the connection again to refresh the list." : {
-      "comment" : "Empty-state message when the provider returned no models",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vuelve a probar la conexión para actualizar la lista."
+    "Test Connection": {
+      "comment": "Button that re-checks a saved API key or server",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Probar conexión"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verifica di nuovo la connessione per aggiornare l'elenco."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verifica connessione"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Teste die Verbindung erneut, um die Liste zu aktualisieren."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verbindung testen"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Testez à nouveau la connexion pour actualiser la liste."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tester la connexion"
           }
         }
       }
     },
-    "That photo couldn't be read. Try a JPEG or PNG." : {
-      "comment" : "Error when an attached photo can't be decoded",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No se pudo leer esa foto. Prueba con un JPEG o PNG."
+    "Test the connection again to refresh the list.": {
+      "comment": "Empty-state message when the provider returned no models",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vuelve a probar la conexión para actualizar la lista."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impossibile leggere la foto. Prova con un JPEG o PNG."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verifica di nuovo la connessione per aggiornare l'elenco."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Das Foto konnte nicht gelesen werden. Versuche es mit einem JPEG oder PNG."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teste die Verbindung erneut, um die Liste zu aktualisieren."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impossible de lire cette photo. Essayez un JPEG ou un PNG."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Testez à nouveau la connexion pour actualiser la liste."
           }
         }
       }
     },
-    "That server address isn't a valid URL." : {
-      "comment" : "Error when the typed server address can't be parsed",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Esa dirección de servidor no es una URL válida."
+    "That photo couldn't be read. Try a JPEG or PNG.": {
+      "comment": "Error when an attached photo can't be decoded",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo leer esa foto. Prueba con un JPEG o PNG."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L'indirizzo del server non è un URL valido."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile leggere la foto. Prova con un JPEG o PNG."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diese Serveradresse ist keine gültige URL."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Foto konnte nicht gelesen werden. Versuche es mit einem JPEG oder PNG."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cette adresse de serveur n'est pas une URL valide."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de lire cette photo. Essayez un JPEG ou un PNG."
           }
         }
       }
     },
-    "The AI provider returned an empty reply." : {
-      "comment" : "Error when the AI provider replied with no text",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "El proveedor de IA devolvió una respuesta vacía."
+    "That server address isn't a valid URL.": {
+      "comment": "Error when the typed server address can't be parsed",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esa dirección de servidor no es una URL válida."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il provider di IA ha restituito una risposta vuota."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'indirizzo del server non è un URL valido."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Der KI-Anbieter hat eine leere Antwort zurückgegeben."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Serveradresse ist keine gültige URL."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le fournisseur d'IA a renvoyé une réponse vide."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette adresse de serveur n'est pas une URL valide."
           }
         }
       }
     },
-    "The app sends requests to this provider using your own account. You're billed by the provider, not by us." : {
-      "comment" : "Footer explaining that the user's own provider account is billed, not the app developer",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La app envía las solicitudes a este proveedor con tu propia cuenta. Te factura el proveedor, no nosotros."
+    "The AI looks things up on the web before answering. Searches are billed by your provider. Apple Intelligence and Ollama answer without searching.": {
+      "comment": "Footer under the Search the Web switch",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La IA busca información en la web antes de responder. Las búsquedas las cobra tu proveedor. Apple Intelligence y Ollama responden sin buscar."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L'app invia le richieste a questo provider usando il tuo account. Ti addebita il provider, non noi."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'IA cerca informazioni sul web prima di rispondere. Le ricerche vengono addebitate dal tuo provider. Apple Intelligence e Ollama rispondono senza cercare."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die App sendet Anfragen mit deinem eigenen Account an diesen Anbieter. Die Kosten rechnet der Anbieter ab, nicht wir."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die KI sucht vor dem Antworten im Web nach Informationen. Suchen werden von deinem Anbieter abgerechnet. Apple Intelligence und Ollama antworten ohne Suche."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L'app envoie les requêtes à ce fournisseur avec votre propre compte. C'est le fournisseur qui vous facture, pas nous."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'IA cherche des informations sur le Web avant de répondre. Les recherches sont facturées par votre fournisseur. Apple Intelligence et Ollama répondent sans chercher."
           }
         }
       }
     },
-    "The conversation must end with a user message." : {
-      "comment" : "Developer-facing error: the last chat message must come from the user",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La conversación debe terminar con un mensaje del usuario."
+    "The AI provider returned an empty reply.": {
+      "comment": "Error when the AI provider replied with no text",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El proveedor de IA devolvió una respuesta vacía."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La conversazione deve terminare con un messaggio dell'utente."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il provider di IA ha restituito una risposta vuota."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die Unterhaltung muss mit einer Nachricht des Benutzers enden."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der KI-Anbieter hat eine leere Antwort zurückgegeben."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La conversation doit se terminer par un message de l'utilisateur."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le fournisseur d'IA a renvoyé une réponse vide."
           }
         }
       }
     },
-    "The on-device model is still downloading. Try again shortly." : {
-      "comment" : "Error while Apple's on-device model is still downloading",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "El modelo del dispositivo aún se está descargando. Inténtalo de nuevo en breve."
+    "The app sends requests to this provider using your own account. You're billed by the provider, not by us.": {
+      "comment": "Footer explaining that the user's own provider account is billed, not the app developer",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La app envía las solicitudes a este proveedor con tu propia cuenta. Te factura el proveedor, no nosotros."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il modello sul dispositivo è ancora in download. Riprova tra poco."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'app invia le richieste a questo provider usando il tuo account. Ti addebita il provider, non noi."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Das Modell auf dem Gerät wird noch geladen. Versuche es gleich noch einmal."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die App sendet Anfragen mit deinem eigenen Account an diesen Anbieter. Die Kosten rechnet der Anbieter ab, nicht wir."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le modèle sur l'appareil est encore en cours de téléchargement. Réessayez dans un instant."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'app envoie les requêtes à ce fournisseur avec votre propre compte. C'est le fournisseur qui vous facture, pas nous."
           }
         }
       }
     },
-    "The provider returned HTTP %lld." : {
-      "comment" : "Error with an HTTP status code number, e.g. 500",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "El proveedor devolvió HTTP %lld."
+    "The conversation must end with a user message.": {
+      "comment": "Developer-facing error: the last chat message must come from the user",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La conversación debe terminar con un mensaje del usuario."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il provider ha restituito HTTP %lld."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La conversazione deve terminare con un messaggio dell'utente."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Der Anbieter hat HTTP %lld zurückgegeben."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Unterhaltung muss mit einer Nachricht des Benutzers enden."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le fournisseur a renvoyé HTTP %lld."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La conversation doit se terminer par un message de l'utilisateur."
           }
         }
       }
     },
-    "This API key was rejected (%@)." : {
-      "comment" : "Error when the provider refuses the API key. The argument is the provider's reason, in English",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Se rechazó esta clave de API (%@)."
+    "The on-device model is still downloading. Try again shortly.": {
+      "comment": "Error while Apple's on-device model is still downloading",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El modelo del dispositivo aún se está descargando. Inténtalo de nuevo en breve."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Questa chiave API è stata rifiutata (%@)."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il modello sul dispositivo è ancora in download. Riprova tra poco."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dieser API-Schlüssel wurde abgelehnt (%@)."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Modell auf dem Gerät wird noch geladen. Versuche es gleich noch einmal."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cette clé API a été refusée (%@)."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le modèle sur l'appareil est encore en cours de téléchargement. Réessayez dans un instant."
           }
         }
       }
     },
-    "This API key was rejected." : {
-      "comment" : "Error when the provider refuses the API key; the one-argument form appends the provider's reason",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Se rechazó esta clave de API."
+    "The provider returned HTTP %lld.": {
+      "comment": "Error with an HTTP status code number, e.g. 500",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El proveedor devolvió HTTP %lld."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Questa chiave API è stata rifiutata."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il provider ha restituito HTTP %lld."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dieser API-Schlüssel wurde abgelehnt."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Anbieter hat HTTP %lld zurückgegeben."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cette clé API a été refusée."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le fournisseur a renvoyé HTTP %lld."
           }
         }
       }
     },
-    "This device doesn't support Apple Intelligence." : {
-      "comment" : "Error on devices that don't support Apple Intelligence",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Este dispositivo no es compatible con Apple Intelligence."
+    "This API key was rejected (%@).": {
+      "comment": "Error when the provider refuses the API key. The argument is the provider's reason, in English",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se rechazó esta clave de API (%@)."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Questo dispositivo non supporta Apple Intelligence."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questa chiave API è stata rifiutata (%@)."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dieses Gerät unterstützt Apple Intelligence nicht."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieser API-Schlüssel wurde abgelehnt (%@)."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cet appareil ne prend pas en charge Apple Intelligence."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette clé API a été refusée (%@)."
           }
         }
       }
     },
-    "Turn on Apple Intelligence in Settings to use the on-device model." : {
-      "comment" : "Error when Apple Intelligence is turned off in the Settings app",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activa Apple Intelligence en Ajustes para usar el modelo del dispositivo."
+    "This API key was rejected.": {
+      "comment": "Error when the provider refuses the API key; the one-argument form appends the provider's reason",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se rechazó esta clave de API."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Attiva Apple Intelligence in Impostazioni per usare il modello sul dispositivo."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questa chiave API è stata rifiutata."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiviere Apple Intelligence in den Einstellungen, um das Modell auf dem Gerät zu verwenden."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieser API-Schlüssel wurde abgelehnt."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activez Apple Intelligence dans Réglages pour utiliser le modèle sur l'appareil."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette clé API a été refusée."
           }
         }
       }
     },
-    "Unexpected response from the provider." : {
-      "comment" : "Error when the provider's reply can't be understood",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Respuesta inesperada del proveedor."
+    "This device doesn't support Apple Intelligence.": {
+      "comment": "Error on devices that don't support Apple Intelligence",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este dispositivo no es compatible con Apple Intelligence."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Risposta inattesa dal provider."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questo dispositivo non supporta Apple Intelligence."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unerwartete Antwort vom Anbieter."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieses Gerät unterstützt Apple Intelligence nicht."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Réponse inattendue du fournisseur."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cet appareil ne prend pas en charge Apple Intelligence."
           }
         }
       }
     },
-    "Use %@" : {
-      "comment" : "Toggle label to turn on an on-device provider. The argument is the provider name, e.g. Apple Intelligence",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usar %@"
+    "Turn on Apple Intelligence in Settings to use the on-device model.": {
+      "comment": "Error when Apple Intelligence is turned off in the Settings app",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activa Apple Intelligence en Ajustes para usar el modelo del dispositivo."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usa %@"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva Apple Intelligence in Impostazioni per usare il modello sul dispositivo."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ verwenden"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktiviere Apple Intelligence in den Einstellungen, um das Modell auf dem Gerät zu verwenden."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utiliser %@"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activez Apple Intelligence dans Réglages pour utiliser le modèle sur l'appareil."
           }
         }
       }
     },
-    "Use as Default" : {
-      "comment" : "Button that makes this provider the one the app uses",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usar como predeterminado"
+    "Unexpected response from the provider.": {
+      "comment": "Error when the provider's reply can't be understood",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Respuesta inesperada del proveedor."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usa come predefinito"
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Risposta inattesa dal provider."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Als Standard verwenden"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unerwartete Antwort vom Anbieter."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utiliser par défaut"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réponse inattendue du fournisseur."
           }
         }
       }
     },
-    "Verified %@." : {
-      "comment" : "Footer saying when the connection was last checked. The argument is a relative date like yesterday or 5 minutes ago",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verificado %@."
+    "Use %@": {
+      "comment": "Toggle label to turn on an on-device provider. The argument is the provider name, e.g. Apple Intelligence",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usar %@"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verificato %@."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usa %@"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Überprüft %@."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ verwenden"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vérifié %@."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utiliser %@"
           }
         }
       }
     },
-    "Your saved key will be removed from this device." : {
-      "comment" : "Confirmation dialog message when disconnecting a cloud provider",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tu clave guardada se eliminará de este dispositivo."
+    "Use as Default": {
+      "comment": "Button that makes this provider the one the app uses",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usar como predeterminado"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La chiave salvata verrà rimossa da questo dispositivo."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usa come predefinito"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dein gespeicherter Schlüssel wird von diesem Gerät entfernt."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Als Standard verwenden"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Votre clé enregistrée sera supprimée de cet appareil."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utiliser par défaut"
           }
         }
       }
     },
-    "Your saved server and model will be removed from this device." : {
-      "comment" : "Confirmation dialog message when disconnecting a local Ollama server",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tu servidor y modelo guardados se eliminarán de este dispositivo."
+    "Verified %@.": {
+      "comment": "Footer saying when the connection was last checked. The argument is a relative date like yesterday or 5 minutes ago",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificado %@."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il server e il modello salvati verranno rimossi da questo dispositivo."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificato %@."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dein gespeicherter Server und dein Modell werden von diesem Gerät entfernt."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Überprüft %@."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Votre serveur et votre modèle enregistrés seront supprimés de cet appareil."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérifié %@."
           }
         }
       }
     },
-    "“%@” can't be used for chat. Choose a different model in AI provider settings." : {
-      "comment" : "Error when the chosen model can't chat (e.g. an embedding model). The argument is the model ID",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "«%@» no se puede usar para chatear. Elige otro modelo en los ajustes de proveedores de IA."
+    "Your saved key will be removed from this device.": {
+      "comment": "Confirmation dialog message when disconnecting a cloud provider",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu clave guardada se eliminará de este dispositivo."
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "«%@» non può essere usato per la chat. Scegli un altro modello nelle impostazioni dei provider di IA."
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La chiave salvata verrà rimossa da questo dispositivo."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "„%@“ kann nicht für Chats verwendet werden. Wähle in den KI-Anbieter-Einstellungen ein anderes Modell."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein gespeicherter Schlüssel wird von diesem Gerät entfernt."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "« %@ » ne peut pas être utilisé pour discuter. Choisissez un autre modèle dans les réglages des fournisseurs d'IA."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre clé enregistrée sera supprimée de cet appareil."
+          }
+        }
+      }
+    },
+    "Your saved server and model will be removed from this device.": {
+      "comment": "Confirmation dialog message when disconnecting a local Ollama server",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu servidor y modelo guardados se eliminarán de este dispositivo."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il server e il modello salvati verranno rimossi da questo dispositivo."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein gespeicherter Server und dein Modell werden von diesem Gerät entfernt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre serveur et votre modèle enregistrés seront supprimés de cet appareil."
+          }
+        }
+      }
+    },
+    "“%@” can't be used for chat. Choose a different model in AI provider settings.": {
+      "comment": "Error when the chosen model can't chat (e.g. an embedding model). The argument is the model ID",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» no se puede usar para chatear. Elige otro modelo en los ajustes de proveedores de IA."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» non può essere usato per la chat. Scegli un altro modello nelle impostazioni dei provider di IA."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@“ kann nicht für Chats verwendet werden. Wähle in den KI-Anbieter-Einstellungen ein anderes Modell."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« %@ » ne peut pas être utilisé pour discuter. Choisissez un autre modèle dans les réglages des fournisseurs d'IA."
           }
         }
       }
     }
   },
-  "version" : "1.0"
+  "version": "1.0"
 }

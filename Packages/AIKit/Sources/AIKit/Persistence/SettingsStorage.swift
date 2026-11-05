@@ -5,6 +5,7 @@ import Foundation
 struct SettingsStorage {
     private static let settingsKey = "AIKit.settings"
     private static let activeKey = "AIKit.activeProvider"
+    private static let webSearchKey = "AIKit.webSearch"
 
     let defaults: UserDefaults
 
@@ -34,6 +35,15 @@ struct SettingsStorage {
 
     func saveActiveProvider(_ provider: AIProvider?) {
         defaults.set(provider?.rawValue, forKey: Self.activeKey)
+    }
+
+    /// On until the user turns it off; a missing value means on.
+    func loadWebSearchEnabled() -> Bool {
+        defaults.object(forKey: Self.webSearchKey) == nil || defaults.bool(forKey: Self.webSearchKey)
+    }
+
+    func saveWebSearchEnabled(_ isOn: Bool) {
+        defaults.set(isOn, forKey: Self.webSearchKey)
     }
 
     /// Lists saved before non-chat models were filtered out may still hold them,

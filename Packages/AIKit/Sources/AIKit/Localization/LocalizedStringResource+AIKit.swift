@@ -27,6 +27,10 @@ nonisolated extension LocalizedStringResource {
     static var notConnected: Self { Self("Not Connected", bundle: #bundle, comment: "Status next to a provider that has no API key or server saved") }
     static var defaultStatus: Self { Self("Default", bundle: #bundle, comment: "Status of the provider the app uses") }
     static var connected: Self { Self("Connected", bundle: #bundle, comment: "Status next to a provider that has a working API key or server") }
+    static var searchTheWeb: Self { Self("Search the Web", bundle: #bundle, comment: "Switch that lets the AI look things up on the web before answering") }
+    static var webSearchNote: Self {
+        Self("The AI looks things up on the web before answering. Searches are billed by your provider. Apple Intelligence and Ollama answer without searching.", bundle: #bundle, comment: "Footer under the Search the Web switch")
+    }
 
     // MARK: Provider detail
 

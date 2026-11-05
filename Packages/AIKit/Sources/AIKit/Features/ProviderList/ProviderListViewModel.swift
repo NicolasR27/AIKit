@@ -18,6 +18,11 @@ final class ProviderListViewModel {
         set { store.selectProvider(newValue) }
     }
 
+    var webSearchEnabled: Bool {
+        get { store.webSearchEnabled }
+        set { store.webSearchEnabled = newValue }
+    }
+
     /// "Default" or "Connected" for connected providers; `nil` keeps unconnected rows clean.
     func status(for provider: AIProvider) -> LocalizedStringResource? {
         guard store.isConnected(provider) else { return nil }

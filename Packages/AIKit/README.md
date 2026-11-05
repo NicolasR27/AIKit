@@ -80,11 +80,18 @@ let answer = try await AIProviderStore.shared.send(
 let watch = try await AIProviderStore.shared.send("What watch is this?", images: [photoData])
 ```
 
-**Search the web** (for news, prices, scores, anything newer than the model):
+**Search the web.** `send` already does: whenever the provider can search, it looks things up
+on the live web before answering, so reports and answers aren't written from memory. Users
+can turn it off with the "Search the Web" switch in the settings screen
+(`AIProviderStore.shared.webSearchEnabled`); Apple Intelligence and Ollama answer without searching.
 
 ```swift
-// Just the answer:
-let reply = try await AIProviderStore.shared.send("Who won the game last night?", webSearch: true)
+// Follows the switch:
+let reply = try await AIProviderStore.shared.send("Who won the game last night?")
+
+// Always / never search, whatever the switch says:
+let fresh = try await AIProviderStore.shared.send("Who won the game last night?", webSearch: true)
+let quick = try await AIProviderStore.shared.send("Rewrite this nicer: …", webSearch: false)
 
 // The answer plus the pages it used:
 let answer = try await AIProviderStore.shared.searchWeb("Who won the game last night?")
@@ -92,14 +99,13 @@ Text(answer.text)
 ForEach(answer.sources) { Link($0.title, destination: $0.url) }
 ```
 
-That's all. The provider runs the search itself (and can open pages it finds, or ones you
-paste into the prompt), so there's nothing else to set up. AIKit also tells the model, ahead of
-your system prompt, that it has live web tools and must search, read and cite before answering
-(and makes OpenAI search on every call), so replies don't come from memory with "unverified"
-labels or a note that nothing was looked up. Searches are billed to the user's
-provider account like any other request. Apple Intelligence and Ollama can't search; hide
-your search switch with `if AIProviderStore.shared.canSearchWeb { … }`, or catch
-`AIKitError.webSearchNotSupported`.
+The provider runs the search itself (and can open pages it finds, or ones you paste into the
+prompt), so there's nothing else to set up. AIKit tells the model, ahead of your system prompt,
+that it has live web tools and must search, read and cite before answering (and makes OpenAI
+search on every call), so replies don't come back with "unverified" labels or a note that
+nothing was looked up. Searches are billed to the user's provider account like any other
+request. `webSearch: true` on a provider that can't search throws `AIKitError.webSearchNotSupported`;
+check `AIProviderStore.shared.canSearchWeb` first if you show your own search control.
 
 Errors have a user-readable `localizedDescription`. `AIKitError.notConnected` and
 `.noModelSelected` mean the user needs to finish setup, so show the settings.

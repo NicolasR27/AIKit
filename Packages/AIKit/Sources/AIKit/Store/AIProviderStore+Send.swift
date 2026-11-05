@@ -7,23 +7,25 @@ extension AIProviderStore {
     ///     let reply = try await AIProviderStore.shared.send("What watch is this?", images: [photoData])
     ///     let reply = try await AIProviderStore.shared.send("Who won last night?", webSearch: true)
     ///
-    /// - Parameter webSearch: Let the provider look things up on the live web first.
-    public func send(_ prompt: String, images: [Data] = [], system: String? = nil, webSearch: Bool = false) async throws -> String {
+    /// - Parameter webSearch: Whether the provider looks things up on the live web first. Leave it out
+    ///   to follow the user's "Search the Web" switch (on by default, skipped where the provider can't search);
+    ///   `true` always searches (and throws `webSearchNotSupported` where it can't), `false` never does.
+    public func send(_ prompt: String, images: [Data] = [], system: String? = nil, webSearch: Bool? = nil) async throws -> String {
         try await send([.user(prompt, images: images)], system: system, webSearch: webSearch)
     }
 
     /// Sends a whole conversation (oldest first) and returns the assistant's next reply.
     /// - Parameters:
     ///   - provider: Overrides the user's default provider, if connected.
-    ///   - webSearch: Let the provider look things up on the live web first.
+    ///   - webSearch: See `send(_:images:system:webSearch:)`.
     public func send(
         _ messages: [AIMessage],
         system: String? = nil,
         provider: AIProvider? = nil,
-        webSearch: Bool = false
+        webSearch: Bool? = nil
     ) async throws -> String {
         let (credentials, model) = try target(provider)
-        if webSearch {
+        if webSearch ?? (webSearchEnabled && credentials.provider.supportsWebSearch) {
             return try await client.searchWeb(messages, system: system, credentials: credentials, model: model).text
         }
         return try await client.chat(messages, system: system, credentials: credentials, model: model)
@@ -45,7 +47,7 @@ extension AIProviderStore {
         return try await client.searchWeb(messages, system: system, credentials: credentials, model: model)
     }
 
-    /// Whether the provider `send` and `searchWeb` will use can search the web. Use it to show or hide a search switch.
+    /// Whether the provider `send` and `searchWeb` will use can search the web.
     public var canSearchWeb: Bool {
         activeProvider?.supportsWebSearch == true
     }

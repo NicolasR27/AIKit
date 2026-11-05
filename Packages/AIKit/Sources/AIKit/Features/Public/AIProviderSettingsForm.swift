@@ -24,6 +24,8 @@ public struct AIProviderSettingsForm: View {
                 )
             }
 
+            WebSearchSection(isOn: $viewModel.webSearchEnabled)
+
             Section(.providers) {
                 ForEach(viewModel.providers) { provider in
                     NavigationLink {

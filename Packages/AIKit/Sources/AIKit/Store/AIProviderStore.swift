@@ -18,6 +18,12 @@ public final class AIProviderStore {
         didSet { storage.saveActiveProvider(activeProvider) }
     }
 
+    /// Whether `send` looks things up on the live web first (when the provider can). On by default;
+    /// users switch it in settings. `searchWeb` and `send(…, webSearch: true)` always search.
+    public var webSearchEnabled: Bool {
+        didSet { storage.saveWebSearchEnabled(webSearchEnabled) }
+    }
+
     private var settings: [AIProvider: ProviderSettings] {
         didSet { storage.saveSettings(settings) }
     }
@@ -66,6 +72,7 @@ public final class AIProviderStore {
         self.storage = storage
         self.keys = keys
         settings = storage.loadSettings()
+        webSearchEnabled = storage.loadWebSearchEnabled()
         activeProvider = storage.loadActiveProvider().flatMap { providers.contains($0) ? $0 : nil }
 
         for provider in providers where provider.requiresAPIKey {
