@@ -96,7 +96,8 @@ extension NetworkTests {
         #expect(answer == AIAnswer(text: "It's sunny.", sources: [AIWebSource(title: "Lisbon weather", url: URL(string: "https://weather.example/lisbon")!)]))
         #expect(StubURLProtocol.requests.first?.url?.absoluteString == "https://api.openai.com/v1/responses")
         let body = try #require(StubURLProtocol.bodies.first)
-        #expect(body["instructions"] as? String == "Be brief")
+        #expect(body["instructions"] as? String == ProviderClient.webSearchDirective + "\n\nBe brief")
+        #expect(body["tool_choice"] as? String == "required")
         #expect(body["store"] as? Bool == false)
         #expect(tools().map { $0["type"] as? String } == ["web_search"])
         #expect(body["input"] as? [[String: String]] == [["role": "user", "content": "Weather in Lisbon?"]])
@@ -159,6 +160,30 @@ extension NetworkTests {
         #expect(answer.sources.map(\.title) == ["bbc.com", "club.example"])
         let toolKeys = tools().flatMap(\.keys)
         #expect(toolKeys == ["googleSearch", "urlContext"])
+    }
+
+    // MARK: - Steering
+
+    @Test func everySearchTellsTheModelToUseTheWeb() async throws {
+        let client = ProviderClient(session: StubURLProtocol.session { _ in
+            .init(json: #"{"stop_reason":"end_turn","content":[{"type":"text","text":"Hi"}]}"#)
+        })
+
+        _ = try await client.searchWeb([.user("Hi")], system: nil, credentials: credentials(.anthropic), model: "claude-opus-5")
+        _ = try await client.searchWeb([.user("Hi")], system: "Be brief", credentials: credentials(.anthropic), model: "claude-opus-5")
+
+        #expect(StubURLProtocol.bodies[0]["system"] as? String == ProviderClient.webSearchDirective)
+        #expect(StubURLProtocol.bodies[1]["system"] as? String == ProviderClient.webSearchDirective + "\n\nBe brief")
+    }
+
+    @Test func plainChatIsNotSteered() async throws {
+        let client = ProviderClient(session: StubURLProtocol.session { _ in
+            .init(json: #"{"content":[{"type":"text","text":"Hi"}]}"#)
+        })
+
+        _ = try await client.chat([.user("Hi")], system: "Be brief", credentials: credentials(.anthropic), model: "claude-opus-5")
+
+        #expect(StubURLProtocol.bodies[0]["system"] as? String == "Be brief")
     }
 
     // MARK: - Providers without search

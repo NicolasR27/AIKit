@@ -45,12 +45,30 @@ struct ProviderClient {
         let backend = try backend(for: credentials.provider, apiKey: credentials.apiKey, baseURL: credentials.baseURL)
         let answer: AIAnswer
         do {
-            answer = try await backend.searchWeb(messages, system: system, model: model)
+            answer = try await backend.searchWeb(messages, system: Self.steered(system), model: model)
         } catch ProviderError.server(_, let message?) where Self.isNotAChatModelMessage(message) {
             throw ProviderError.notAChatModel(model)
         }
         guard !answer.text.isEmpty else { throw AIKitError.emptyResponse }
         return answer
+    }
+
+    // MARK: - Web search steering
+
+    /// Every provider lets the model decide whether to actually run the search it was given, and a
+    /// model that skips it answers from memory and hedges ("unverified", "no live web access").
+    /// This goes ahead of the host's system prompt so the model searches, reads and cites instead.
+    static let webSearchDirective = """
+        Live web search and page reading tools are enabled for this request. Use them before you answer: \
+        search for anything current, specific or checkable (facts, names, numbers, dates, prices, products, \
+        people, organizations), open the pages you rely on, and cite them. Never say you lack web access or \
+        that the answer was prepared without live retrieval. Mark a claim as unverified only after a search \
+        found nothing relevant.
+        """
+
+    static func steered(_ system: String?) -> String {
+        guard let system, !system.isEmpty else { return webSearchDirective }
+        return webSearchDirective + "\n\n" + system
     }
 
     // MARK: - Routing

@@ -11,6 +11,7 @@ extension OpenAICompatibleBackend {
                 instructions: system,
                 input: try messages.map(InputMessage.init),
                 tools: [ResponsesTool(type: "web_search")],
+                tool_choice: "required",
                 store: false
             ),
             headers: HTTPClient.bearer(apiKey),
@@ -34,6 +35,8 @@ private struct ResponsesRequest: Encodable {
     let instructions: String?
     let input: [InputMessage]
     let tools: [ResponsesTool]
+    /// `required`: the model must search; with the default `auto` it may answer from memory.
+    let tool_choice: String
     /// Don't keep the conversation on OpenAI's servers; AIKit resends history every time.
     let store: Bool
 }

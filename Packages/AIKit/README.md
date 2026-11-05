@@ -93,7 +93,10 @@ ForEach(answer.sources) { Link($0.title, destination: $0.url) }
 ```
 
 That's all. The provider runs the search itself (and can open pages it finds, or ones you
-paste into the prompt), so there's nothing else to set up. Searches are billed to the user's
+paste into the prompt), so there's nothing else to set up. AIKit also tells the model, ahead of
+your system prompt, that it has live web tools and must search, read and cite before answering
+(and makes OpenAI search on every call), so replies don't come from memory with "unverified"
+labels or a note that nothing was looked up. Searches are billed to the user's
 provider account like any other request. Apple Intelligence and Ollama can't search; hide
 your search switch with `if AIProviderStore.shared.canSearchWeb { … }`, or catch
 `AIKitError.webSearchNotSupported`.
