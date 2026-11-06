@@ -1857,6 +1857,35 @@
         }
       }
     },
+    "This is too long for Apple Intelligence. Try a shorter request, or choose a cloud provider in AI provider settings.": {
+      "comment": "Error when a request, its search results and the reply don't fit in Apple's on-device model",
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esto es demasiado largo para Apple Intelligence. Prueba con una solicitud más corta o elige un proveedor en la nube en los ajustes de proveedores de IA."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "È troppo lungo per Apple Intelligence. Prova una richiesta più breve o scegli un provider cloud nelle impostazioni dei provider IA."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das ist zu lang für Apple Intelligence. Versuche eine kürzere Anfrage oder wähle in den KI-Anbieter-Einstellungen einen Cloud-Anbieter."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "C'est trop long pour Apple Intelligence. Essayez une demande plus courte ou choisissez un fournisseur cloud dans les réglages des fournisseurs d'IA."
+          }
+        }
+      }
+    },
     "Turn on Apple Intelligence in Settings to use the on-device model.": {
       "comment": "Error when Apple Intelligence is turned off in the Settings app",
       "localizations": {

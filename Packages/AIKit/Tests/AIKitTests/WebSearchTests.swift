@@ -333,13 +333,47 @@ extension NetworkTests {
         #expect(tools().map { $0["type"] as? String } == ["web_search_20260209", "web_fetch_20260209"])
     }
 
+    /// A tool with a roomy budget and a 4-characters-per-token estimate instead of the real tokenizer.
+    private func tool(_ engine: any AIWebSearchEngine = FakeEngine(), budget: Int = 4_000) -> AppleWebSearchTool {
+        var tool = AppleWebSearchTool(engine: engine)
+        tool.measure = { ($0.count + 3) / 4 }
+        tool.budget.set(budget)
+        return tool
+    }
+
     @Test func toolReturnsFindingsAndKeepsSources() async throws {
-        let tool = AppleWebSearchTool(engine: FakeEngine())
+        let tool = tool()
 
         let output = try await tool.call(arguments: .init(query: "swift 7"))
 
         #expect(output == "Found: swift 7\n\nSources: Page")
         #expect(tool.log.sources == [AIWebSource(title: "Page", url: URL(string: "https://page.example")!)])
+        #expect(tool.budget.remaining == 4_000 - (output.count + 3) / 4 - AppleWebSearchTool.callOverhead)
+    }
+
+    private struct LongEngine: AIWebSearchEngine {
+        func search(_ query: String) async throws -> AIAnswer {
+            AIAnswer(text: String(repeating: "word ", count: 400))
+        }
+    }
+
+    @Test func toolTrimsResultsToWhatsLeft() async throws {
+        let tool = tool(LongEngine(), budget: 300)
+
+        let output = try await tool.call(arguments: .init(query: "q"))
+
+        #expect((output.count + 3) / 4 <= 300 - AppleWebSearchTool.callOverhead)
+        #expect(output.count > 400)
+        #expect(tool.budget.remaining < AppleWebSearchTool.minimumResultTokens + AppleWebSearchTool.callOverhead)
+    }
+
+    @Test func toolStopsSearchingWhenTheContextIsFull() async throws {
+        let tool = tool(budget: 100)
+
+        let output = try await tool.call(arguments: .init(query: "q"))
+
+        #expect(output == AppleWebSearchTool.budgetSpent)
+        #expect(tool.log.sources.isEmpty)
     }
 
     @Test func toolOutputFitsTheOnDeviceContext() {

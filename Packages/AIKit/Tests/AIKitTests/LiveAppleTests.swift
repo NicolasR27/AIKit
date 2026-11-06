@@ -38,4 +38,29 @@ struct LiveAppleTests {
         #expect(answer.text.localizedStandardContains("Quillfeather"))
         #expect(answer.sources.map(\.title) == ["Tour de Lune results"])
     }
+
+    /// Long research instructions plus long results used to overflow the 8,192-token context.
+    @Test func longResearchFitsTheContext() async throws {
+        let engine = LongEngine()
+        let credentials = AIProviderCredentials(provider: .apple, model: AppleIntelligenceBackend.modelName, apiKey: nil, baseURL: nil)
+        let system = String(repeating: "Write a detailed buying report: authorized dealers, grey market, prices, service centers, warranty. ", count: 40)
+
+        let answer = try await ProviderClient().searchWeb(
+            [.user("Research the Glycine GL1050 for a buyer in the United States: vendors, prices and warranty.")],
+            system: system, credentials: credentials, model: AppleIntelligenceBackend.modelName, searchEngine: engine
+        )
+
+        print("Apple searched \(engine.queries.withLock { $0 }) and replied \(answer.text.count) characters")
+        #expect(!answer.text.isEmpty)
+    }
+
+    private nonisolated final class LongEngine: AIWebSearchEngine {
+        let queries = Mutex<[String]>([])
+
+        func search(_ query: String) async throws -> AIAnswer {
+            queries.withLock { $0.append(query) }
+            let text = (1...60).map { "Vendor \($0) sells the Glycine GL1050 for $\(400 + $0 * 5) with a two-year warranty and free shipping." }
+            return AIAnswer(text: text.joined(separator: " "), sources: [AIWebSource(title: "Dealers", url: URL(string: "https://dealers.example")!)])
+        }
+    }
 }

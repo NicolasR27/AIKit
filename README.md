@@ -6,7 +6,7 @@ OpenRouter, Ollama) or turn on Apple Intelligence from a native iOS settings scr
 ## Install
 
 1. In Xcode: **File ▸ Add Package Dependencies…**
-2. Paste this repo's URL, choose **Up to Next Major Version** from **1.1.0**, and add **AIKit** to your app target.
+2. Paste this repo's URL, choose **Up to Next Major Version** from **1.1.1**, and add **AIKit** to your app target.
    Already on the package? **File ▸ Packages ▸ Update to Latest Package Versions** picks up new releases.
 
 ## Use (one line)

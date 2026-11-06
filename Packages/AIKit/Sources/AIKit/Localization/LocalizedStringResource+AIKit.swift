@@ -124,6 +124,9 @@ nonisolated extension LocalizedStringResource {
     static var modelNotReadyError: Self {
         Self("The on-device model is still downloading. Try again shortly.", bundle: #bundle, comment: "Error while Apple's on-device model is still downloading")
     }
+    static var appleContextFullError: Self {
+        Self("This is too long for Apple Intelligence. Try a shorter request, or choose a cloud provider in AI provider settings.", bundle: #bundle, comment: "Error when a request, its search results and the reply don't fit in Apple's on-device model")
+    }
     static var appleIntelligenceUnavailableError: Self {
         Self("Apple Intelligence isn't available right now.", bundle: #bundle, comment: "Generic error when Apple Intelligence can't be used")
     }

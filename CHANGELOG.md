@@ -2,6 +2,20 @@
 
 What changed in each AIKit release. Newest first.
 
+## 1.1.1 — 2026-11-06
+
+### Fixed
+- **Apple Intelligence no longer fails with "Provided 8,595 tokens, but the maximum allowed is
+  8,192."** Everything sent to the on-device model now has to fit its 8,192-token context: the
+  instructions, the conversation, the search results and the reply. AIKit now counts tokens
+  with Apple's own tokenizer and keeps the total under the limit:
+  - Room is kept free for the reply, and the oldest chat turns are dropped if the conversation
+    is too long.
+  - Search results are trimmed to the space that's left; once it's used up, the model answers
+    from what it already found instead of searching again (and paying for it).
+  - If it still overflows, AIKit retries once with more room for the reply, then shows a
+    readable, translated message instead of raw token counts.
+
 ## 1.1.0 — 2026-11-06
 
 ### Added
