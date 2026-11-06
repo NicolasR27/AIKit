@@ -30,7 +30,8 @@ public nonisolated enum AIProvider: String, CaseIterable, Identifiable, Codable,
     public var requiresAPIKey: Bool { self != .apple && self != .ollama }
 
     /// Can look things up on the live web with `send(_:webSearch:)` or `searchWeb(_:)`.
-    /// The provider runs the search itself and bills it to the user's account.
+    /// The provider runs the search itself and bills it to the user's account. Apple Intelligence searches
+    /// with a tool instead, when it has somewhere to search: check `AIProviderStore.canSearchWeb`.
     public var supportsWebSearch: Bool { self != .apple && self != .ollama }
 
     /// Runs on the device with Apple's Foundation Models framework, so it's switched on and off

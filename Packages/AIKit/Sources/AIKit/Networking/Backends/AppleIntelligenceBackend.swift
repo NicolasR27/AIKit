@@ -11,8 +11,28 @@ struct AppleIntelligenceBackend: ProviderBackend {
         return [Self.modelName]
     }
 
+    /// Where the model's search tool looks things up. `nil` means it can't search.
+    var searchEngine: (any AIWebSearchEngine)?
+
     /// Replays earlier turns as the session transcript, then asks for a reply to the last user message.
     func reply(to messages: [AIMessage], system: String?, model: String) async throws -> String {
+        try await respond(to: messages, system: system, tools: [])
+    }
+
+    /// Gives the model a `searchWeb` tool and lets it search as often as it needs before answering.
+    func searchWeb(_ messages: [AIMessage], system: String?, model: String) async throws -> AIAnswer {
+        guard let searchEngine else { throw AIKitError.webSearchNotSupported(.apple) }
+        let tool = AppleWebSearchTool(engine: searchEngine)
+        do {
+            let text = try await respond(to: messages, system: AppleWebSearchTool.steered(system), tools: [tool])
+            return AIAnswer(text: text, sources: tool.log.sources)
+        } catch let error as LanguageModelSession.ToolCallError {
+            // Surface the search provider's own error ("invalid key", "rate limited"…).
+            throw error.underlyingError
+        }
+    }
+
+    private func respond(to messages: [AIMessage], system: String?, tools: [any Tool]) async throws -> String {
         try Self.checkAvailability()
         guard let last = messages.last, last.role == .user else {
             throw ProviderError.unavailable(String(localized: .mustEndWithUserError))
@@ -24,7 +44,8 @@ struct AppleIntelligenceBackend: ProviderBackend {
 
         var entries: [Transcript.Entry] = []
         if let system {
-            entries.append(.instructions(.init(segments: [.text(.init(content: system))], toolDefinitions: [])))
+            let definitions = tools.map { Transcript.ToolDefinition(tool: $0) }
+            entries.append(.instructions(.init(segments: [.text(.init(content: system))], toolDefinitions: definitions)))
         }
         for message in messages.dropLast() {
             let images: [Transcript.Segment] = try message.images.map {
@@ -37,7 +58,7 @@ struct AppleIntelligenceBackend: ProviderBackend {
             }
         }
 
-        let session = LanguageModelSession(transcript: Transcript(entries: entries))
+        let session = LanguageModelSession(tools: tools, transcript: Transcript(entries: entries))
         let attachments = try last.images.map { Attachment(try ImageEncoding.cgImage(from: $0)) }
         return try await session.respond {
             for attachment in attachments { attachment }

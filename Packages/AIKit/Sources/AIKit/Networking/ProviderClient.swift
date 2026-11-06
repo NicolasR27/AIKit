@@ -33,19 +33,26 @@ struct ProviderClient {
     }
 
     /// Same as `chat`, but the provider searches and reads the live web first and reports its sources.
+    /// - Parameter searchEngine: Where Apple Intelligence's search tool looks things up; other providers search themselves.
     func searchWeb(
         _ messages: [AIMessage],
         system: String?,
         credentials: AIProviderCredentials,
-        model: String
+        model: String,
+        searchEngine: (any AIWebSearchEngine)? = nil
     ) async throws -> AIAnswer {
-        guard credentials.provider.supportsWebSearch else {
-            throw AIKitError.webSearchNotSupported(credentials.provider)
-        }
-        let backend = try backend(for: credentials.provider, apiKey: credentials.apiKey, baseURL: credentials.baseURL)
+        let provider = credentials.provider
         let answer: AIAnswer
         do {
-            answer = try await backend.searchWeb(messages, system: Self.steered(system), model: model)
+            if provider.isOnDevice, let searchEngine {
+                // The on-device model gets a tool instead, steered by its own directive.
+                answer = try await AppleIntelligenceBackend(searchEngine: searchEngine)
+                    .searchWeb(messages, system: system, model: model)
+            } else {
+                guard provider.supportsWebSearch else { throw AIKitError.webSearchNotSupported(provider) }
+                answer = try await backend(for: provider, apiKey: credentials.apiKey, baseURL: credentials.baseURL)
+                    .searchWeb(messages, system: Self.steered(system), model: model)
+            }
         } catch ProviderError.server(_, let message?) where Self.isNotAChatModelMessage(message) {
             throw ProviderError.notAChatModel(model)
         }

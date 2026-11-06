@@ -83,7 +83,8 @@ let watch = try await AIProviderStore.shared.send("What watch is this?", images:
 **Search the web.** `send` already does: whenever the provider can search, it looks things up
 on the live web before answering, so reports and answers aren't written from memory. Users
 can turn it off with the "Search the Web" switch in the settings screen
-(`AIProviderStore.shared.webSearchEnabled`); Apple Intelligence and Ollama answer without searching.
+(`AIProviderStore.shared.webSearchEnabled`); Ollama answers without searching, and so does
+Apple Intelligence unless it has somewhere to search (below).
 
 ```swift
 // Follows the switch:
@@ -106,6 +107,25 @@ search on every call), so replies don't come back with "unverified" labels or a 
 nothing was looked up. Searches are billed to the user's provider account like any other
 request. `webSearch: true` on a provider that can't search throws `AIKitError.webSearchNotSupported`;
 check `AIProviderStore.shared.canSearchWeb` first if you show your own search control.
+
+**Apple Intelligence can search too.** The on-device model can't reach the web, so AIKit gives it
+a `searchWeb` tool (Foundation Models tool calling): the model decides when to look something up,
+the tool runs the search, and the model answers from the results. Out of the box the tool hands
+just the search query (never the conversation) to another connected provider that can search,
+e.g. OpenAI or Claude. To use your own search API instead (Tavily, Brave, your server), add this
+once at app launch:
+
+```swift
+struct MySearch: AIWebSearchEngine {
+    func search(_ query: String) async throws -> AIAnswer {
+        // Call your search API, return a short summary of the results + the pages.
+    }
+}
+
+AIProviderStore.shared.webSearchEngine = MySearch()
+```
+
+With neither, Apple Intelligence answers from memory as before.
 
 Errors have a user-readable `localizedDescription`. `AIKitError.notConnected` and
 `.noModelSelected` mean the user needs to finish setup, so show the settings.
@@ -132,7 +152,8 @@ With `webSearch: true` (or `searchWeb`), each provider uses its own built-in sea
 | Google Gemini | `generateContent` with Google Search and URL context |
 | Mistral | `POST /v1/conversations` with the `web_search` tool |
 | OpenRouter | `POST /chat/completions` with the `web` plugin (any model) |
-| Ollama, Apple Intelligence | Not available |
+| Apple Intelligence | A `searchWeb` tool backed by your `webSearchEngine`, or another connected provider's search |
+| Ollama | Not available |
 
 Some providers need it switched on first: an Anthropic org admin enables web search in the
 Claude Console, and older models (e.g. Gemini 1.5) can't search at all; the provider's

@@ -287,6 +287,67 @@ extension NetworkTests {
         }
     }
 
+    // MARK: - Apple Intelligence's search tool
+
+    private struct FakeEngine: AIWebSearchEngine {
+        func search(_ query: String) async throws -> AIAnswer {
+            AIAnswer(text: "Found: \(query)", sources: [AIWebSource(title: "Page", url: URL(string: "https://page.example")!)])
+        }
+    }
+
+    @Test func appleSearchesThroughAConnectedProvider() async throws {
+        let store = try await anthropicStore()
+        #expect(!AIProvider.apple.supportsWebSearch)
+        #expect(store.canSearchWeb(.apple))
+
+        let relay = try #require(store.searchEngine(for: .apple) as? RelayedWebSearch)
+        #expect(relay.credentials.provider == .anthropic)
+        #expect(store.searchEngine(for: .anthropic) == nil)
+    }
+
+    @Test func appleCantSearchWithNothingToRelayThrough() {
+        let store = makeTestStore([.apple, .ollama])
+        #expect(store.searchEngine(for: .apple) == nil)
+        #expect(!store.canSearchWeb(.apple))
+    }
+
+    @Test func yourOwnEngineWins() async throws {
+        let store = try await anthropicStore()
+        store.webSearchEngine = FakeEngine()
+        #expect(store.searchEngine(for: .apple) is FakeEngine)
+    }
+
+    @Test func relayedSearchSendsOnlyTheQuery() async throws {
+        let client = ProviderClient(session: StubURLProtocol.session { _ in
+            .init(json: #"{"stop_reason":"end_turn","content":[{"type":"text","text":"Sunny, 21°C."}]}"#)
+        })
+        let relay = RelayedWebSearch(client: client, credentials: credentials(.anthropic), model: "claude-opus-5")
+
+        let answer = try await relay.search("weather lisbon")
+
+        #expect(answer.text == "Sunny, 21°C.")
+        let body = try #require(StubURLProtocol.bodies.first)
+        let messages = try #require(body["messages"] as? [[String: Any]])
+        #expect(messages.count == 1)
+        #expect((body["system"] as? String)?.hasSuffix(RelayedWebSearch.instructions) == true)
+        #expect(tools().map { $0["type"] as? String } == ["web_search_20260209", "web_fetch_20260209"])
+    }
+
+    @Test func toolReturnsFindingsAndKeepsSources() async throws {
+        let tool = AppleWebSearchTool(engine: FakeEngine())
+
+        let output = try await tool.call(arguments: .init(query: "swift 7"))
+
+        #expect(output == "Found: swift 7\n\nSources: Page")
+        #expect(tool.log.sources == [AIWebSource(title: "Page", url: URL(string: "https://page.example")!)])
+    }
+
+    @Test func toolOutputFitsTheOnDeviceContext() {
+        let long = AppleWebSearchTool.output(for: AIAnswer(text: String(repeating: "a", count: 5_000)))
+        #expect(long.count == AppleWebSearchTool.maxFindingsLength)
+        #expect(AppleWebSearchTool.output(for: AIAnswer(text: " ")) == "The search found nothing relevant.")
+    }
+
     @Test func sourcesSkipDuplicatesAndNonWebLinks() {
         let sources = AIWebSource.list([
             ("A", "https://a.example"), ("A again", "https://a.example"),

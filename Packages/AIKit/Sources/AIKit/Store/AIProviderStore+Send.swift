@@ -25,8 +25,11 @@ extension AIProviderStore {
         webSearch: Bool? = nil
     ) async throws -> String {
         let (credentials, model) = try target(provider)
-        if webSearch ?? (webSearchEnabled && credentials.provider.supportsWebSearch) {
-            return try await client.searchWeb(messages, system: system, credentials: credentials, model: model).text
+        if webSearch ?? (webSearchEnabled && canSearchWeb(credentials.provider)) {
+            return try await client.searchWeb(
+                messages, system: system, credentials: credentials, model: model,
+                searchEngine: searchEngine(for: credentials.provider)
+            ).text
         }
         return try await client.chat(messages, system: system, credentials: credentials, model: model)
     }
@@ -44,12 +47,34 @@ extension AIProviderStore {
     /// - Parameter provider: Overrides the user's default provider, if connected.
     public func searchWeb(_ messages: [AIMessage], system: String? = nil, provider: AIProvider? = nil) async throws -> AIAnswer {
         let (credentials, model) = try target(provider)
-        return try await client.searchWeb(messages, system: system, credentials: credentials, model: model)
+        return try await client.searchWeb(
+            messages, system: system, credentials: credentials, model: model,
+            searchEngine: searchEngine(for: credentials.provider)
+        )
     }
 
     /// Whether the provider `send` and `searchWeb` will use can search the web.
     public var canSearchWeb: Bool {
-        activeProvider?.supportsWebSearch == true
+        activeProvider.map(canSearchWeb) ?? false
+    }
+
+    /// Cloud providers search by themselves. Apple Intelligence searches with a tool, which needs
+    /// `webSearchEngine` or another connected provider that can search.
+    func canSearchWeb(_ provider: AIProvider) -> Bool {
+        provider.supportsWebSearch || searchEngine(for: provider) != nil
+    }
+
+    /// The engine behind Apple Intelligence's search tool: yours if you set one, otherwise the first
+    /// connected provider that can search, which gets only the search query, not the conversation.
+    func searchEngine(for provider: AIProvider) -> (any AIWebSearchEngine)? {
+        guard provider.isOnDevice else { return nil }
+        if let webSearchEngine { return webSearchEngine }
+        for relay in connectedProviders where relay.supportsWebSearch {
+            if let credentials = credentials(for: relay), let model = credentials.model {
+                return RelayedWebSearch(client: client, credentials: credentials, model: model)
+            }
+        }
+        return nil
     }
 
     private func target(_ provider: AIProvider?) throws -> (AIProviderCredentials, String) {

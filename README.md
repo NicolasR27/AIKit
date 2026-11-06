@@ -77,7 +77,8 @@ answer.text                       // the reply
 answer.sources                    // [AIWebSource]: title + url
 ```
 
-Web search works with every provider except Apple Intelligence and Ollama
+Web search works with every provider except Ollama. Apple Intelligence searches through a
+tool that uses another connected provider's search, or your own `webSearchEngine`
 (`AIProviderStore.shared.canSearchWeb` tells you). More in
 [Packages/AIKit/README.md](Packages/AIKit/README.md#use-it-3-steps).
 

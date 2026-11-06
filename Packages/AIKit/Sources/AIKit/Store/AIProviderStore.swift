@@ -24,6 +24,10 @@ public final class AIProviderStore {
         didSet { storage.saveWebSearchEnabled(webSearchEnabled) }
     }
 
+    /// Where Apple Intelligence looks things up when it searches the web. `nil` (the default) relays the
+    /// search query through another connected provider that can search; set your own to use a search API.
+    @ObservationIgnored public var webSearchEngine: (any AIWebSearchEngine)?
+
     private var settings: [AIProvider: ProviderSettings] {
         didSet { storage.saveSettings(settings) }
     }
