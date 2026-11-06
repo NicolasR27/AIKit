@@ -2,7 +2,7 @@
 
 What changed in each AIKit release. Newest first.
 
-## Unreleased
+## 1.1.0 — 2026-11-06
 
 ### Added
 - **Apple Intelligence can search the web.** The on-device model gets a `searchWeb` tool
