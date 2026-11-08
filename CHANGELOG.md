@@ -2,6 +2,14 @@
 
 What changed in each AIKit release. Newest first.
 
+## 1.1.2 — 2026-11-08
+
+### Fixed
+- **No more raw `<cite index="2-4">…</cite>` tags in answers.** Claude sometimes writes its
+  citations inline as markup instead of returning them separately. AIKit now strips the tags
+  from web search replies and keeps the cited words; a plain HTML `<cite>` is left alone. Sources still come back in
+  `AIAnswer.sources`.
+
 ## 1.1.1 — 2026-11-06
 
 ### Fixed

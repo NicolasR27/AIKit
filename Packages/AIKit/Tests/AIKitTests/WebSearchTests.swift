@@ -42,6 +42,20 @@ extension NetworkTests {
         #expect(StubURLProtocol.requests.first?.url?.absoluteString == "https://api.anthropic.com/v1/messages")
     }
 
+    @Test func anthropicInlineCiteTagsAreStripped() async throws {
+        let client = ProviderClient(session: StubURLProtocol.session { _ in
+            .init(json: #"""
+            {"stop_reason":"end_turn","content":[
+              {"type":"text","text":"A market price of <cite index=\"2-4\">$306 as of\nOct 27</cite>, and <cite index=\"18-3\">SGD588.50</cite> in <cite>The Straits Times</cite>."}
+            ]}
+            """#)
+        })
+
+        let answer = try await client.searchWeb([.user("Price?")], system: nil, credentials: credentials(.anthropic), model: "claude-opus-5")
+
+        #expect(answer.text == "A market price of $306 as of\nOct 27, and SGD588.50 in <cite>The Straits Times</cite>.")
+    }
+
     @Test(arguments: ["claude-haiku-4-5", "claude-sonnet-4-5-20250929", "claude-sonnet-4-20250514", "claude-3-7-sonnet-latest"])
     func olderAnthropicModelsGetBasicSearch(model: String) async throws {
         let client = ProviderClient(session: StubURLProtocol.session { _ in

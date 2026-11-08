@@ -42,7 +42,7 @@ struct ProviderClient {
         searchEngine: (any AIWebSearchEngine)? = nil
     ) async throws -> AIAnswer {
         let provider = credentials.provider
-        let answer: AIAnswer
+        var answer: AIAnswer
         do {
             if provider.isOnDevice, let searchEngine {
                 // The on-device model gets a tool instead, steered by its own directive.
@@ -56,6 +56,7 @@ struct ProviderClient {
         } catch ProviderError.server(_, let message?) where Self.isNotAChatModelMessage(message) {
             throw ProviderError.notAChatModel(model)
         }
+        answer.text = CitationMarkup.stripped(answer.text)
         guard !answer.text.isEmpty else { throw AIKitError.emptyResponse }
         return answer
     }
