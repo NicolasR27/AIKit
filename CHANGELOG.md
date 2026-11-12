@@ -2,7 +2,7 @@
 
 What changed in each AIKit release. Newest first.
 
-## Unreleased
+## 1.1.3 — 2026-11-11
 
 ### Added
 - **Plain row icon.** `AIKitConfiguration(rowIconStyle: .plain)` draws the "AI Providers"
