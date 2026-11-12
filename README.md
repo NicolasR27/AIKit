@@ -6,7 +6,7 @@ OpenRouter, Ollama) or turn on Apple Intelligence from a native iOS settings scr
 ## Install
 
 1. In Xcode: **File ▸ Add Package Dependencies…**
-2. Paste this repo's URL, choose **Up to Next Major Version** from **1.1.3**, and add **AIKit** to your app target.
+2. Paste this repo's URL, choose **Up to Next Major Version** from **1.1.4**, and add **AIKit** to your app target.
    Already on the package? **File ▸ Packages ▸ Update to Latest Package Versions** picks up new releases.
 
 ## Use (one line)
@@ -99,7 +99,7 @@ or your `App` file if AIKit is the whole screen). You don't edit anything inside
 AIProviderSettingsSection(icon: "brain", iconColor: .orange)
 
 // No colored tile, just the symbol in your app's tint (like your other Label rows):
-AIProviderSettingsSection(configuration: AIKitConfiguration(rowIconStyle: .plain))
+AIProviderSettingsSection(icon: "sparkles", iconStyle: .plain)
 ```
 
 **The provider icons** (OpenAI, Anthropic, …) on every AIKit screen:

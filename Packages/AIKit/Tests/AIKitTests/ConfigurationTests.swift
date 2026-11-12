@@ -18,6 +18,9 @@ struct ConfigurationTests {
 
         let plain = AIKitConfiguration(rowIconStyle: .plain)
         #expect(plain.withRowIcon("brain", .orange).rowIconStyle == .plain)
+        let changed = AIKitConfiguration().withRowIcon("brain", nil, .plain)
+        #expect(changed.rowSymbol == "brain")
+        #expect(changed.rowIconStyle == .plain)
     }
 
     @Test func providerIconsFallBackToDefaults() {

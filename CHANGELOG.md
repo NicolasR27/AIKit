@@ -2,6 +2,13 @@
 
 What changed in each AIKit release. Newest first.
 
+## 1.1.4 — 2026-11-11
+
+### Fixed
+- **Changing the row icon no longer forces the colored tile.** `AIProviderSettingsSection(icon:)`
+  now takes `iconStyle: .plain` too; before, the plain style was only reachable through
+  `AIKitConfiguration`, so `icon:` always drew the symbol on a filled square.
+
 ## 1.1.3 — 2026-11-11
 
 ### Added

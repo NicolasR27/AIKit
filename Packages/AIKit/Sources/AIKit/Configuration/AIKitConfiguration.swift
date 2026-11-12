@@ -91,10 +91,11 @@ extension AIKitConfiguration {
     }
 
     /// Copy with the row icon replaced where a value is given.
-    func withRowIcon(_ symbol: String?, _ tint: Color?) -> AIKitConfiguration {
+    func withRowIcon(_ symbol: String?, _ tint: Color?, _ style: RowIconStyle? = nil) -> AIKitConfiguration {
         var copy = self
         if let symbol { copy.rowSymbol = symbol }
         if let tint { copy.rowTint = tint }
+        if let style { copy.rowIconStyle = style }
         return copy
     }
 }

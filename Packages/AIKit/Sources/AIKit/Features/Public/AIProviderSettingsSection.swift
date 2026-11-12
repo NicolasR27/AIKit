@@ -20,7 +20,7 @@ import SwiftUI
 ///
 /// Or drop the tile to match plain `Label` rows:
 ///
-///     AIProviderSettingsSection(configuration: AIKitConfiguration(rowIconStyle: .plain))
+///     AIProviderSettingsSection(icon: "sparkle", iconStyle: .plain)
 public struct AIProviderSettingsSection: View {
     private let store: AIProviderStore
     private let configuration: AIKitConfiguration
@@ -30,15 +30,17 @@ public struct AIProviderSettingsSection: View {
     /// - Parameters:
     ///   - icon: SF Symbol for the row's tile. Overrides `configuration.rowSymbol`.
     ///   - iconColor: The tile's background. Overrides `configuration.rowTint`.
+    ///   - iconStyle: `.plain` drops the tile. Overrides `configuration.rowIconStyle`.
     public init(
         icon: String? = nil,
         iconColor: Color? = nil,
+        iconStyle: AIKitConfiguration.RowIconStyle? = nil,
         store: AIProviderStore = .shared,
         configuration: AIKitConfiguration = AIKitConfiguration(),
         footer: Text? = nil
     ) {
         self.store = store
-        self.configuration = configuration.withRowIcon(icon, iconColor)
+        self.configuration = configuration.withRowIcon(icon, iconColor, iconStyle)
         self.footer = footer
         self.selection = nil
     }
@@ -49,12 +51,13 @@ public struct AIProviderSettingsSection: View {
         selection: Binding<AIProvider?>,
         icon: String? = nil,
         iconColor: Color? = nil,
+        iconStyle: AIKitConfiguration.RowIconStyle? = nil,
         store: AIProviderStore = .shared,
         configuration: AIKitConfiguration = AIKitConfiguration(),
         footer: Text? = nil
     ) {
         self.store = store
-        self.configuration = configuration.withRowIcon(icon, iconColor)
+        self.configuration = configuration.withRowIcon(icon, iconColor, iconStyle)
         self.footer = footer
         self.selection = selection
     }
@@ -125,10 +128,7 @@ public struct AIProviderSettingsSection: View {
                     Label("Siri Integration", systemImage: "waveform")
                 }
             }
-            AIProviderSettingsSection(
-                store: AIProviderStore(),
-                configuration: AIKitConfiguration(rowIconStyle: .plain)
-            )
+            AIProviderSettingsSection(iconStyle: .plain, store: AIProviderStore())
         }
         .navigationTitle("Settings")
     }
