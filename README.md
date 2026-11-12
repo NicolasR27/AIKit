@@ -97,6 +97,9 @@ or your `App` file if AIKit is the whole screen). You don't edit anything inside
 
 ```swift
 AIProviderSettingsSection(icon: "brain", iconColor: .orange)
+
+// No colored tile, just the symbol in your app's tint (like your other Label rows):
+AIProviderSettingsSection(configuration: AIKitConfiguration(rowIconStyle: .plain))
 ```
 
 **The provider icons** (OpenAI, Anthropic, …) on every AIKit screen:

@@ -17,6 +17,10 @@ import SwiftUI
 /// Change the row's icon with any SF Symbol name and a background color:
 ///
 ///     AIProviderSettingsSection(icon: "brain", iconColor: .orange)
+///
+/// Or drop the tile to match plain `Label` rows:
+///
+///     AIProviderSettingsSection(configuration: AIKitConfiguration(rowIconStyle: .plain))
 public struct AIProviderSettingsSection: View {
     private let store: AIProviderStore
     private let configuration: AIKitConfiguration
@@ -66,7 +70,12 @@ public struct AIProviderSettingsSection: View {
                     Label {
                         Text(configuration.rowTitle)
                     } icon: {
-                        SettingsTile(symbolName: configuration.rowSymbol, tint: configuration.rowTint)
+                        switch configuration.rowIconStyle {
+                        case .tile:
+                            SettingsTile(symbolName: configuration.rowSymbol, tint: configuration.rowTint)
+                        case .plain:
+                            Image(systemName: configuration.rowSymbol)
+                        }
                     }
                 }
             }
@@ -103,6 +112,23 @@ public struct AIProviderSettingsSection: View {
         Form {
             AIProviderSettingsSection(selection: $selectedAIProvider, store: AIProviderStore())
             LabeledContent("Selected", value: selectedAIProvider?.displayName ?? "None")
+        }
+        .navigationTitle("Settings")
+    }
+}
+
+#Preview("Plain icon") {
+    NavigationStack {
+        Form {
+            Section {
+                Toggle(isOn: .constant(true)) {
+                    Label("Siri Integration", systemImage: "waveform")
+                }
+            }
+            AIProviderSettingsSection(
+                store: AIProviderStore(),
+                configuration: AIKitConfiguration(rowIconStyle: .plain)
+            )
         }
         .navigationTitle("Settings")
     }

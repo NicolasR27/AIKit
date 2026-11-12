@@ -23,6 +23,9 @@ public nonisolated struct AIKitConfiguration: Sendable {
     public var rowSymbol: String
     /// Background of the row's icon tile.
     public var rowTint: Color
+    /// `.tile` puts the symbol on a colored square, like the Settings app.
+    /// `.plain` shows the bare symbol in your app's tint, like a standard `Label`.
+    public var rowIconStyle: RowIconStyle
 
     /// SF Symbols that replace the built-in provider icons, e.g. `[.openAI: "bolt"]`.
     /// Providers you leave out keep their default icon.
@@ -45,6 +48,7 @@ public nonisolated struct AIKitConfiguration: Sendable {
         rowTitle: LocalizedStringResource = .aiProviders,
         rowSymbol: String = "sparkles",
         rowTint: Color = .indigo,
+        rowIconStyle: RowIconStyle = .tile,
         providerIcons: [AIProvider: String] = [:],
         providerIconColors: [AIProvider: Color] = [:],
         showsDefaultProviderPicker: Bool = true,
@@ -57,12 +61,23 @@ public nonisolated struct AIKitConfiguration: Sendable {
         self.rowTitle = rowTitle
         self.rowSymbol = rowSymbol
         self.rowTint = rowTint
+        self.rowIconStyle = rowIconStyle
         self.providerIcons = providerIcons
         self.providerIconColors = providerIconColors
         self.showsDefaultProviderPicker = showsDefaultProviderPicker
         self.showsOpenRouterSignIn = showsOpenRouterSignIn
         self.billingNote = billingNote
         self.privacyNote = privacyNote
+    }
+}
+
+extension AIKitConfiguration {
+    /// How the "AI Providers" row draws its icon.
+    public enum RowIconStyle: Sendable {
+        /// The symbol on a `rowTint` rounded square.
+        case tile
+        /// The bare symbol, tinted like your other `Label` rows. `rowTint` is ignored.
+        case plain
     }
 }
 

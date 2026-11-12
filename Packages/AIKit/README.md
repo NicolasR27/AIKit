@@ -174,6 +174,7 @@ AIProviderSettingsSection(configuration: AIKitConfiguration(
     rowTitle: "Assistant",       // the row in your Settings
     rowSymbol: "brain",          // SF Symbol in the row's icon tile
     rowTint: .orange,            // icon tile color
+    rowIconStyle: .tile,         // .plain = bare symbol, no tile
     showsDefaultProviderPicker: true,
     showsOpenRouterSignIn: true,
     billingNote: nil,            // nil hides the billing footer

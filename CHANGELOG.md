@@ -2,6 +2,13 @@
 
 What changed in each AIKit release. Newest first.
 
+## Unreleased
+
+### Added
+- **Plain row icon.** `AIKitConfiguration(rowIconStyle: .plain)` draws the "AI Providers"
+  row's symbol without the colored tile, in your app's tint, so it matches plain `Label` rows
+  like `Label("Siri", systemImage: "waveform")`. The default is still `.tile`.
+
 ## 1.1.2 — 2026-11-08
 
 ### Fixed

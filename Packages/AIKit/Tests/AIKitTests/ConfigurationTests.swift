@@ -13,6 +13,13 @@ struct ConfigurationTests {
         #expect(base.withRowIcon("brain", nil).rowTint == .indigo)
     }
 
+    @Test func rowIconStyleDefaultsToTileAndSurvivesOverrides() {
+        #expect(AIKitConfiguration().rowIconStyle == .tile)
+
+        let plain = AIKitConfiguration(rowIconStyle: .plain)
+        #expect(plain.withRowIcon("brain", .orange).rowIconStyle == .plain)
+    }
+
     @Test func providerIconsFallBackToDefaults() {
         var config = AIKitConfiguration()
         config.providerIcons = [.openAI: "bolt"]
